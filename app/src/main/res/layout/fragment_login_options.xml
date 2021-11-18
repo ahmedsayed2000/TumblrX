@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".LoginOptionsFragment"
+    tools:layout_editor_absoluteX="-8dp"
+    tools:layout_editor_absoluteY="128dp">
+
+    <Button
+        android:id="@+id/btn_login_google"
+        android:layout_width="300dp"
+        android:layout_height="40dp"
+        android:text="Log in with Google"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_login_email" />
+
+    <Button
+        android:id="@+id/btn_login_email"
+        android:layout_width="300dp"
+        android:layout_height="40dp"
+        android:text="Log in with Email"
+        app:layout_constraintBottom_toTopOf="@+id/btn_login_google"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
