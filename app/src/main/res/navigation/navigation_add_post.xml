@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation_add_post"
+    app:startDestination="@id/initialPostFragment">
+
+    <fragment
+        android:id="@+id/initialPostFragment"
+        android:name="com.example.android.tumblrx2.addpostfragments.InitialPostFragment"
+        android:label="fragment_initial_post"
+        tools:layout="@layout/fragment_initial_post" />
+</navigation>
