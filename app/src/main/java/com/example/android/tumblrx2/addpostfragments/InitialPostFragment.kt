@@ -2,59 +2,66 @@ package com.example.android.tumblrx2.addpostfragments
 
 
 import android.app.Activity.RESULT_OK
-import android.content.Intent
-import android.os.Bundle
-import android.util.Log
-import androidx.fragment.app.Fragment
-import androidx.activity.result.contract.ActivityResultContracts
-import androidx.databinding.DataBindingUtil
-import com.example.android.tumblrx2.R
-import com.example.android.tumblrx2.databinding.FragmentInitialPostBinding
 import android.content.ClipData
 import android.content.Context
+import android.content.Intent
 import android.graphics.Color
+import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.*
 import android.view.inputmethod.InputMethodManager
 import android.widget.*
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.view.GestureDetectorCompat
+import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
+import com.example.android.tumblrx2.R
+import com.example.android.tumblrx2.databinding.FragmentInitialPostBinding
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 
 /**
  * this is the starter fragment in the AddPostActivity
+ * @property[gestureDetector] a gesture detector for text editors touch events
+ * @property[binding] the fragment binding object the holds the UI
+ * @property[mediaController] mediaController to control the video in the post
+ * @property[oneVideo] a boolean that indicates that the post has one video
+ * @property[items] array that represents the media Type options
+ * @property[textMap] a map that relates each text editor with its text size
+ * @property[textSizes] array represents the text sizes
+ * @property[imageLauncher] used in register the result of image returned
+ * @property[videoLauncher] used in register the result of video/gif returned
  */
-
 class InitialPostFragment : Fragment() {
 
 
+    /**
+     * Gesture Listener to handle text editors touch events
+     */
     private inner class GestureListener : GestureDetector.SimpleOnGestureListener() {
 
         override fun onDoubleTap(e: MotionEvent?): Boolean {
-            val sheet = TextBottomSheet()
-            activity?.let { it1 -> sheet.show(it1.supportFragmentManager, "tag") }
+            /*val sheet = TextBottomSheet()
+            activity?.let { it1 -> sheet.show(it1.supportFragmentManager, "tag") }*/
             return true
         }
 
-        override fun onDown(e: MotionEvent?): Boolean {
-            return super.onDown(e)
-        }
 
-        override fun onShowPress(e: MotionEvent?) {
-            super.onShowPress(e)
-        }
-
-        override fun onSingleTapUp(e: MotionEvent?): Boolean {
+        override fun onSingleTapConfirmed(e: MotionEvent?): Boolean {
             activity?.window?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE)
             val imm = context?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-            imm.showSoftInput(binding.root, InputMethodManager.SHOW_IMPLICIT)
+            imm.showSoftInput(binding.root, InputMethodManager.SHOW_FORCED)
             binding.firstText.requestFocus()
+            binding.firstText.showSoftInputOnFocus = true
             return true
         }
+
     }
 
     private lateinit var gestureDetector: GestureDetectorCompat
+
 
     private lateinit var binding: FragmentInitialPostBinding
 
@@ -64,6 +71,8 @@ class InitialPostFragment : Fragment() {
 
     private val items = arrayOf("Image(s)", "Video/Gif")
 
+    private val textSizes = arrayOf("Regular", "Bigger", "Biggest")
+    private var textMap = mutableMapOf<Int, Int>()
 
     private val imageLauncher =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
@@ -158,6 +167,9 @@ class InitialPostFragment : Fragment() {
             addText()
         }
 
+
+
+        textMap[0] = 0
         binding.firstText.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
 
@@ -169,10 +181,7 @@ class InitialPostFragment : Fragment() {
 
             override fun afterTextChanged(p0: Editable?) {
                 if (p0.toString() == "") {
-                    if(!checkCount())
-                        togglePostButton(false)
-                    else
-                        togglePostButton(true)
+                    togglePostButton(false)
                 } else
                     togglePostButton(true)
 
@@ -239,10 +248,35 @@ class InitialPostFragment : Fragment() {
             }
         }
 
+        binding.insertText.setOnClickListener {
+            val index = getActiveText()
+            if (index == -1) {
+                addText()
+            } else {
+                val editor = (binding.postList.getChildAt(index)) as EditText
+                textMap[index] = (textMap[index]!! + 1) % 3
+                when (textSizes[textMap[index]!!]) {
+                    "Regular" -> {
+                        editor.textSize = 15.0f
+                        Toast.makeText(context, "Regular", Toast.LENGTH_SHORT).show()
+                    }
+                    "Bigger" -> {
+                        editor.textSize = 20.0f
+                        Toast.makeText(context, "Bigger", Toast.LENGTH_SHORT).show()
+                    }
+                    "Biggest" -> {
+                        editor.textSize = 25.0f
+                        Toast.makeText(context, "Biggest", Toast.LENGTH_SHORT).show()
+                    }
+                }
+            }
+        }
+
+
     }
 
     /**
-     * this function adds a text editor when clicking on an empty space in the post
+     * this function adds a text editor when clicking on an empty space in the post or on the insert Text Button
      */
 
     private fun addText() {
@@ -263,6 +297,7 @@ class InitialPostFragment : Fragment() {
             text.background = null
             binding.postList.addView(text)
             text.requestFocus()
+            textMap[count] = 0
             text.addTextChangedListener(object : TextWatcher {
                 override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
 
@@ -273,23 +308,13 @@ class InitialPostFragment : Fragment() {
 
                 override fun afterTextChanged(p0: Editable?) {
                     if (p0.toString() == "") {
-                        if(!checkCount())
-                            togglePostButton(false)
-                        else
-                            togglePostButton(true)
+                        togglePostButton(false)
                     } else
                         togglePostButton(true)
 
                 }
             })
         }
-    }
-
-    private fun checkCount(): Boolean {
-        if(binding.postList.childCount > 1)
-            return true
-        else
-            return false
     }
 
     /**
