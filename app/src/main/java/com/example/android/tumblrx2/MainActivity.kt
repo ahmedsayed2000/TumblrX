@@ -11,7 +11,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setTheme(R.style.Theme_TumblrX2)    //resets theme to remove splash screen
+
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
 
         binding.goToHome.setOnClickListener {
