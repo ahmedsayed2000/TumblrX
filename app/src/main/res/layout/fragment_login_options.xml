@@ -10,6 +10,7 @@
 
     <Button
         android:id="@+id/btn_login_google"
+        style="@style/IntroButtonsStyle"
         android:layout_width="300dp"
         android:layout_height="40dp"
         android:text="Log in with Google"
@@ -21,6 +22,7 @@
 
     <Button
         android:id="@+id/btn_login_email"
+        style="@style/IntroButtonsStyle"
         android:layout_width="300dp"
         android:layout_height="40dp"
         android:text="Log in with Email"
