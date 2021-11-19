@@ -17,5 +17,8 @@ class MainActivity : AppCompatActivity() {
         binding.goToHome.setOnClickListener {
             startActivity(Intent(this, HomePageActivity::class.java))
         }
+        binding.btnIntro.setOnClickListener {
+            startActivity(Intent(this, IntroActivity::class.java))
+        }
     }
 }
