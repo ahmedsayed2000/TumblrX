@@ -8,4 +8,6 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="cyanLight">#18FFFF</color>
+    <color name="blue_bolt">#00b9fb</color>
+
 </resources>

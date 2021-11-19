@@ -2,4 +2,9 @@
     <string name="app_name">TumblrX</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="name_text">mariam.a.malak12</string>
+    <string name="activity_fragment">Activity</string>
+    <string name="messages_fragment">Messages</string>
+    <string name="activity_button_text">All Activity</string>
+    <string name="follow_btn"> Follow </string>
 </resources>
