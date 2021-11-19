@@ -1,6 +1,7 @@
 plugins {
     id 'com.android.application'
     id 'kotlin-android'
+    id 'org.jetbrains.dokka'
 }
 
 android {
@@ -34,6 +35,10 @@ android {
     dataBinding {
         enabled = true
     }
+}
+
+tasks.dokkaHtml.configure {
+    outputDirectory.set(file("../documentation/html"))
 }
 
 dependencies {
