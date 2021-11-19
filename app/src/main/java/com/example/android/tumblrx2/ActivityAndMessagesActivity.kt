@@ -12,7 +12,7 @@ class ActivityAndMessagesActivity : AppCompatActivity() {
     var myAdapter: TabsAdapter?=null;
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_messages_and_activity)
         tabLayout = findViewById(R.id.tabLayout)
         tabLayout!!.addTab(tabLayout!!.newTab().setText("Activity"))
         tabLayout!!.addTab(tabLayout!!.newTab().setText("Messages"))
