@@ -8,6 +8,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:orientation="vertical"
         tools:context=".MainActivity">
 
         <Button
@@ -24,6 +25,21 @@
             style="@style/IntroButtonsStyle"
             android:text="Intro"
             android:id="@+id/btn_intro"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/IntroButtonsStyle"
+            android:text="Activity"
+            android:id="@+id/btn_activity"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/IntroButtonsStyle"
+            android:text="New Message"
+            android:id="@+id/btn_new_message"/>
+
 
     </LinearLayout>
 </layout>

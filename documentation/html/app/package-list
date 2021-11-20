@@ -18,6 +18,24 @@ $dokka.location:com.example.android.tumblrx2.addpostfragments/TextBottomSheet/on
 $dokka.location:com.example.android.tumblrx2.controllers////PointingToDeclaration/app/com.example.android.tumblrx2.controllers/index.html
 $dokka.location:com.example.android.tumblrx2.controllers/LoginController///PointingToDeclaration/app/com.example.android.tumblrx2.controllers/-login-controller/index.html
 $dokka.location:com.example.android.tumblrx2.controllers/LoginController/onLogin/#kotlin.String?#kotlin.String?/PointingToDeclaration/app/com.example.android.tumblrx2.controllers/-login-controller/on-login.html
+$dokka.location:com.example.android.tumblrx2.postobjects////PointingToDeclaration/app/com.example.android.tumblrx2.postobjects/index.html
+$dokka.location:com.example.android.tumblrx2.postobjects/ImageObject///PointingToDeclaration/app/com.example.android.tumblrx2.postobjects/-image-object/index.html
+$dokka.location:com.example.android.tumblrx2.postobjects/ImageObject/ImageObject/#/PointingToDeclaration/app/com.example.android.tumblrx2.postobjects/-image-object/-image-object.html
+$dokka.location:com.example.android.tumblrx2.postobjects/ImageObject/file/#/PointingToDeclaration/app/com.example.android.tumblrx2.postobjects/-image-object/file.html
+$dokka.location:com.example.android.tumblrx2.postobjects/ImageObject/height/#/PointingToDeclaration/app/com.example.android.tumblrx2.postobjects/-image-object/height.html
+$dokka.location:com.example.android.tumblrx2.postobjects/ImageObject/mType/#/PointingToDeclaration/app/com.example.android.tumblrx2.postobjects/-image-object/m-type.html
+$dokka.location:com.example.android.tumblrx2.postobjects/ImageObject/type/#/PointingToDeclaration/app/com.example.android.tumblrx2.postobjects/-image-object/type.html
+$dokka.location:com.example.android.tumblrx2.postobjects/ImageObject/width/#/PointingToDeclaration/app/com.example.android.tumblrx2.postobjects/-image-object/width.html
+$dokka.location:com.example.android.tumblrx2.postobjects/PostContent///PointingToDeclaration/app/com.example.android.tumblrx2.postobjects/-post-content/index.html
+$dokka.location:com.example.android.tumblrx2.postobjects/PostContent/PostContent/#java.util.ArrayList[com.example.android.tumblrx2.postobjects.PostObject]/PointingToDeclaration/app/com.example.android.tumblrx2.postobjects/-post-content/-post-content.html
+$dokka.location:com.example.android.tumblrx2.postobjects/PostContent/content/#/PointingToDeclaration/app/com.example.android.tumblrx2.postobjects/-post-content/content.html
+$dokka.location:com.example.android.tumblrx2.postobjects/PostObject///PointingToDeclaration/app/com.example.android.tumblrx2.postobjects/-post-object/index.html
+$dokka.location:com.example.android.tumblrx2.postobjects/PostObject/type/#/PointingToDeclaration/app/com.example.android.tumblrx2.postobjects/-post-object/type.html
+$dokka.location:com.example.android.tumblrx2.postobjects/TextObject///PointingToDeclaration/app/com.example.android.tumblrx2.postobjects/-text-object/index.html
+$dokka.location:com.example.android.tumblrx2.postobjects/TextObject/TextObject/#/PointingToDeclaration/app/com.example.android.tumblrx2.postobjects/-text-object/-text-object.html
+$dokka.location:com.example.android.tumblrx2.postobjects/TextObject/mType/#/PointingToDeclaration/app/com.example.android.tumblrx2.postobjects/-text-object/m-type.html
+$dokka.location:com.example.android.tumblrx2.postobjects/TextObject/text/#/PointingToDeclaration/app/com.example.android.tumblrx2.postobjects/-text-object/text.html
+$dokka.location:com.example.android.tumblrx2.postobjects/TextObject/type/#/PointingToDeclaration/app/com.example.android.tumblrx2.postobjects/-text-object/type.html
 $dokka.location:com.example.android.tumblrx2.utils////PointingToDeclaration/app/com.example.android.tumblrx2.utils/index.html
 $dokka.location:com.example.android.tumblrx2.utils/User///PointingToDeclaration/app/com.example.android.tumblrx2.utils/-user/index.html
 $dokka.location:com.example.android.tumblrx2.utils/User/User/#kotlin.String#kotlin.String/PointingToDeclaration/app/com.example.android.tumblrx2.utils/-user/-user.html
@@ -25,6 +43,20 @@ $dokka.location:com.example.android.tumblrx2.utils/User/email/#/PointingToDeclar
 $dokka.location:com.example.android.tumblrx2.utils/User/password/#/PointingToDeclaration/app/com.example.android.tumblrx2.utils/-user/password.html
 $dokka.location:com.example.android.tumblrx2.utils/User/validateUser/#kotlin.String#kotlin.String/PointingToDeclaration/app/com.example.android.tumblrx2.utils/-user/validate-user.html
 $dokka.location:com.example.android.tumblrx2////PointingToDeclaration/app/com.example.android.tumblrx2/index.html
+$dokka.location:com.example.android.tumblrx2/ActivityAndMessagesActivity///PointingToDeclaration/app/com.example.android.tumblrx2/-activity-and-messages-activity/index.html
+$dokka.location:com.example.android.tumblrx2/ActivityAndMessagesActivity/ActivityAndMessagesActivity/#/PointingToDeclaration/app/com.example.android.tumblrx2/-activity-and-messages-activity/-activity-and-messages-activity.html
+$dokka.location:com.example.android.tumblrx2/ActivityAndMessagesActivity/myAdapter/#/PointingToDeclaration/app/com.example.android.tumblrx2/-activity-and-messages-activity/my-adapter.html
+$dokka.location:com.example.android.tumblrx2/ActivityAndMessagesActivity/tabLayout/#/PointingToDeclaration/app/com.example.android.tumblrx2/-activity-and-messages-activity/tab-layout.html
+$dokka.location:com.example.android.tumblrx2/ActivityAndMessagesActivity/viewPager/#/PointingToDeclaration/app/com.example.android.tumblrx2/-activity-and-messages-activity/view-pager.html
+$dokka.location:com.example.android.tumblrx2/ActivityFragment///PointingToDeclaration/app/com.example.android.tumblrx2/-activity-fragment/index.html
+$dokka.location:com.example.android.tumblrx2/ActivityFragment/ActivityFragment/#/PointingToDeclaration/app/com.example.android.tumblrx2/-activity-fragment/-activity-fragment.html
+$dokka.location:com.example.android.tumblrx2/ActivityFragment/onCreateView/#android.view.LayoutInflater#android.view.ViewGroup?#android.os.Bundle?/PointingToDeclaration/app/com.example.android.tumblrx2/-activity-fragment/on-create-view.html
+$dokka.location:com.example.android.tumblrx2/ActivityListAdapter///PointingToDeclaration/app/com.example.android.tumblrx2/-activity-list-adapter/index.html
+$dokka.location:com.example.android.tumblrx2/ActivityListAdapter/ActivityListAdapter/#android.content.Context/PointingToDeclaration/app/com.example.android.tumblrx2/-activity-list-adapter/-activity-list-adapter.html
+$dokka.location:com.example.android.tumblrx2/ActivityListAdapter/getCount/#/PointingToDeclaration/app/com.example.android.tumblrx2/-activity-list-adapter/get-count.html
+$dokka.location:com.example.android.tumblrx2/ActivityListAdapter/getItem/#kotlin.Int/PointingToDeclaration/app/com.example.android.tumblrx2/-activity-list-adapter/get-item.html
+$dokka.location:com.example.android.tumblrx2/ActivityListAdapter/getItemId/#kotlin.Int/PointingToDeclaration/app/com.example.android.tumblrx2/-activity-list-adapter/get-item-id.html
+$dokka.location:com.example.android.tumblrx2/ActivityListAdapter/getView/#kotlin.Int#android.view.View?#android.view.ViewGroup?/PointingToDeclaration/app/com.example.android.tumblrx2/-activity-list-adapter/get-view.html
 $dokka.location:com.example.android.tumblrx2/AddPostActivity///PointingToDeclaration/app/com.example.android.tumblrx2/-add-post-activity/index.html
 $dokka.location:com.example.android.tumblrx2/AddPostActivity/AddPostActivity/#/PointingToDeclaration/app/com.example.android.tumblrx2/-add-post-activity/-add-post-activity.html
 $dokka.location:com.example.android.tumblrx2/HomePageActivity///PointingToDeclaration/app/com.example.android.tumblrx2/-home-page-activity/index.html
@@ -38,6 +70,10 @@ $dokka.location:com.example.android.tumblrx2/IntroOptionsFragment/IntroOptionsFr
 $dokka.location:com.example.android.tumblrx2/IntroOptionsFragment/onCreate/#android.os.Bundle?/PointingToDeclaration/app/com.example.android.tumblrx2/-intro-options-fragment/on-create.html
 $dokka.location:com.example.android.tumblrx2/IntroOptionsFragment/onCreateView/#android.view.LayoutInflater#android.view.ViewGroup?#android.os.Bundle?/PointingToDeclaration/app/com.example.android.tumblrx2/-intro-options-fragment/on-create-view.html
 $dokka.location:com.example.android.tumblrx2/IntroOptionsFragment/onViewCreated/#android.view.View#android.os.Bundle?/PointingToDeclaration/app/com.example.android.tumblrx2/-intro-options-fragment/on-view-created.html
+$dokka.location:com.example.android.tumblrx2/JsonClient///PointingToDeclaration/app/com.example.android.tumblrx2/-json-client/index.html
+$dokka.location:com.example.android.tumblrx2/JsonClient/JsonClient/#com.example.android.tumblrx2.ParseJsonService/PointingToDeclaration/app/com.example.android.tumblrx2/-json-client/-json-client.html
+$dokka.location:com.example.android.tumblrx2/JsonClient/getJson/#kotlin.collections.List[com.example.android.tumblrx2.postobjects.PostObject]/PointingToDeclaration/app/com.example.android.tumblrx2/-json-client/get-json.html
+$dokka.location:com.example.android.tumblrx2/JsonClient/parseJson/#/PointingToDeclaration/app/com.example.android.tumblrx2/-json-client/parse-json.html
 $dokka.location:com.example.android.tumblrx2/LoginActivity///PointingToDeclaration/app/com.example.android.tumblrx2/-login-activity/index.html
 $dokka.location:com.example.android.tumblrx2/LoginActivity/LoginActivity/#/PointingToDeclaration/app/com.example.android.tumblrx2/-login-activity/-login-activity.html
 $dokka.location:com.example.android.tumblrx2/LoginOptionsFragment.Companion///PointingToDeclaration/app/com.example.android.tumblrx2/-login-options-fragment/-companion/index.html
@@ -49,8 +85,26 @@ $dokka.location:com.example.android.tumblrx2/LoginOptionsFragment/onCreateView/#
 $dokka.location:com.example.android.tumblrx2/LoginOptionsFragment/onViewCreated/#android.view.View#android.os.Bundle?/PointingToDeclaration/app/com.example.android.tumblrx2/-login-options-fragment/on-view-created.html
 $dokka.location:com.example.android.tumblrx2/MainActivity///PointingToDeclaration/app/com.example.android.tumblrx2/-main-activity/index.html
 $dokka.location:com.example.android.tumblrx2/MainActivity/MainActivity/#/PointingToDeclaration/app/com.example.android.tumblrx2/-main-activity/-main-activity.html
+$dokka.location:com.example.android.tumblrx2/MessagesFragment///PointingToDeclaration/app/com.example.android.tumblrx2/-messages-fragment/index.html
+$dokka.location:com.example.android.tumblrx2/MessagesFragment/MessagesFragment/#/PointingToDeclaration/app/com.example.android.tumblrx2/-messages-fragment/-messages-fragment.html
+$dokka.location:com.example.android.tumblrx2/MessagesFragment/onCreateView/#android.view.LayoutInflater#android.view.ViewGroup?#android.os.Bundle?/PointingToDeclaration/app/com.example.android.tumblrx2/-messages-fragment/on-create-view.html
+$dokka.location:com.example.android.tumblrx2/MessagesListAdapter///PointingToDeclaration/app/com.example.android.tumblrx2/-messages-list-adapter/index.html
+$dokka.location:com.example.android.tumblrx2/MessagesListAdapter/MessagesListAdapter/#android.content.Context/PointingToDeclaration/app/com.example.android.tumblrx2/-messages-list-adapter/-messages-list-adapter.html
+$dokka.location:com.example.android.tumblrx2/MessagesListAdapter/getCount/#/PointingToDeclaration/app/com.example.android.tumblrx2/-messages-list-adapter/get-count.html
+$dokka.location:com.example.android.tumblrx2/MessagesListAdapter/getItem/#kotlin.Int/PointingToDeclaration/app/com.example.android.tumblrx2/-messages-list-adapter/get-item.html
+$dokka.location:com.example.android.tumblrx2/MessagesListAdapter/getItemId/#kotlin.Int/PointingToDeclaration/app/com.example.android.tumblrx2/-messages-list-adapter/get-item-id.html
+$dokka.location:com.example.android.tumblrx2/MessagesListAdapter/getView/#kotlin.Int#android.view.View?#android.view.ViewGroup?/PointingToDeclaration/app/com.example.android.tumblrx2/-messages-list-adapter/get-view.html
+$dokka.location:com.example.android.tumblrx2/NewMessageActivity///PointingToDeclaration/app/com.example.android.tumblrx2/-new-message-activity/index.html
+$dokka.location:com.example.android.tumblrx2/NewMessageActivity/NewMessageActivity/#/PointingToDeclaration/app/com.example.android.tumblrx2/-new-message-activity/-new-message-activity.html
+$dokka.location:com.example.android.tumblrx2/ParseJsonService///PointingToDeclaration/app/com.example.android.tumblrx2/-parse-json-service/index.html
+$dokka.location:com.example.android.tumblrx2/ParseJsonService/parse/#kotlin.collections.List[com.example.android.tumblrx2.postobjects.PostObject]/PointingToDeclaration/app/com.example.android.tumblrx2/-parse-json-service/parse.html
+$dokka.location:com.example.android.tumblrx2/TabsAdapter///PointingToDeclaration/app/com.example.android.tumblrx2/-tabs-adapter/index.html
+$dokka.location:com.example.android.tumblrx2/TabsAdapter/TabsAdapter/#androidx.fragment.app.FragmentManager#androidx.lifecycle.Lifecycle/PointingToDeclaration/app/com.example.android.tumblrx2/-tabs-adapter/-tabs-adapter.html
+$dokka.location:com.example.android.tumblrx2/TabsAdapter/createFragment/#kotlin.Int/PointingToDeclaration/app/com.example.android.tumblrx2/-tabs-adapter/create-fragment.html
+$dokka.location:com.example.android.tumblrx2/TabsAdapter/getItemCount/#/PointingToDeclaration/app/com.example.android.tumblrx2/-tabs-adapter/get-item-count.html
 com.example.android.tumblrx2
 com.example.android.tumblrx2.addpostfragments
 com.example.android.tumblrx2.controllers
+com.example.android.tumblrx2.postobjects
 com.example.android.tumblrx2.utils
 

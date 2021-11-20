@@ -31,6 +31,12 @@ class MainActivity : AppCompatActivity() {
         binding.btnIntro.setOnClickListener {
             startActivity(Intent(this, IntroActivity::class.java))
         }
+        binding.btnActivity.setOnClickListener {
+            startActivity(Intent(this, ActivityAndMessagesActivity::class.java))
+        }
+        binding.btnNewMessage.setOnClickListener {
+            startActivity(Intent(this, NewMessageActivity::class.java))
+        }
     }
 
 }
