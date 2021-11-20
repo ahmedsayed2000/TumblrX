@@ -6,6 +6,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:clickable="true"
         tools:context=".addpostfragments.InitialPostFragment">
 
         <com.google.android.material.appbar.AppBarLayout
@@ -33,19 +34,17 @@
                         android:background="?android:attr/selectableItemBackground"
                         android:padding="8dp"
                         android:src="@drawable/ic_action_close" />
-
                     <com.google.android.material.card.MaterialCardView
                         android:id="@+id/post_button_card"
                         android:layout_width="70dp"
                         android:layout_height="wrap_content"
                         android:layout_alignParentTop="true"
-                        android:layout_marginTop="8dp"
+                        android:layout_marginTop="12dp"
                         android:layout_marginRight="10dp"
                         android:layout_toLeftOf="@id/icon_more"
                         android:background="#EEEEEE"
-                        android:clickable="false"
+                        android:clickable="true"
                         app:cardCornerRadius="15dp"
-
                         >
 
                         <TextView
@@ -58,8 +57,9 @@
                             android:padding="8dp"
                             android:text="Post"
                             android:textColor="#BDBDBD"
-                            android:textSize="18sp" />
+                            android:textSize="15sp" />
                     </com.google.android.material.card.MaterialCardView>
+
 
                     <ImageButton
                         android:id="@+id/icon_more"
@@ -133,31 +133,26 @@
         <ScrollView
             android:id="@+id/scrollList"
             android:layout_width="match_parent"
-            android:layout_height="480dp"
+            android:layout_height="490dp"
             android:layout_below="@id/profile_card"
             android:clickable="true">
 
             <LinearLayout
                 android:id="@+id/post_list"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginLeft="8dp"
                 android:clickable="true"
                 android:orientation="vertical">
 
                 <EditText
+                    android:id="@+id/first_text"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@null"
                     android:hint="add something you,d like"
-                    android:id="@+id/first_text"
+                    android:inputType="text"
                     android:textSize="15sp" />
-
-                <VideoView
-                    android:id="@+id/postVideo"
-                    android:layout_width="match_parent"
-                    android:layout_height="200dp"
-                    android:visibility="invisible" />
 
 
             </LinearLayout>
