@@ -26,7 +26,7 @@ class ActivityListAdapter(context:Context): BaseAdapter() {
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
         val layoutInflater=LayoutInflater.from(myContext)
         val row= layoutInflater.inflate(R.layout.activity_list_item,parent,false)
-        row.findViewById<TextView>(R.id.row_text).text="someone".plus(position).plus(" followed mariam.a.malak")
+        row.findViewById<TextView>(R.id.row_text).text="someone_".plus(position).plus(" started following mariam.a.malak")
         return row
     }
 }

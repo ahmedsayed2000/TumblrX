@@ -28,8 +28,8 @@ class MessagesListAdapter(context:Context): BaseAdapter() {
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
         val layoutInflater=LayoutInflater.from(myContext)
         val row= layoutInflater.inflate(R.layout.messages_list_item,parent,false)
-        row.findViewById<TextView>(R.id.username_text).text="someone".plus(position)
-        row.findViewById<TextView>(R.id.snippet_msg).text="Hello"
+        row.findViewById<TextView>(R.id.username_text).text="someone_".plus(position)
+        row.findViewById<TextView>(R.id.snippet_msg).text="Text Message ".plus(position)
         return row
     }
 }
