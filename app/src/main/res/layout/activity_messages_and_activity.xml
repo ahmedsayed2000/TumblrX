@@ -9,7 +9,7 @@
     android:background="@color/white">
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/nameText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="16dp"
@@ -26,7 +26,7 @@
         android:background="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView"
+        app:layout_constraintTop_toBottomOf="@+id/nameText"
         app:tabIndicatorColor="@color/blue_bolt"
         app:tabSelectedTextColor="@color/blue_bolt"
         app:tabTextColor="@color/black"></com.google.android.material.tabs.TabLayout>
