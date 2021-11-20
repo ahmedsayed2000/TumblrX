@@ -365,6 +365,7 @@ class InitialPostFragment : Fragment() {
 
     /**
      * gets the current focused text editor
+     * @return the index of the focused text editor if no editor is focused returns -1
      */
     private fun getActiveText(): Int {
         for (i in 0..binding.postList.childCount) {
