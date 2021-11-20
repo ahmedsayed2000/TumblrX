@@ -22,7 +22,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
+        setTheme(R.style.Theme_TumblrX2)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
 
         binding.goToHome.setOnClickListener {
@@ -32,4 +32,5 @@ class MainActivity : AppCompatActivity() {
             startActivity(Intent(this, IntroActivity::class.java))
         }
     }
+
 }
