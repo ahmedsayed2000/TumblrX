@@ -1,5 +1,6 @@
 package com.example.android.tumblrx2
 
+import android.widget.Button
 import android.widget.TextView
 import androidx.test.ext.junit.rules.ActivityScenarioRule
 import androidx.viewpager2.widget.ViewPager2
@@ -26,6 +27,15 @@ class ActivityAndMessagesActivityTest {
         mActivityScenarioRule.scenario.onActivity {
             val view = it.findViewById(R.id.nameText) as TextView
             assertNotNull(view)
+        }
+    }
+
+    @Test
+    fun testBottomSheet() {
+        mActivityScenarioRule.scenario.onActivity {
+            val button = it.findViewById(R.id.bottomSheetBtn) as Button
+            assertNotNull(button)
+            button.performClick()
         }
     }
 
