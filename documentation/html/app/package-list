@@ -15,6 +15,17 @@ $dokka.location:com.example.android.tumblrx2.addpostfragments/TagBottomSheet/onV
 $dokka.location:com.example.android.tumblrx2.addpostfragments/TextBottomSheet///PointingToDeclaration/app/com.example.android.tumblrx2.addpostfragments/-text-bottom-sheet/index.html
 $dokka.location:com.example.android.tumblrx2.addpostfragments/TextBottomSheet/TextBottomSheet/#/PointingToDeclaration/app/com.example.android.tumblrx2.addpostfragments/-text-bottom-sheet/-text-bottom-sheet.html
 $dokka.location:com.example.android.tumblrx2.addpostfragments/TextBottomSheet/onCreateView/#android.view.LayoutInflater#android.view.ViewGroup?#android.os.Bundle?/PointingToDeclaration/app/com.example.android.tumblrx2.addpostfragments/-text-bottom-sheet/on-create-view.html
+$dokka.location:com.example.android.tumblrx2.controllers////PointingToDeclaration/app/com.example.android.tumblrx2.controllers/index.html
+$dokka.location:com.example.android.tumblrx2.controllers/LoginController///PointingToDeclaration/app/com.example.android.tumblrx2.controllers/-login-controller/index.html
+$dokka.location:com.example.android.tumblrx2.controllers/LoginController/LoginController/#android.content.Context/PointingToDeclaration/app/com.example.android.tumblrx2.controllers/-login-controller/-login-controller.html
+$dokka.location:com.example.android.tumblrx2.controllers/LoginController/context/#/PointingToDeclaration/app/com.example.android.tumblrx2.controllers/-login-controller/context.html
+$dokka.location:com.example.android.tumblrx2.controllers/LoginController/onLogin/#kotlin.String?#kotlin.String?/PointingToDeclaration/app/com.example.android.tumblrx2.controllers/-login-controller/on-login.html
+$dokka.location:com.example.android.tumblrx2.utils////PointingToDeclaration/app/com.example.android.tumblrx2.utils/index.html
+$dokka.location:com.example.android.tumblrx2.utils/User///PointingToDeclaration/app/com.example.android.tumblrx2.utils/-user/index.html
+$dokka.location:com.example.android.tumblrx2.utils/User/User/#kotlin.String#kotlin.String/PointingToDeclaration/app/com.example.android.tumblrx2.utils/-user/-user.html
+$dokka.location:com.example.android.tumblrx2.utils/User/email/#/PointingToDeclaration/app/com.example.android.tumblrx2.utils/-user/email.html
+$dokka.location:com.example.android.tumblrx2.utils/User/password/#/PointingToDeclaration/app/com.example.android.tumblrx2.utils/-user/password.html
+$dokka.location:com.example.android.tumblrx2.utils/User/validateUser/#kotlin.String#kotlin.String/PointingToDeclaration/app/com.example.android.tumblrx2.utils/-user/validate-user.html
 $dokka.location:com.example.android.tumblrx2////PointingToDeclaration/app/com.example.android.tumblrx2/index.html
 $dokka.location:com.example.android.tumblrx2/AddPostActivity///PointingToDeclaration/app/com.example.android.tumblrx2/-add-post-activity/index.html
 $dokka.location:com.example.android.tumblrx2/AddPostActivity/AddPostActivity/#/PointingToDeclaration/app/com.example.android.tumblrx2/-add-post-activity/-add-post-activity.html
@@ -40,6 +51,9 @@ $dokka.location:com.example.android.tumblrx2/LoginOptionsFragment/onCreateView/#
 $dokka.location:com.example.android.tumblrx2/LoginOptionsFragment/onViewCreated/#android.view.View#android.os.Bundle?/PointingToDeclaration/app/com.example.android.tumblrx2/-login-options-fragment/on-view-created.html
 $dokka.location:com.example.android.tumblrx2/MainActivity///PointingToDeclaration/app/com.example.android.tumblrx2/-main-activity/index.html
 $dokka.location:com.example.android.tumblrx2/MainActivity/MainActivity/#/PointingToDeclaration/app/com.example.android.tumblrx2/-main-activity/-main-activity.html
+$dokka.location:com.example.android.tumblrx2/MainActivity/randomFunction/#kotlin.String/PointingToDeclaration/app/com.example.android.tumblrx2/-main-activity/random-function.html
 com.example.android.tumblrx2
 com.example.android.tumblrx2.addpostfragments
+com.example.android.tumblrx2.controllers
+com.example.android.tumblrx2.utils
 

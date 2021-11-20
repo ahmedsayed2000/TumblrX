@@ -32,4 +32,5 @@ class MainActivity : AppCompatActivity() {
             startActivity(Intent(this, IntroActivity::class.java))
         }
     }
+
 }

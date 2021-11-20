@@ -13,7 +13,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/editText"
+        android:id="@+id/et_email"
         android:layout_width="350dp"
         android:layout_height="50dp"
         android:backgroundTint="@color/white"
@@ -28,6 +28,7 @@
         app:layout_constraintVertical_bias="0.4" />
 
     <EditText
+        android:id="@+id/et_password"
         android:layout_width="350dp"
         android:layout_height="50dp"
         android:backgroundTint="@color/white"
@@ -36,10 +37,10 @@
         android:textColor="@color/white"
         android:textColorHint="@color/gray"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/editText"
+        app:layout_constraintEnd_toEndOf="@+id/et_email"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/editText"
-        app:layout_constraintTop_toBottomOf="@+id/editText"
+        app:layout_constraintStart_toStartOf="@+id/et_email"
+        app:layout_constraintTop_toBottomOf="@+id/et_email"
         app:layout_constraintVertical_bias="0.0" />
 
     <androidx.constraintlayout.widget.Barrier
