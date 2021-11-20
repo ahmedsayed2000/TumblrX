@@ -12,6 +12,7 @@ class ActivityAndMessagesActivity : AppCompatActivity() {
     var myAdapter: TabsAdapter?=null;
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setTheme(R.style.Theme_TumblrX2)
         setContentView(R.layout.activity_messages_and_activity)
         tabLayout = findViewById(R.id.tabLayout)
         tabLayout!!.addTab(tabLayout!!.newTab().setText("Activity"))

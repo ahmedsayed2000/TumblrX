@@ -23,13 +23,14 @@
             android:name=".AddPostActivity"
             android:exported="false" />
         <activity
-<<<<<<< HEAD
             android:name=".ActivityAndMessagesActivity"
-            android:exported="true" >
-=======
+            android:exported="false" />
+        <activity
+            android:name=".NewMessageActivity"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
-            android:exported="true">
->>>>>>> main
+            android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

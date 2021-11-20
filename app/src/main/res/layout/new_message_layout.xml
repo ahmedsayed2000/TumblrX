@@ -6,11 +6,13 @@
     android:layout_height="match_parent">
 
     <EditText
+        android:background="@drawable/bottom_border"
         android:id="@+id/editTextTextPersonName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="textPersonName"
+        android:padding="16dp"
         android:text="To..."
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
