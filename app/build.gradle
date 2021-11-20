@@ -1,8 +1,19 @@
 plugins {
     id 'com.android.application'
     id 'kotlin-android'
+    id 'org.jetbrains.dokka'
+
 }
 
+tasks.dokkaHtml.configure {
+    outputDirectory.set(file("../documentation/html"))
+}
+
+tasks.withType(dokkaHtml.getClass()).configureEach {
+    pluginsMapConfiguration.set(
+            ["org.jetbrains.dokka.base.DokkaBase": """{ "separateInheritedMembers": true}"""]
+    )
+}
 android {
     compileSdk 31
 
@@ -29,6 +40,7 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+
 
     // for data Binding
     dataBinding {
