@@ -14,7 +14,7 @@ class LoginViewModel(private val repository: LoginSignupRepository) : ViewModel(
     val loginResponse: LiveData<Response<LoginResponse>>
         get() = _loginResponse
 
-    fun login(email:String, password: String) = viewModelScope.launch {
+    fun login(email: String, password: String) = viewModelScope.launch {
         _loginResponse.value = repository.login(email, password)
     }
 }
