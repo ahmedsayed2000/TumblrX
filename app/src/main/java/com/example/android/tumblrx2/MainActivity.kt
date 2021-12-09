@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.databinding.DataBindingUtil
 import com.example.android.tumblrx2.databinding.ActivityMainBinding
+import com.example.android.tumblrx2.intro.IntroActivity
 
 /**
  * the starter activity of the app

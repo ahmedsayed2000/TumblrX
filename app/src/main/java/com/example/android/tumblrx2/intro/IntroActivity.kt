@@ -1,7 +1,8 @@
-package com.example.android.tumblrx2
+package com.example.android.tumblrx2.intro
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.example.android.tumblrx2.R
 
 class IntroActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
