@@ -1,11 +1,16 @@
 package com.example.android.tumblrx2.login
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
+import android.view.View
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.example.android.tumblrx2.HomePageActivity
 import com.example.android.tumblrx2.controllers.LoginController
 import com.example.android.tumblrx2.databinding.ActivityLoginBinding
 import com.example.android.tumblrx2.network.LoginSignupAPI
@@ -28,16 +33,48 @@ class LoginActivity : AppCompatActivity() {
         val factory = LoginViewModelFactory(repository)
         model = ViewModelProvider(this, factory).get(LoginViewModel::class.java)
 
+        binding.etEmail.addTextChangedListener(object : TextWatcher {
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                binding.tvErrMsg.visibility = View.GONE
+            }
+
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+                binding.tvErrMsg.visibility = View.GONE
+            }
+
+            override fun afterTextChanged(s: Editable?) {
+                binding.tvErrMsg.visibility = View.GONE
+            }
+        })
+
+        binding.etPassword.addTextChangedListener(object : TextWatcher {
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                binding.tvErrMsg.visibility = View.GONE
+            }
+
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+                binding.tvErrMsg.visibility = View.GONE
+            }
+
+            override fun afterTextChanged(s: Editable?) {
+                binding.tvErrMsg.visibility = View.GONE
+            }
+        })
 
         model.loginResponse.observe(this, Observer { it ->
             when (it) {
                 is Response.Success -> {
+                    binding.tvErrMsg.visibility = View.GONE
                     Toast.makeText(this, it.toString(), Toast.LENGTH_SHORT).show()
                     Log.i("LoginActivity", it.toString())
+                    startActivity(Intent(this, HomePageActivity::class.java))
                 }
                 is Response.Failure -> {
                     Toast.makeText(this, "Login Failed", Toast.LENGTH_SHORT).show()
                     Log.i("LoginActivity", it.toString())
+                    binding.tvErrMsg.visibility = View.VISIBLE
                 }
             }
         })
@@ -46,19 +83,8 @@ class LoginActivity : AppCompatActivity() {
             val email = binding.etEmail.text.toString().trim()
             val password = binding.etPassword.text.toString().trim()
 
-            model.login(email, password)
+            if (email.isNotEmpty() && password.isNotEmpty()) model.login(email, password)
         }
-
-//        val controller = LoginController
-//
-//        binding.actionbarLogin.btnLogin.setOnClickListener {
-//            val email = binding.etEmail.text.toString().trim()
-//            val password = binding.etPassword.text.toString().trim()
-//            val loginResult = controller.onLogin(email, password)
-////            if (loginResult != "Success") {
-//            Toast.makeText(this, loginResult, Toast.LENGTH_SHORT).show()
-////            }
-//        }
 
         binding.actionbarLogin.btnBack.setOnClickListener {
             finish()

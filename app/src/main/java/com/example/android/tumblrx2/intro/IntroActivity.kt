@@ -7,6 +7,7 @@ import com.example.android.tumblrx2.R
 class IntroActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setTheme(R.style.Theme_TumblrX2)
         setContentView(R.layout.activity_intro)
         val introOptionsFragment = IntroOptionsFragment()
 

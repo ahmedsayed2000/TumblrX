@@ -9,6 +9,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 class WebServiceClient {
     companion object {
 //        private const val BASE_URL = "http://10.0.2.2:4000/"  //localhost backend - only works on emulator
+//        private const val BASE_URL = "http://tumblrx.me:3000/" //deployed backend - does not work, reason unknown
         private const val BASE_URL = "http://13.90.116.72:3000/" //deployed backend
     }
 
