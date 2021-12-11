@@ -37,14 +37,15 @@ class LoginActivity : AppCompatActivity() {
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                 binding.tvErrMsg.visibility = View.GONE
+                binding.tvMissingFieldMsg.visibility = View.GONE
             }
 
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-                binding.tvErrMsg.visibility = View.GONE
+                return
             }
 
             override fun afterTextChanged(s: Editable?) {
-                binding.tvErrMsg.visibility = View.GONE
+                return
             }
         })
 
@@ -52,14 +53,15 @@ class LoginActivity : AppCompatActivity() {
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                 binding.tvErrMsg.visibility = View.GONE
+                binding.tvMissingFieldMsg.visibility = View.GONE
             }
 
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-                binding.tvErrMsg.visibility = View.GONE
+                return
             }
 
             override fun afterTextChanged(s: Editable?) {
-                binding.tvErrMsg.visibility = View.GONE
+                return
             }
         })
 
@@ -83,7 +85,9 @@ class LoginActivity : AppCompatActivity() {
             val email = binding.etEmail.text.toString().trim()
             val password = binding.etPassword.text.toString().trim()
 
-            if (email.isNotEmpty() && password.isNotEmpty()) model.login(email, password)
+            if (email.isEmpty() || password.isEmpty()) {
+                binding.tvMissingFieldMsg.visibility = View.VISIBLE
+            } else model.login(email, password)
         }
 
         binding.actionbarLogin.btnBack.setOnClickListener {
