@@ -85,4 +85,12 @@ dependencies {
 
     // for json serialization
     implementation 'com.google.code.gson:gson:2.8.1'
+
+    // for link preview
+    implementation 'io.github.ponnamkarthik:richlinkpreview:1.0.9'
+    implementation 'com.squareup.picasso:picasso:2.71828'
+    implementation 'org.jsoup:jsoup:1.14.3'
+
+    // for giphy
+    implementation 'com.giphy.sdk:ui:2.1.12'
 }

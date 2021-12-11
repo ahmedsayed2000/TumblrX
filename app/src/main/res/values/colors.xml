@@ -11,4 +11,9 @@
     <color name="blue_bolt">#00b9fb</color>
     <color name="navy">#002147</color>
     <color name="gray">#808080</color>
+    <color name="red">#D50000</color>
+    <color name="orange">#FF9100</color>
+    <color name="pink">#FF4081</color>
+    <color name="green">#00C853</color>
+
 </resources>
