@@ -83,8 +83,6 @@ dependencies {
     //truth library for assertions
     testImplementation "com.google.truth:truth:1.1.3"
 
-    // for json serialization
-    implementation 'com.google.code.gson:gson:2.8.1'
 
     // for link preview
     implementation 'io.github.ponnamkarthik:richlinkpreview:1.0.9'
@@ -93,4 +91,21 @@ dependencies {
 
     // for giphy
     implementation 'com.giphy.sdk:ui:2.1.12'
+
+
+    implementation 'com.google.code.gson:gson:2.8.6'
+
+    //retrofit for http requests
+    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.3.0'
+
+    //kotlin coroutines
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.4.1'
+
+    //ViewModel and LiveData
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.0"
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.4.0"
+
+    implementation "com.squareup.okhttp3:logging-interceptor:4.9.3"
+
 }

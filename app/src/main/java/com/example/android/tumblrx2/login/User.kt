@@ -1,7 +1,4 @@
-package com.example.android.tumblrx2.utils
-
-import androidx.core.util.PatternsCompat.EMAIL_ADDRESS
-import java.util.regex.Pattern
+package com.example.android.tumblrx2.login
 
 data class User(val email: String, val password: String) {
 //object User(val email: String, val password: String) {
