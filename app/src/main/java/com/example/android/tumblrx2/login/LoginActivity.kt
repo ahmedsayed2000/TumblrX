@@ -69,7 +69,7 @@ class LoginActivity : AppCompatActivity() {
             when (it) {
                 is Response.Success -> {
                     binding.tvErrMsg.visibility = View.GONE
-                    Toast.makeText(this, it.toString(), Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, it.toString(), Toast.LENGTH_LONG).show()
                     Log.i("LoginActivity", it.toString())
                     startActivity(Intent(this, HomePageActivity::class.java))
                 }
