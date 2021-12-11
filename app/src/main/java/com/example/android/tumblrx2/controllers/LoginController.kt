@@ -1,7 +1,6 @@
 package com.example.android.tumblrx2.controllers
 
-import android.content.Context
-import com.example.android.tumblrx2.utils.User
+import com.example.android.tumblrx2.login.User
 
 
 //class LoginController(val context: Context) {
