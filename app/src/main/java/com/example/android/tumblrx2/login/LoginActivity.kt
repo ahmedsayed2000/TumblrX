@@ -1,3 +1,6 @@
+//resources:
+//https://www.youtube.com/playlist?list=PLk7v1Z2rk4hgmIvyw8rvpiEQxIAbJvDAF
+//https://classroom.udacity.com/courses/ud9012 lessons 5,8
 package com.example.android.tumblrx2.login
 
 import android.content.Intent
