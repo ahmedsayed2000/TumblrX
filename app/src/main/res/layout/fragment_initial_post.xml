@@ -130,33 +130,20 @@
 
         </com.google.android.material.card.MaterialCardView>
 
-        <ScrollView
-            android:id="@+id/scrollList"
+
+        <ListView
+            android:id="@+id/post_list"
             android:layout_width="match_parent"
-            android:layout_height="490dp"
+            android:layout_height="wrap_content"
             android:layout_below="@id/profile_card"
-            android:clickable="true">
-
-            <LinearLayout
-                android:id="@+id/post_list"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="8dp"
-                android:clickable="true"
-                android:orientation="vertical">
-
-                <EditText
-                    android:id="@+id/first_text"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@null"
-                    android:hint="add something you,d like"
-                    android:inputType="text"
-                    android:textSize="15sp" />
+            android:layout_above="@id/tags_card"
+            android:layout_marginLeft="8dp"
+            android:clickable="true"
+            android:divider="@null"
+            android:orientation="vertical">
 
 
-            </LinearLayout>
-        </ScrollView>
+        </ListView>
 
         <LinearLayout
             android:id="@+id/insertion_bar"
