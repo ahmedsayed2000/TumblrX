@@ -15,14 +15,17 @@ import android.view.GestureDetector
 import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
-import android.widget.EditText
-import android.widget.ImageButton
-import android.widget.ListView
-import android.widget.Toast
+import android.widget.*
 import androidx.core.view.GestureDetectorCompat
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.android.tumblrx2.postobjects.AddPostAdapter
 import com.example.android.tumblrx2.postobjects.AddPostItem
+import com.giphy.sdk.core.models.Media
+import com.giphy.sdk.core.models.enums.MediaType
+import com.giphy.sdk.ui.pagination.GPHContent
+import com.giphy.sdk.ui.views.GPHGridCallback
+import com.giphy.sdk.ui.views.GiphyGridView
 
 class AddPostViewModel : ViewModel() {
 
@@ -64,13 +67,21 @@ class AddPostViewModel : ViewModel() {
     // the post list
     private lateinit var postListView: ListView
 
+    // the post list adapter
+    lateinit var adapter: AddPostAdapter
+
     // text editors gesture detector
     private lateinit var gestureDetector: GestureDetectorCompat
+
+    // the video media controller
+    lateinit var mediaController: MediaController
 
     // objects concerning the text sizes in the editors
     private val textSizes = arrayOf("Regular", "Bigger", "Biggest")
     private var textMap = mutableMapOf<Int, Int>()
 
+    // first text
+    private val firstItem = AddPostItem(1, "")
 
     init {
         Log.d("initial fragment", " view model created")
@@ -78,23 +89,27 @@ class AddPostViewModel : ViewModel() {
         val list = mutableListOf<AddPostItem>()
         postListItems.value = list
 
+        // adding and initializing the first edit text
+        postListItems.value?.add(firstItem)
+        textMap[0] = 0
+
         // init the toggle post button
         togglePostButton.value = false
     }
 
     fun initViews(view: ListView, context: Context) {
-        // init the context and needed objects
+
+        // context and needed objects
         this.context = context
         gestureDetector = GestureDetectorCompat(this.context, GestureListener())
+        mediaController = MediaController(context)
 
-        // adding and initializing the first edit text
-        val item = AddPostItem(1, "")
-        item.textGestureDetector = this.gestureDetector
-        postListItems.value?.add(item)
-        textMap[0] = 0
+        // initialise the first element
+        firstItem.textGestureDetector = this.gestureDetector
 
-        // getting the post list
+        // init the list view
         postListView = view
+
     }
 
     private fun getActiveText(): Int {
@@ -479,5 +494,63 @@ class AddPostViewModel : ViewModel() {
             }
         }
     }
+
+    fun initialiseGifView(view: View) {
+        val grid = view.findViewById<GiphyGridView>(R.id.gifsGridView)
+        grid.content = GPHContent.trendingGifs
+
+        grid.callback = object : GPHGridCallback {
+            override fun contentDidUpdate(resultCount: Int) {
+                if (resultCount == -1) {
+                    Toast.makeText(context, "error in rendering gifs", Toast.LENGTH_SHORT).show()
+                }
+            }
+
+            override fun didSelectMedia(media: Media) {
+
+                // new gif item to be added
+                val item = AddPostItem(6, "")
+                item.giphMedia = media
+
+                val index = getActiveText()
+                // adding the gif at the correct position
+                if (index == -1) {
+                    postListItems.value?.add(item)
+                    Log.d("initial fragment", "last view")
+                } else {
+                    postListItems.value?.add(index + 1, item)
+                }
+                togglePostButton(true)
+                adapter.notifyDataSetChanged()
+
+            }
+        }
+
+
+
+        val textEditor = view.findViewById<EditText>(R.id.gif_text)
+        val searchButton = view.findViewById<ImageButton>(R.id.search_gif)
+
+        // setting the search button click listener
+        searchButton.setOnClickListener {
+            grid.content = GPHContent.searchQuery(textEditor.text.toString(), MediaType.gif)
+        }
+    }
+
+    fun addVideo(uri: Uri) {
+        val item = AddPostItem(3, uri.toString())
+        item.mediaController = mediaController
+
+        val index = getActiveText()
+        if(index == -1) {
+           postListItems.value?.add(item)
+        }
+        else {
+            postListItems.value?.add(index + 1, item)
+        }
+        togglePostButton(true)
+    }
+
+
 
 }

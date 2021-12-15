@@ -45,20 +45,15 @@ class InitialPostFragment : Fragment() {
 
     private lateinit var binding: FragmentInitialPostBinding
 
-    private lateinit var mediaController: MediaController
     private var oneVideo: Boolean = false
 
     private val items = arrayOf("Image(s)", "Video/Gif")
-
-    private val textSizes = arrayOf("Regular", "Bigger", "Biggest")
-    private var textMap = mutableMapOf<Int, Int>()
 
 
     // the app sdk key for the giphy api
     private val appSdkKey = "7VZcIVNJ2mlp9FGeVAcFVY2a8NitNRVr"
 
-    // the adapter and its list
-    var listOfItems: MutableList<AddPostItem> = mutableListOf()
+    // the adapter
     private lateinit var adapter: AddPostAdapter
 
     // the AddPostViewModel
@@ -84,8 +79,8 @@ class InitialPostFragment : Fragment() {
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
             if (it.resultCode == RESULT_OK) {
                 val uri = it.data?.data!!
-
-
+                viewModel.addVideo(uri)
+                adapter.notifyDataSetChanged()
             }
         }
 
@@ -108,8 +103,7 @@ class InitialPostFragment : Fragment() {
         // init all the bottom sheets and buttons listeners
         initialViews()
 
-        // init the video media controller
-        mediaController = MediaController(context)
+
 
         // giphy configuration
         context?.let { Giphy.configure(it, appSdkKey) }
@@ -133,9 +127,10 @@ class InitialPostFragment : Fragment() {
         viewModel.togglePostButton.observe(viewLifecycleOwner, togglePostButtonObserver)
 
 
+
+        // init the list view and the adapter
         initPostList()
 
-        //initialViews()
 
         // for link previewer
         /*richPreview = RichPreview(object : ResponseListener {
@@ -186,13 +181,15 @@ class InitialPostFragment : Fragment() {
      */
     private fun initPostList() {
         Log.d("initial fragment", "init the adapter")
-        adapter = context?.let { AddPostAdapter(it, 0, viewModel.postListItems.value!!) }!!
+        adapter = context?.let { AddPostAdapter(it, 0, viewModel.postListItems.value!!, viewModel) }!!
 
         Log.d("initial fragment", "list items count = ${viewModel.postListItems.value!!.size}")
 
         binding.postList.adapter = adapter
 
         Log.d("initial fragment", "passed the error area")
+
+        viewModel.adapter = adapter
 
 
     }
@@ -204,25 +201,6 @@ class InitialPostFragment : Fragment() {
 
     private fun initialViews() {
 
-
-        /*textMap[0] = 0
-        binding.firstText.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-
-            }
-
-            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-
-            }
-
-            override fun afterTextChanged(p0: Editable?) {
-                if (p0.toString() == "") {
-                    togglePostButton(false)
-                } else
-                    togglePostButton(true)
-
-            }
-        })*/
 
         binding.insertLink.setOnClickListener {
             viewModel.insertLink()
@@ -290,7 +268,7 @@ class InitialPostFragment : Fragment() {
             // inflating the text bottom sheet layout view
             val view = LayoutInflater.from(context).inflate(R.layout.text_bottomsheet, null)
 
-            // init the view buttons
+            // init the view buttons by the view model
             viewModel.initTextBottomSheet(view)
 
             // creating a bottom sheet with the view content
@@ -302,64 +280,23 @@ class InitialPostFragment : Fragment() {
         }
 
         binding.insertGif.setOnClickListener {
+
+            // inflating the giphy bottom sheet
             val view = LayoutInflater.from(context).inflate(R.layout.giphy_sheet, null)
-            initialiseGifView(view)
+
+            // init the giphy sheet
+            viewModel.initialiseGifView(view)
+
+            // creating a bottom sheet with grid of gifs
             val sheet = activity?.let { it1 -> BottomSheetDialog(it1) }
             sheet?.setContentView(view)
             sheet?.show()
         }
 
-
-    }
-
-    /**
-     *
-     */
-    private fun initialiseGifView(view: View) {
-        val grid = view.findViewById<GiphyGridView>(R.id.gifsGridView)
-        grid.content = GPHContent.trendingGifs
-
-        grid.callback = object : GPHGridCallback {
-            override fun contentDidUpdate(resultCount: Int) {
-                if (resultCount == -1) {
-                    Toast.makeText(context, "error in rendering gifs", Toast.LENGTH_SHORT).show()
-                }
-            }
-
-            override fun didSelectMedia(media: Media) {
-                /*val mediaView = context?.let { GPHMediaView(it) }
-                mediaView?.setMedia(media, RenditionType.original)
-                val param = RelativeLayout.LayoutParams(
-                    100,
-                    100
-                )
-                param.setMargins(8, 8, 10, 20)*/
-                val item = AddPostItem(6, "")
-                item.giphMedia = media
-                //val index = getActiveText()
-                val index = 0
-                if (index == -1) {
-                    listOfItems.add(item)
-                    Log.d("initial fragment", "last view")
-                } else {
-                    listOfItems.add(index + 1, item)
-                }
-            }
-        }
-
-
-        val textEditor = view.findViewById<EditText>(R.id.gif_text)
-        val searchButton = view.findViewById<ImageButton>(R.id.search_gif)
-
-        searchButton.setOnClickListener {
-            grid.content = GPHContent.searchQuery(textEditor.text.toString(), MediaType.gif)
-        }
     }
 
 
-    /**
-     * this function adds a text editor when clicking on an empty space in the post or on the insert Text Button
-     */
+
 
 
     /**
