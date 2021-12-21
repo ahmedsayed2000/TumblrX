@@ -40,4 +40,11 @@ class LoginViewModel(private val repository: LoginSignupRepository) : ViewModel(
     fun login(email: String, password: String) = viewModelScope.launch {
         _loginResponse.value = repository.login(email, password)
     }
+
+    /**
+     * calls the saveAuthToken function in the LoginRepository class with [token]
+     */
+    fun saveAuthToken(token: String) = viewModelScope.launch {
+        repository.saveAuthToken(token)
+    }
 }

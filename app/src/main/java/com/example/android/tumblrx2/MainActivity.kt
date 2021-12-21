@@ -7,7 +7,6 @@ import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.asLiveData
-import com.example.android.tumblrx2.data.UserPreferences
 import com.example.android.tumblrx2.databinding.ActivityMainBinding
 import com.example.android.tumblrx2.intro.IntroActivity
 
@@ -43,10 +42,7 @@ class MainActivity : AppCompatActivity() {
             startActivity(Intent(this, NewMessageActivity::class.java))
         }
 
-        val userPreferences = UserPreferences(this)
-        userPreferences.authToken.asLiveData().observe(this, Observer{
-            Toast.makeText(this, it?:"Token is Null", Toast.LENGTH_SHORT).show()
-        })
+
     }
 
 }

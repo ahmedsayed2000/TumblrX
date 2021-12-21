@@ -22,6 +22,8 @@ import com.example.android.tumblrx2.network.LoginSignupAPI
 import com.example.android.tumblrx2.network.Response
 import com.example.android.tumblrx2.network.WebServiceClient
 import com.example.android.tumblrx2.data.repository.LoginSignupRepository
+import com.example.android.tumblrx2.enable
+import com.example.android.tumblrx2.visibile
 import kotlinx.coroutines.launch
 
 class LoginActivity : AppCompatActivity() {
@@ -36,14 +38,20 @@ class LoginActivity : AppCompatActivity() {
 
         val webServiceClient = WebServiceClient()
 
-        repository = LoginSignupRepository(webServiceClient.buildApi(LoginSignupAPI::class.java))
-
-        val factory = LoginViewModelFactory(repository)
-
         //Should be initialized using dependency injection
         userPreferences = UserPreferences(this)
 
+        repository = LoginSignupRepository(
+            webServiceClient.buildApi(LoginSignupAPI::class.java),
+            userPreferences
+        )
+
+        val factory = LoginViewModelFactory(repository)
+
+
         model = ViewModelProvider(this, factory).get(LoginViewModel::class.java)
+
+//        binding.actionbarLogin.btnLogin.enable(false)
 
         binding.etEmail.addTextChangedListener(object : TextWatcher {
 
@@ -78,6 +86,7 @@ class LoginActivity : AppCompatActivity() {
         })
 
         model.loginResponse.observe(this, Observer { it ->
+            binding.progressBar.visibile(false)
             when (it) {
                 is Response.Success -> {
                     binding.tvErrMsg.visibility = View.GONE
@@ -85,10 +94,9 @@ class LoginActivity : AppCompatActivity() {
                     Toast.makeText(this, "Success", Toast.LENGTH_SHORT).show()
                     Log.i("LoginActivity", it.toString())
 
-                    lifecycleScope.launch {
-                        userPreferences.saveAuthToken(it.value.token)
-                    }
-//                    startActivity(Intent(this, HomePageActivity::class.java))
+                    model.saveAuthToken(it.value.token)
+                    startActivity(Intent(this@LoginActivity, HomePageActivity::class.java))
+
                 }
                 is Response.Failure -> {
                     Toast.makeText(this, "Login Failed", Toast.LENGTH_SHORT).show()
@@ -101,6 +109,8 @@ class LoginActivity : AppCompatActivity() {
         binding.actionbarLogin.btnLogin.setOnClickListener {
             val email = binding.etEmail.text.toString().trim()
             val password = binding.etPassword.text.toString().trim()
+
+            binding.progressBar.visibile(true)
 
             if (email.isEmpty() || password.isEmpty()) {
                 binding.tvMissingFieldMsg.visibility = View.VISIBLE
