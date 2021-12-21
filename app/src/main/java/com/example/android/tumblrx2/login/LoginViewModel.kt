@@ -2,8 +2,8 @@ package com.example.android.tumblrx2.login
 
 import androidx.lifecycle.*
 import com.example.android.tumblrx2.network.Response
-import com.example.android.tumblrx2.repository.LoginSignupRepository
-import com.example.android.tumblrx2.responses.LoginResponse
+import com.example.android.tumblrx2.data.repository.LoginSignupRepository
+import com.example.android.tumblrx2.data.responses.LoginResponse
 import kotlinx.coroutines.launch
 
 class LoginViewModel(private val repository: LoginSignupRepository) : ViewModel() {

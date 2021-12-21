@@ -2,8 +2,8 @@ package com.example.android.tumblrx2.login
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.example.android.tumblrx2.repository.BaseRepository
-import com.example.android.tumblrx2.repository.LoginSignupRepository
+import com.example.android.tumblrx2.data.repository.BaseRepository
+import com.example.android.tumblrx2.data.repository.LoginSignupRepository
 import java.lang.IllegalArgumentException
 
 @Suppress("UNCHECKED_CAST")

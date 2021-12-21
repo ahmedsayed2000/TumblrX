@@ -1,4 +1,4 @@
-package com.example.android.tumblrx2.repository
+package com.example.android.tumblrx2.data.repository
 
 import com.example.android.tumblrx2.network.LoginSignupAPI
 

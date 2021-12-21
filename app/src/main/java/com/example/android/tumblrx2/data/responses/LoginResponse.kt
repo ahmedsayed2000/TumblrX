@@ -1,4 +1,4 @@
-package com.example.android.tumblrx2.responses
+package com.example.android.tumblrx2.data.responses
 
 data class LoginResponse(
     val status: String,
