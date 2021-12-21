@@ -11,4 +11,9 @@
     <color name="blue_bolt">#00b9fb</color>
     <color name="navy">#002147</color>
     <color name="gray">#808080</color>
+    <color name="green">#3CB043</color>
+    <color name="gold">#A48111</color>
+    <color name="dark_grey">#2d2f30</color>
+
+
 </resources>

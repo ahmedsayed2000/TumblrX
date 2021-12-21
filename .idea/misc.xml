@@ -4,10 +4,15 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Mariam/College/Software Engineering/Project/TumblrX/app/src/main/res/drawable/bottom_border.xml" value="0.2703125" />
+        <entry key="..\:/Mariam/College/Software Engineering/Project/TumblrX/app/src/main/res/drawable/corner.xml" value="0.2703125" />
         <entry key="..\:/Mariam/College/Software Engineering/Project/TumblrX/app/src/main/res/drawable/ic_arrow.xml" value="0.2703125" />
         <entry key="..\:/Mariam/College/Software Engineering/Project/TumblrX/app/src/main/res/layout/activity_add_post.xml" value="0.264" />
+        <entry key="..\:/Mariam/College/Software Engineering/Project/TumblrX/app/src/main/res/layout/activity_blog.xml" value="0.1" />
+        <entry key="..\:/Mariam/College/Software Engineering/Project/TumblrX/app/src/main/res/layout/activity_chat.xml" value="0.264" />
+        <entry key="..\:/Mariam/College/Software Engineering/Project/TumblrX/app/src/main/res/layout/activity_chat_message.xml" value="0.264" />
         <entry key="..\:/Mariam/College/Software Engineering/Project/TumblrX/app/src/main/res/layout/activity_home_page.xml" value="0.13020833333333334" />
         <entry key="..\:/Mariam/College/Software Engineering/Project/TumblrX/app/src/main/res/layout/activity_list_item.xml" value="0.1" />
+        <entry key="..\:/Mariam/College/Software Engineering/Project/TumblrX/app/src/main/res/layout/activity_login.xml" value="0.12360688956433637" />
         <entry key="..\:/Mariam/College/Software Engineering/Project/TumblrX/app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="..\:/Mariam/College/Software Engineering/Project/TumblrX/app/src/main/res/layout/activity_messages_and_activity.xml" value="0.17300724637681159" />
         <entry key="..\:/Mariam/College/Software Engineering/Project/TumblrX/app/src/main/res/layout/bottom_sheet_layout.xml" value="0.4" />
