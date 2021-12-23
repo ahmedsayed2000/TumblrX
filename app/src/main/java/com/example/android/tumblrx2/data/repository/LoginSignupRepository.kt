@@ -13,7 +13,7 @@ class LoginSignupRepository(
     suspend fun login(email: String, password: String) = safeApiCall { api.login(email, password) }
 
     /**
-     * saves the authentication token given when a user logs in in the dataStore using [token]
+     * saves the authentication token given when a user logs in in the dataStore     using [token]
      */
     suspend fun saveAuthToken(token: String){
         preferences.saveAuthToken(token)

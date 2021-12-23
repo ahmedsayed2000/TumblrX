@@ -44,7 +44,7 @@ class LoginViewModel(private val repository: LoginSignupRepository) : ViewModel(
     /**
      * calls the saveAuthToken function in the LoginRepository class with [token]
      */
-    fun saveAuthToken(token: String) = viewModelScope.launch {
+    suspend fun saveAuthToken(token: String) {
         repository.saveAuthToken(token)
     }
 }

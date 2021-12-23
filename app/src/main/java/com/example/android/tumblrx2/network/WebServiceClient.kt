@@ -16,17 +16,25 @@ class WebServiceClient {
     }
 
     fun <Api> buildApi(
-        api: Class<Api>
+        api: Class<Api>,
+        authToken: String? = null
     ): Api {
         return Retrofit.Builder()
             .baseUrl(BASE_URL)
             .client(
-                OkHttpClient.Builder().also { client ->
-                    val logging = HttpLoggingInterceptor()
-                    logging.setLevel(HttpLoggingInterceptor.Level.BODY)
-                    client.addInterceptor(logging)
-                    client.connectTimeout(5, TimeUnit.SECONDS)
-                }.build()
+                OkHttpClient.Builder()
+                    .addInterceptor { chain ->
+                        chain.proceed(chain.request().newBuilder().also {
+                            if (authToken != null) {
+                                it.addHeader("Authorization", authToken)
+                            }
+                        }.build())
+                    }.also { client ->
+                        val logging = HttpLoggingInterceptor()
+                        logging.setLevel(HttpLoggingInterceptor.Level.BODY)
+                        client.addInterceptor(logging)
+                        client.connectTimeout(5, TimeUnit.SECONDS)
+                    }.build()
             )
             .addConverterFactory(GsonConverterFactory.create())
             .build()

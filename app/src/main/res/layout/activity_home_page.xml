@@ -19,5 +19,25 @@
             android:id="@+id/button_addPost"
             />
 
+        <TextView
+            android:id="@+id/tv_test"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="352dp"
+            android:layout_marginEnd="173dp"
+            android:text="TextView" />
+
+        <Button
+            android:id="@+id/bt_test"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="263dp"
+            android:layout_marginEnd="155dp"
+            android:text="Button" />
+
     </RelativeLayout>
 </layout>

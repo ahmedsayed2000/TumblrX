@@ -1,12 +1,12 @@
 package com.example.android.tumblrx2.controllers
 
-import com.example.android.tumblrx2.login.User
+import com.example.android.tumblrx2.login.User_old
 
 
 //class LoginController(val context: Context) {
 object LoginController {
-    private var mockUsers: MutableList<User> =
-        mutableListOf(User("admin@admin", "admin"), User("Ahmed@gmail.com", "123456"))
+    private var mockUsers: MutableList<User_old> =
+        mutableListOf(User_old("admin@admin", "admin"), User_old("Ahmed@gmail.com", "123456"))
 
     /**
      * uses the User.validateUser function to return an appropriate message to LoginActivity to be displayed.
@@ -16,7 +16,7 @@ object LoginController {
      * @return a string with the message to be displayed to the user
      */
     fun onLogin(email: String?, password: String?): String {
-        val user = User(
+        val user = User_old(
             email!!,
             password!!
         )

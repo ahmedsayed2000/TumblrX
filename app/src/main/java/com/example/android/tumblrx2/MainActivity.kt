@@ -7,6 +7,7 @@ import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.asLiveData
+import com.example.android.tumblrx2.data.UserPreferences
 import com.example.android.tumblrx2.databinding.ActivityMainBinding
 import com.example.android.tumblrx2.intro.IntroActivity
 
@@ -33,6 +34,15 @@ class MainActivity : AppCompatActivity() {
             startActivity(Intent(this, HomePageActivity::class.java))
         }
         binding.btnIntro.setOnClickListener {
+            val userPreferences = UserPreferences(this)
+            userPreferences.authToken.asLiveData().observe(this, Observer { token ->
+                if (token != null) {
+                    startActivity(Intent(this@MainActivity, HomePageActivity::class.java).also{
+                        it.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                    })
+                } else
+                    startActivity(Intent(this, IntroActivity::class.java))
+            })
             startActivity(Intent(this, IntroActivity::class.java))
         }
         binding.btnActivity.setOnClickListener {

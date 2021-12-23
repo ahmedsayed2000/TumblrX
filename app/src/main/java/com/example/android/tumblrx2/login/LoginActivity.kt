@@ -94,8 +94,17 @@ class LoginActivity : AppCompatActivity() {
                     Toast.makeText(this, "Success", Toast.LENGTH_SHORT).show()
                     Log.i("LoginActivity", it.toString())
 
-                    model.saveAuthToken(it.value.token)
-                    startActivity(Intent(this@LoginActivity, HomePageActivity::class.java))
+                    lifecycleScope.launch {
+                        model.saveAuthToken(it.value.token)
+                        startActivity(
+                            Intent(
+                                this@LoginActivity,
+                                HomePageActivity::class.java
+                            ).also {
+//                        it.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                                it.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK
+                            })
+                    }
 
                 }
                 is Response.Failure -> {

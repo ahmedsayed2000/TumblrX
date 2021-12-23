@@ -20,7 +20,7 @@ class UserPreferences(
      * returns the saved authToken value using kotlin Coroutines and Flow
      */
     val authToken: Flow<String?>
-        get() = dataStore.data.map{  preferences ->
+        get() = dataStore.data.map { preferences ->
             preferences[KEY_AUTH]
         }
 
@@ -28,7 +28,7 @@ class UserPreferences(
      * Saves the [authToken] got from the backend to the created dataStore
      */
     suspend fun saveAuthToken(authToken: String){
-        dataStore.edit{ preferences ->
+        dataStore.edit { preferences ->
             preferences[KEY_AUTH] = authToken
         }
     }
