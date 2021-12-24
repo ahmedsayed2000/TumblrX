@@ -35,7 +35,7 @@
         android:text="What should we call you?"
         android:textAlignment="center"
         android:textColor="@color/white"
-        android:textSize="37dp"
+        android:textSize="37sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btn_back" />
@@ -49,7 +49,7 @@
         android:text="You'll need a name to make your own posts, customzie your own blog, nad message people."
         android:textAlignment="center"
         android:textColor="@color/gray"
-        android:textSize="15dp"
+        android:textSize="15sp"
         app:layout_constraintEnd_toStartOf="@id/btn_signup"
         app:layout_constraintStart_toEndOf="@+id/btn_back"
         app:layout_constraintTop_toBottomOf="@+id/tv_signup1" />
@@ -57,9 +57,10 @@
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/til_email"
         android:layout_width="300dp"
-        android:layout_height="50dp"
+        android:layout_height="55dp"
         android:layout_marginTop="16dp"
         android:textColorHint="@color/gray"
+        app:boxStrokeColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_signup2">
@@ -69,15 +70,16 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:backgroundTint="@color/gph_transparent"
+            android:textColor="@color/white"
             android:hint="email" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/til_password"
         android:layout_width="300dp"
-        android:layout_height="50dp"
+        android:layout_height="55dp"
         android:textColorHint="@color/gray"
-        app:boxStrokeColor="@color/gray"
+        app:boxStrokeColor="@color/white"
         app:endIconTint="@color/gray"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -90,14 +92,16 @@
             android:layout_height="match_parent"
             android:background="@color/gph_transparent"
             android:hint="password"
+            android:textColor="@android:color/white"
             android:inputType="textPassword" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/til_username"
         android:layout_width="300dp"
-        android:layout_height="50dp"
+        android:layout_height="55dp"
         android:textColorHint="@color/gray"
+        app:boxStrokeColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
@@ -108,14 +112,16 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:backgroundTint="@color/gph_transparent"
+            android:textColor="@color/white"
             android:hint="username" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/til_age"
         android:layout_width="300dp"
-        android:layout_height="50dp"
+        android:layout_height="55dp"
         android:textColorHint="@color/gray"
+        app:boxStrokeColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/til_username">
@@ -125,9 +131,26 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:backgroundTint="@color/gph_transparent"
+            android:textColor="@android:color/white"
+            android:inputType="number"
             android:hint="age"
             />
     </com.google.android.material.textfield.TextInputLayout>
+
+    <TextView
+        android:id="@+id/tv_err_msg"
+        android:layout_width="290dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="Error"
+        android:textSize="15sp"
+        android:textColor="#F44336"
+        android:lineSpacingMultiplier="1.2"
+        android:textAlignment="textStart"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/til_age"
+        android:visibility="gone"/>
 
 
     <!-- TODO: Update blank fragment layout -->
