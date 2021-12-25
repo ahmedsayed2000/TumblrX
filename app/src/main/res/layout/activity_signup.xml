@@ -70,8 +70,9 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:backgroundTint="@color/gph_transparent"
-            android:textColor="@color/white"
-            android:hint="email" />
+            android:hint="email"
+            android:inputType="textEmailAddress"
+            android:textColor="@color/white" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -92,8 +93,8 @@
             android:layout_height="match_parent"
             android:background="@color/gph_transparent"
             android:hint="password"
-            android:textColor="@android:color/white"
-            android:inputType="textPassword" />
+            android:inputType="textPassword"
+            android:textColor="@android:color/white" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -112,8 +113,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:backgroundTint="@color/gph_transparent"
-            android:textColor="@color/white"
-            android:hint="username" />
+            android:hint="username"
+            android:textColor="@color/white" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -131,10 +132,9 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:backgroundTint="@color/gph_transparent"
-            android:textColor="@android:color/white"
-            android:inputType="number"
             android:hint="age"
-            />
+            android:inputType="number"
+            android:textColor="@android:color/white" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <TextView
@@ -142,17 +142,26 @@
         android:layout_width="290dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
-        android:text="Error"
-        android:textSize="15sp"
-        android:textColor="#F44336"
         android:lineSpacingMultiplier="1.2"
+        android:text="Error"
         android:textAlignment="textStart"
+        android:textColor="#F44336"
+        android:textSize="15sp"
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/til_age"
-        android:visibility="gone"/>
+        app:layout_constraintTop_toBottomOf="@+id/til_age" />
 
+    <ProgressBar
+        android:id="@+id/progress_signup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <!-- TODO: Update blank fragment layout -->
 
 </androidx.constraintlayout.widget.ConstraintLayout>
