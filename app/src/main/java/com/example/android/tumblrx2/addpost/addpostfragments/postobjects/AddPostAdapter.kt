@@ -1,23 +1,21 @@
-package com.example.android.tumblrx2.postobjects
+package com.example.android.tumblrx2.addpost.addpostfragments.postobjects
 
 import android.content.Context
 import android.net.Uri
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.core.view.GestureDetectorCompat
-import com.example.android.tumblrx2.AddPostViewModel
+import com.example.android.tumblrx2.addpost.addpostfragments.AddPostViewModel
 import com.example.android.tumblrx2.R
 import com.giphy.sdk.core.models.Media
 import com.giphy.sdk.core.models.enums.RenditionType
 import com.giphy.sdk.ui.views.GPHMediaView
 import io.github.ponnamkarthik.richlinkpreview.RichLinkView
 import io.github.ponnamkarthik.richlinkpreview.ViewListener
-import timber.log.Timber
 
 class AddPostAdapter : ArrayAdapter<AddPostItem> {
 
@@ -39,7 +37,12 @@ class AddPostAdapter : ArrayAdapter<AddPostItem> {
 
     private var listOfItems: MutableList<AddPostItem>
 
-    constructor(context: Context, res: Int, list: MutableList<AddPostItem>, viewModel: AddPostViewModel) : super(
+    constructor(
+        context: Context,
+        res: Int,
+        list: MutableList<AddPostItem>,
+        viewModel: AddPostViewModel
+    ) : super(
         context,
         res,
         list
@@ -54,6 +57,7 @@ class AddPostAdapter : ArrayAdapter<AddPostItem> {
         val listItem = listOfItems.get(position)
         val type = getItemViewType(position)
         var view: View? = null
+
 
         if (convertView == null) {
             when (type) {
@@ -101,9 +105,9 @@ class AddPostAdapter : ArrayAdapter<AddPostItem> {
             when (type) {
                 ITEM_TEXT -> {
                     val index = searchHolder(listItem)
-                    if (index != -1)
+                    if (index != -1) {
                         view = textHolderList.get(index).text
-                    else {
+                    } else {
                         view = EditText(context)
                         view?.let {
                             initText(it, listItem.textGestureDetector!!, listItem)
@@ -141,7 +145,8 @@ class AddPostAdapter : ArrayAdapter<AddPostItem> {
                 }
 
                 ITEM_LINK -> {
-                    if (!(convertView is EditText) && !(convertView is ImageView) && !(convertView is VideoView) && !(convertView is RichLinkView) && !(convertView is GPHMediaView)) {
+                    if (!(convertView is VideoView) && !(convertView is ImageView) && !(convertView is EditText) && !(convertView is RichLinkView) && !(convertView is GPHMediaView)) {
+                        initLink(convertView, listItem)
                         view = convertView
                     } else {
                         view =
@@ -230,27 +235,27 @@ class AddPostAdapter : ArrayAdapter<AddPostItem> {
 
             override fun afterTextChanged(p0: Editable?) {
                 item.content = p0.toString()
-                if(view.text.toString() == "") {
-                    if(listOfItems.size == 1)
+                if (view.text.toString() == "") {
+                    if (listOfItems.size == 1)
                         postViewModel.togglePostButton.value = false
-                }
-                else
+                } else
                     postViewModel.togglePostButton.value = true
             }
         })
+
     }
 
     private fun initImage(view: ImageView, content: String) {
         val param = RelativeLayout.LayoutParams(
             ViewGroup.LayoutParams.MATCH_PARENT,
-            ViewGroup.LayoutParams.WRAP_CONTENT
+            800
         )
         param.setMargins(8, 8, 8, 8)
 
         val uri = Uri.parse(content)
         view.setImageURI(uri)
-        view.setImageURI(uri)
         view.layoutParams = param
+        view.scaleType = ImageView.ScaleType.CENTER_CROP
     }
 
     private fun initVideo(view: VideoView, mediaController: MediaController, content: String) {
@@ -279,20 +284,37 @@ class AddPostAdapter : ArrayAdapter<AddPostItem> {
         val close = view.findViewById<ImageButton>(R.id.link_close)
         val linkButton = view.findViewById<ImageButton>(R.id.link_button)
 
+        val text = view.findViewById<EditText>(R.id.link_url)
+        text.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+
+            }
+
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+
+            }
+
+            override fun afterTextChanged(p0: Editable?) {
+                item.content = p0.toString()
+            }
+        })
+
+        text.setText(item.content)
+
+
         linkButton.setOnClickListener {
             val text = view.findViewById<EditText>(R.id.link_url)
             val linkString = text.text.toString()
             val position = searchForLink(item)
-            if(position != -1) {
+            if (position != -1) {
                 listOfItems.removeAt(position)
                 listOfItems.add(position, AddPostItem(5, linkString))
             }
-            this.notifyDataSetChanged()
         }
 
         close.setOnClickListener {
             val position = searchForLink(item)
-            if(position != -1) {
+            if (position != -1) {
                 listOfItems.removeAt(position)
             }
             this.notifyDataSetChanged()
@@ -304,32 +326,46 @@ class AddPostAdapter : ArrayAdapter<AddPostItem> {
             if (textHolderList.get(i).item === item)
                 return i
         }
+
         return -1
     }
 
     private fun searchForLink(item: AddPostItem): Int {
-        for (i in 0 until listOfItems.size) {
-            if (listOfItems.get(i) === item)
-                return i
+        if (listOfItems.contains(item)) {
+            return listOfItems.indexOf(item)
         }
         return -1
+
     }
 
 }
 
+/*
+val index = searchHolder(listItem)
+                    if (index != -1) {
+                        view = textHolderList.get(index).text
+                    }
+                    else {
+                        view = EditText(context)
+                        view?.let {
+                            initText(it, listItem.textGestureDetector!!, listItem)
+                        }
+                        val holder = TextHolder(view, listItem)
+                        view.tag = holder
+                        textHolderList.add(holder)
+                    }
+ */
 
 /*
-override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
-
-        val listItem = listOfItems.get(position)
-        val type = getItemViewType(position)
-        var view: View? = null
-
-        if (convertView == null) {
+if (convertView == null) {
             when (type) {
                 ITEM_TEXT -> {
                     view = EditText(context)
-                    view?.let { initText(it, listItem.textGestureDetector!!) }
+                    view?.let { initText(it, listItem.textGestureDetector!!, listItem) }
+                    val holder = TextHolder(view, listItem)
+                    view.tag = holder
+                    textHolderList.add(holder)
+
                 }
                 ITEM_IMAGE -> {
                     view = ImageView(context)
@@ -350,7 +386,7 @@ override fun getView(position: Int, convertView: View?, parent: ViewGroup): View
 
                 ITEM_LINK -> {
                     view = LayoutInflater.from(context).inflate(R.layout.link_card, parent, false)
-                    view?.let { initLink(it, position) }
+                    view?.let { initLink(it, listItem) }
                 }
 
                 ITEM_LINK_PREVIEW -> {
@@ -366,30 +402,35 @@ override fun getView(position: Int, convertView: View?, parent: ViewGroup): View
         } else {
             when (type) {
                 ITEM_TEXT -> {
-                    if(convertView is EditText) {
-                        view = convertView
+                    val index = searchHolder(listItem)
+                    if (index != -1) {
+                        view = textHolderList.get(index).text
+                        view.requestFocus()
                     }
                     else {
                         view = EditText(context)
-                        view?.let { initText(it, listItem.textGestureDetector!!) }
+                        view?.let {
+                            initText(it, listItem.textGestureDetector!!, listItem)
+                        }
+                        val holder = TextHolder(view, listItem)
+                        view.tag = holder
+                        textHolderList.add(holder)
                     }
                 }
                 ITEM_IMAGE -> {
-                    if(convertView is ImageView) {
+                    if (convertView is ImageView) {
                         initImage(convertView, listItem.content)
                         view = convertView
-                    }
-                    else {
+                    } else {
                         view = ImageView(context)
                         view?.let { initImage(it, listItem.content) }
                     }
                 }
                 ITEM_VIDEO -> {
-                    if(convertView is VideoView) {
+                    if (convertView is VideoView) {
                         initVideo(convertView, listItem.mediaController!!, listItem.content)
                         view = convertView
-                    }
-                    else {
+                    } else {
                         view = VideoView(context)
                         view?.let {
                             listItem.mediaController?.let { it1 ->
@@ -404,38 +445,34 @@ override fun getView(position: Int, convertView: View?, parent: ViewGroup): View
                 }
 
                 ITEM_LINK -> {
-                    if(!(convertView is EditText) && !(convertView is ImageView) && !(convertView is VideoView) && !(convertView is RichLinkView) && !(convertView is GPHMediaView)) {
+                    if (!(convertView is EditText) && !(convertView is ImageView) && !(convertView is VideoView) && !(convertView is RichLinkView) && !(convertView is GPHMediaView)) {
                         view = convertView
-                    }
-                    else {
+                    } else {
                         view =
                             LayoutInflater.from(context).inflate(R.layout.link_card, parent, false)
-                        view?.let { initLink(it, position) }
+                        view?.let { initLink(it, listItem) }
                     }
                 }
 
                 ITEM_LINK_PREVIEW -> {
-                    if(convertView is RichLinkView) {
+                    if (convertView is RichLinkView) {
                         initPreview(convertView, listItem.content)
                         view = convertView
-                    }
-                    else {
+                    } else {
                         view = RichLinkView(context)
                         initPreview(view, listItem.content)
                     }
                 }
                 ITEM_GIPH -> {
-                    if(convertView is GPHMediaView) {
+                    if (convertView is GPHMediaView) {
                         initGiph(convertView, listItem.giphMedia)
                         view = convertView
-                    }
-                    else {
+                    } else {
                         view = GPHMediaView(context)
                         initGiph(view, listItem.giphMedia)
                     }
                 }
             }
-            //view = convertView
         }
 
 

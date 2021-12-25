@@ -1,10 +1,11 @@
-package com.example.android.tumblrx2
+package com.example.android.tumblrx2.addpost.addpostfragments
 
 import android.content.ClipData
 import android.content.Context
 import android.graphics.Color
 import android.graphics.Typeface
 import android.net.Uri
+import android.provider.MediaStore
 import android.text.SpannableStringBuilder
 import android.text.style.AbsoluteSizeSpan
 import android.text.style.ForegroundColorSpan
@@ -12,20 +13,26 @@ import android.text.style.StrikethroughSpan
 import android.text.style.StyleSpan
 import android.util.Log
 import android.view.GestureDetector
-import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
 import android.widget.*
 import androidx.core.view.GestureDetectorCompat
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.android.tumblrx2.postobjects.AddPostAdapter
-import com.example.android.tumblrx2.postobjects.AddPostItem
+import com.example.android.tumblrx2.R
+import com.example.android.tumblrx2.addpost.addpostfragments.postobjects.*
+import com.example.android.tumblrx2.repository.AddPostRepository
 import com.giphy.sdk.core.models.Media
 import com.giphy.sdk.core.models.enums.MediaType
 import com.giphy.sdk.ui.pagination.GPHContent
 import com.giphy.sdk.ui.views.GPHGridCallback
+import com.giphy.sdk.ui.views.GPHMediaView
 import com.giphy.sdk.ui.views.GiphyGridView
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.MultipartBody
+import okhttp3.RequestBody.Companion.asRequestBody
+import okhttp3.internal.toHexString
+import java.io.File
 
 class AddPostViewModel : ViewModel() {
 
@@ -54,6 +61,13 @@ class AddPostViewModel : ViewModel() {
 
     }
 
+    data class SizeOfText(val item: AddPostItem, var size: Int)
+
+    private var listOfSizes = mutableListOf<SizeOfText>()
+
+    // list of post objects
+    val fileList = mutableListOf<MultipartBody.Part>()
+    val contentList = mutableListOf<MultipartBody.Part>()
 
     // the activity context
     private lateinit var context: Context
@@ -78,10 +92,19 @@ class AddPostViewModel : ViewModel() {
 
     // objects concerning the text sizes in the editors
     private val textSizes = arrayOf("Regular", "Bigger", "Biggest")
-    private var textMap = mutableMapOf<Int, Int>()
+    private val textColors =
+        arrayOf("black", "red", "orange", "green", "cyan", "purple", "pink")  // 7 colors
+    private val textStyles = arrayOf("Bold", "Italic", "Strike")
+    private var textMap = mutableMapOf<AddPostItem, Int>()
+    private var styleMap = mutableMapOf<AddPostItem, Int>()
+    private var boldList = mutableListOf<AddPostItem>()
+    private var italicList = mutableListOf<AddPostItem>()
+    private var strikeList = mutableListOf<AddPostItem>()
+    private var colorMap = mutableMapOf<AddPostItem, String>()
 
     // first text
     private val firstItem = AddPostItem(1, "")
+
 
     init {
         Log.d("initial fragment", " view model created")
@@ -91,7 +114,8 @@ class AddPostViewModel : ViewModel() {
 
         // adding and initializing the first edit text
         postListItems.value?.add(firstItem)
-        textMap[0] = 0
+        textMap[firstItem] = 0
+        listOfSizes.add(SizeOfText(firstItem, 0))
 
         // init the toggle post button
         togglePostButton.value = false
@@ -107,8 +131,13 @@ class AddPostViewModel : ViewModel() {
         // initialise the first element
         firstItem.textGestureDetector = this.gestureDetector
 
+        Log.d("initial fragment", "first text size = ${textMap[firstItem]}")
+
         // init the list view
         postListView = view
+
+        // print color
+        Log.d("initial fragment", "green is ${Color.GREEN.toHexString()}")
 
     }
 
@@ -159,19 +188,24 @@ class AddPostViewModel : ViewModel() {
     }
 
     fun addText() {
+        Log.d("initial fragment", "add text")
         val count = postListView.childCount
         val lastChild = postListView.getChildAt(count - 1)
 
         // checking if the last child is an Edit text
         if (lastChild is EditText) {
             // requesting the focus in order not to add another edit text
+            Log.d("initial fragment", "request the focus")
             lastChild.requestFocus()
+            lastChild.isCursorVisible = true
+            //adapter.notifyDataSetChanged()
         } else {
             // adding a new text editor to the list
             val item = AddPostItem(1, "")
             item.textGestureDetector = gestureDetector
             postListItems.value?.add(item)
-            textMap[count] = 0
+            //textMap[item] = 0
+            listOfSizes.add(SizeOfText(item, 0))
         }
 
     }
@@ -179,17 +213,33 @@ class AddPostViewModel : ViewModel() {
 
     private fun editSelectedTextSize(index: Int) {
         // getting the text editor to increase its text size
+        Log.d("initial fragment", "before area")
         val editor = (postListView.getChildAt(index)) as EditText
 
+        val item = (postListItems.value?.get(index)) as AddPostItem
+
+        Log.d("initial fragment", "index = ${index}")
+
         // incrementing the text size
-        textMap[index] = (textMap[index]!! + 1) % 3
+        //textMap[item] = (textMap[item]!! + 1) % 3
+        //textMap[(postListItems.value!!.get(index))] = (textMap[(postListItems.value!!.get(index))]!! + 1) % 3
+
+        var textSize: SizeOfText? = null
+        for (x in listOfSizes) {
+            if (x.item === item)
+                textSize = x
+        }
+
+        textSize?.size = (textSize?.size!! + 1) % 3
+
+        Log.d("initial fragment", "before area with map = ${textSize.size}")
 
 
         val selStart = editor.selectionStart
         val selEnd = editor.selectionEnd
 
         // getting the current size to update
-        when (textSizes[textMap[index]!!]) {
+        when (textSizes[textSize.size]) {
             "Regular" -> {
                 if (editor.selectionStart != -1) {
                     val spanString = SpannableStringBuilder(editor.text)
@@ -202,7 +252,7 @@ class AddPostViewModel : ViewModel() {
                     editor.text = spanString
                     editor.setSelection(selStart, selEnd)
                 }
-                //Toast.makeText(context, "Regular", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, "Regular", Toast.LENGTH_SHORT).show()
             }
             "Bigger" -> {
                 if (editor.selectionStart != -1) {
@@ -217,7 +267,7 @@ class AddPostViewModel : ViewModel() {
                     editor.setSelection(selStart, selEnd)
                 }
 
-                //Toast.makeText(context, "Bigger", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, "Bigger", Toast.LENGTH_SHORT).show()
             }
             "Biggest" -> {
                 if (editor.selectionStart != -1) {
@@ -232,7 +282,7 @@ class AddPostViewModel : ViewModel() {
                     editor.setSelection(selStart, selEnd)
                 }
 
-                //Toast.makeText(context, "Biggest", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, "Biggest", Toast.LENGTH_SHORT).show()
             }
         }
     }
@@ -284,9 +334,12 @@ class AddPostViewModel : ViewModel() {
                     activeEditor.selectionEnd,
                     0
                 )
+                val item = (postListItems.value?.get(index)) as AddPostItem
 
                 activeEditor.text = spanString
                 activeEditor.setSelection(selStart, selEnd)
+                //styleMap[item] = 0
+                boldList.add(item)
             }
 
         }
@@ -310,6 +363,9 @@ class AddPostViewModel : ViewModel() {
 
                 activeEditor.text = spanString
                 activeEditor.setSelection(selStart, selEnd)
+                val item = (postListItems.value?.get(index)) as AddPostItem
+                //styleMap[item] = 1
+                italicList.add(item)
             }
 
         }
@@ -333,6 +389,10 @@ class AddPostViewModel : ViewModel() {
 
                 activeEditor.text = spanString
                 activeEditor.setSelection(selStart, selEnd)
+                val item = (postListItems.value?.get(index)) as AddPostItem
+                //styleMap[item] = 2
+                strikeList.add(item)
+
             }
         }
 
@@ -354,8 +414,10 @@ class AddPostViewModel : ViewModel() {
                 )
 
                 activeEditor.text = spanString
-
                 activeEditor.setSelection(selStart, selEnd)
+
+                val item = (postListItems.value?.get(index)) as AddPostItem
+                colorMap[item] = "#000000"
             }
         }
 
@@ -377,8 +439,9 @@ class AddPostViewModel : ViewModel() {
                 )
 
                 activeEditor.text = spanString
-
                 activeEditor.setSelection(selStart, selEnd)
+                val item = (postListItems.value?.get(index)) as AddPostItem
+                colorMap[item] = "#d50000"
             }
         }
         // orange button
@@ -399,9 +462,9 @@ class AddPostViewModel : ViewModel() {
                 )
 
                 activeEditor.text = spanString
-
-
                 activeEditor.setSelection(selStart, selEnd)
+                val item = (postListItems.value?.get(index)) as AddPostItem
+                colorMap[item] = "#ff9100"
             }
         }
         // purple button
@@ -424,6 +487,8 @@ class AddPostViewModel : ViewModel() {
                 activeEditor.text = spanString
 
                 activeEditor.setSelection(selStart, selEnd)
+                val item = (postListItems.value?.get(index)) as AddPostItem
+                colorMap[item] = "#df00f9"
             }
         }
         // cyan button
@@ -447,6 +512,8 @@ class AddPostViewModel : ViewModel() {
 
 
                 activeEditor.setSelection(selStart, selEnd)
+                val item = (postListItems.value?.get(index)) as AddPostItem
+                colorMap[item] = "#00bcd4"
             }
         }
         // pink button
@@ -469,6 +536,8 @@ class AddPostViewModel : ViewModel() {
                 activeEditor.text = spanString
 
                 activeEditor.setSelection(selStart, selEnd)
+                val item = (postListItems.value?.get(index)) as AddPostItem
+                colorMap[item] = "#ff4081"
             }
         }
         // green button
@@ -491,6 +560,10 @@ class AddPostViewModel : ViewModel() {
                 activeEditor.text = spanString
 
                 activeEditor.setSelection(selStart, selEnd)
+                val item = (postListItems.value?.get(index)) as AddPostItem
+                colorMap[item] = "#00c853"
+
+
             }
         }
     }
@@ -522,10 +595,8 @@ class AddPostViewModel : ViewModel() {
                 }
                 togglePostButton(true)
                 adapter.notifyDataSetChanged()
-
             }
         }
-
 
 
         val textEditor = view.findViewById<EditText>(R.id.gif_text)
@@ -542,15 +613,324 @@ class AddPostViewModel : ViewModel() {
         item.mediaController = mediaController
 
         val index = getActiveText()
-        if(index == -1) {
-           postListItems.value?.add(item)
-        }
-        else {
+        if (index == -1) {
+            postListItems.value?.add(item)
+        } else {
             postListItems.value?.add(index + 1, item)
         }
         togglePostButton(true)
     }
 
+    fun postToBlog() {
+        prepareList()
+        val repo = AddPostRepository()
+        repo?.postToBlog(context, contentList, fileList)
+    }
+
+
+    /*fun restoreTextProp(view: EditText, index: Int) {
+        val item = postListItems.value?.get(index) as AddPostItem
+
+        //view.setText(item.content)
+
+        when (textMap[item]) {
+            0 -> {
+                resizeText(view, 15)
+            }
+            1 -> {
+                resizeText(view, 20)
+            }
+            2 -> {
+                resizeText(view, 25)
+            }
+        }
+        /*if(colorMap.containsKey(item)) {
+            when(colorMap[item]) {
+                0 -> colorText(view, Color.BLACK)
+                1 -> colorText(view, Color.RED)
+                2 -> colorText(view, Color.parseColor("#FF9100"))
+                3 -> colorText(view, Color.GREEN)
+                4 -> colorText(view, Color.CYAN)
+                5 -> colorText(view, Color.parseColor("#FF6200EE"))
+                6 -> colorText(view, Color.parseColor("#FF4081"))
+            }
+        }*/
+
+        /*if(styleMap.contains(item)) {
+            when(styleMap[item]) {
+                1 -> styleText(view, Typeface.BOLD)
+                2 -> styleText(view, Typeface.ITALIC)
+                3 -> strikeText(view)
+            }
+        }*/
+
+        if (boldList.contains(item)) {
+            styleText(view, Typeface.BOLD)
+        }
+        if (italicList.contains(item)) {
+            styleText(view, Typeface.ITALIC)
+        }
+        if (strikeList.contains(item)) {
+            strikeText(view)
+        }
+
+        //adapter.notifyDataSetChanged()
+    }
+
+    private fun resizeText(view: EditText, size: Int) {
+        val spanString = SpannableStringBuilder(view.text)
+        spanString.setSpan(
+            AbsoluteSizeSpan(size, true),
+            0,
+            view.text.length,
+            0
+        )
+
+        view.text = spanString
+    }
+
+    private fun colorText(view: EditText, color: Int) {
+        val spanString = SpannableStringBuilder(view.text)
+        spanString.setSpan(
+            ForegroundColorSpan(color),
+            0,
+            view.text.length - 1,
+            0
+        )
+
+        view.text = spanString
+    }
+
+    private fun styleText(view: EditText, style: Int) {
+        val spanString = SpannableStringBuilder(view.text)
+        spanString.setSpan(
+            StyleSpan(style),
+            0,
+            view.text.length - 1,
+            0
+        )
+        view.text = spanString
+    }
+
+    private fun strikeText(view: EditText) {
+        val spanString = SpannableStringBuilder(view.text)
+        spanString.setSpan(
+            StrikethroughSpan(),
+            0,
+            view.text.length - 1,
+            0
+        )
+        view.text = spanString
+    }*/
+
+
+    private fun prepareList() {
+
+        var index = 0
+        for (item in postListItems.value!!) {
+            when (item.type) {
+                1 -> {
+                    // text
+                    prepareTextPart(index)
+                }
+                2 -> {
+                    // the image item
+                    prepareImagePart(item.content, index)
+                }
+                3 -> {
+
+                }
+                4 -> {
+                    prepareLinkPart(index, item)
+                }
+                5 -> {
+                    preparePreviewPart(index, item)
+                }
+                6 -> {
+                    prepareGifPart(index, item)
+                }
+            }
+
+            index = index + 1
+        }
+
+
+    }
+
+    private fun prepareLinkPart(index: Int, item: AddPostItem) {
+
+    }
+
+    private fun preparePreviewPart(index: Int, item: AddPostItem) {
+        val part = MultipartBody.Part.createFormData("content[${index}][type]", "link")
+        val part1 = MultipartBody.Part.createFormData("content[${index}][url]", item.content)
+
+        contentList.add(part)
+        contentList.add(part1)
+
+    }
+
+    private fun prepareTextPart(index: Int) {
+
+        val item = postListItems.value?.get(index) as AddPostItem
+        val part = MultipartBody.Part.createFormData("content[${index}][type]", "text")
+        val part1 = MultipartBody.Part.createFormData("content[${index}][text]", item.content)
+
+        contentList.add(part)
+        contentList.add(part1)
+        var counter = 0
+        if (colorMap.contains(item)) {
+            val part = MultipartBody.Part.createFormData(
+                "content[${index}][formatting][${counter}][type]",
+                "color"
+            )
+            val part1 = MultipartBody.Part.createFormData(
+                "content[${index}][formatting][${counter}][start]",
+                "0"
+            )
+            val part2 = MultipartBody.Part.createFormData(
+                "content[${index}][formatting][${counter}][end]",
+                "${item.content.length - 1}"
+            )
+            val part3 = MultipartBody.Part.createFormData(
+                "content[${index}][formatting][${counter}][hex]",
+                colorMap[item]!!
+            )
+
+            contentList.add(part)
+            contentList.add(part1)
+            contentList.add(part2)
+            contentList.add(part3)
+            counter = counter + 1
+
+            Log.d("view model", "color added")
+        }
+        if (boldList.contains(item)) {
+            val part = MultipartBody.Part.createFormData(
+                "content[${index}][formatting][${counter}][type]",
+                "bold"
+            )
+            val part1 = MultipartBody.Part.createFormData(
+                "content[${index}][formatting][${counter}][start]",
+                "0"
+            )
+            val part2 = MultipartBody.Part.createFormData(
+                "content[${index}][formatting][${counter}][end]",
+                "${item.content.length - 1}"
+            )
+
+            contentList.add(part)
+            contentList.add(part1)
+            contentList.add(part2)
+            counter = counter + 1
+
+            Log.d("view model", "bold added")
+        }
+        if (italicList.contains(item)) {
+            val part = MultipartBody.Part.createFormData(
+                "content[${index}][formatting][${counter}][type]",
+                "italic"
+            )
+            val part1 = MultipartBody.Part.createFormData(
+                "content[${index}][formatting][${counter}][start]",
+                "0"
+            )
+            val part2 = MultipartBody.Part.createFormData(
+                "content[${index}][formatting][${counter}][end]",
+                "${item.content.length - 1}"
+            )
+
+            contentList.add(part)
+            contentList.add(part1)
+            contentList.add(part2)
+            counter = counter + 1
+
+            Log.d("view model", "italic added")
+        }
+        if (strikeList.contains(item)) {
+            val part = MultipartBody.Part.createFormData(
+                "content[${index}][formatting][${counter}][type]",
+                "strikethrough"
+            )
+            val part1 = MultipartBody.Part.createFormData(
+                "content[${index}][formatting][${counter}][start]",
+                "0"
+            )
+            val part2 = MultipartBody.Part.createFormData(
+                "content[${index}][formatting][${counter}][end]",
+                "${item.content.length - 1}"
+            )
+            contentList.add(part)
+            contentList.add(part1)
+            contentList.add(part2)
+            counter = counter + 1
+
+
+            Log.d("view model", "strike added")
+        }
+
+
+    }
+
+    private fun prepareGifPart(index: Int, item: AddPostItem) {
+
+        val mediaView = postListView.getChildAt(index) as GPHMediaView
+        val url = mediaView.media?.url
+
+        val part = MultipartBody.Part.createFormData(
+            "content[${index}][type]",
+            "image"
+        )
+        val part1 = MultipartBody.Part.createFormData(
+            "content[${index}][media]",
+            "image/gif"
+        )
+        val part2 = MultipartBody.Part.createFormData(
+            "content[${index}][url]",
+            url!!
+        )
+
+        contentList.add(part)
+        contentList.add(part1)
+        contentList.add(part2)
+    }
+
+
+    private fun prepareImagePart(uriString: String, index: Int) {
+        val uri = (Uri.parse(uriString)) as Uri
+        Log.d("image path", "${uriString}")
+
+        val real = getRealPath(uriString)
+        Log.d("real image path", "${real}")
+        val file = File(real)
+
+        val requestBody = file.asRequestBody("image/*".toMediaTypeOrNull())
+
+        val part = MultipartBody.Part.createFormData("image" + index, file.name, requestBody)
+
+        fileList.add(part)
+
+    }
+
+    fun prepareGif(index: Int, content: String) {
+
+    }
+
+    private fun getRealPath(uriString: String): String {
+        val proj = arrayOf(MediaStore.Images.Media.DATA)
+        val cursor = context.contentResolver.query(Uri.parse(uriString), proj, null, null, null)
+        var result = ""
+        if (cursor != null) {
+            val columnIndex = cursor.getColumnIndex(MediaStore.Images.Media.DATA)
+            cursor.moveToFirst()
+            result = cursor.getString(columnIndex)
+            cursor.close()
+            return result
+        }
+        return result
+    }
 
 
 }
+
+

@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/initialPostFragment"
-        android:name="com.example.android.tumblrx2.addpostfragments.InitialPostFragment"
+        android:name="com.example.android.tumblrx2.addpost.addpostfragments.InitialPostFragment"
         android:label="fragment_initial_post"
         tools:layout="@layout/fragment_initial_post" />
 </navigation>

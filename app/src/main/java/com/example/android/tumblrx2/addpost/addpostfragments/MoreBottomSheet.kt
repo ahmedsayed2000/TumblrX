@@ -1,4 +1,4 @@
-package com.example.android.tumblrx2.addpostfragments
+package com.example.android.tumblrx2.addpost.addpostfragments
 
 import android.os.Bundle
 import android.view.LayoutInflater
