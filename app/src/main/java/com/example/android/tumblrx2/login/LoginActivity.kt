@@ -3,6 +3,8 @@
 //https://classroom.udacity.com/courses/ud9012 lessons 5,8
 package com.example.android.tumblrx2.login
 
+import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -13,6 +15,7 @@ import android.view.View
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import com.example.android.tumblrx2.HomePageActivity
 import com.example.android.tumblrx2.controllers.LoginController
 import com.example.android.tumblrx2.databinding.ActivityLoginBinding
@@ -21,81 +24,81 @@ import com.example.android.tumblrx2.network.Response
 import com.example.android.tumblrx2.network.WebServiceClient
 import com.example.android.tumblrx2.repository.LoginSignupRepository
 import com.example.android.tumblrx2.responses.LoginResponse
+import com.example.android.tumblrx2.signup.network.RegisterResponse
+import kotlinx.coroutines.launch
 import okhttp3.ResponseBody
+import retrofit2.HttpException
+import java.io.IOException
 
 class LoginActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLoginBinding
-    private lateinit var model: LoginViewModel
-    private lateinit var repository: LoginSignupRepository
+    private lateinit var viewModel: LoginViewModel
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 //        setContentView(R.layout.activity_login)
         binding = ActivityLoginBinding.inflate(layoutInflater)
-        val webServiceClient = WebServiceClient()
-        repository = LoginSignupRepository(webServiceClient.buildApi(LoginSignupAPI::class.java))
-        val factory = LoginViewModelFactory(repository)
-        model = ViewModelProvider(this, factory).get(LoginViewModel::class.java)
-
-        binding.etEmail.addTextChangedListener(object : TextWatcher {
-
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                binding.tvErrMsg.visibility = View.GONE
-                binding.tvMissingFieldMsg.visibility = View.GONE
-            }
-
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-                return
-            }
-
-            override fun afterTextChanged(s: Editable?) {
-                return
-            }
-        })
-
-        binding.etPassword.addTextChangedListener(object : TextWatcher {
-
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                binding.tvErrMsg.visibility = View.GONE
-                binding.tvMissingFieldMsg.visibility = View.GONE
-            }
-
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-                return
-            }
-
-            override fun afterTextChanged(s: Editable?) {
-                return
-            }
-        })
-
-        model.loginResponse.observe(this, Observer { it ->
-            when (it) {
-                is Response.Success -> {
-                    binding.tvErrMsg.visibility = View.GONE
-                    Toast.makeText(this, it.toString(), Toast.LENGTH_LONG).show()
-                    Log.i("LoginActivity", it.toString())
-                    startActivity(Intent(this, HomePageActivity::class.java))
-                }
-                is Response.Failure -> {
-                    Toast.makeText(this, "Login Failed", Toast.LENGTH_SHORT).show()
-                    Log.i("LoginActivity", it.toString())
-                    binding.tvErrMsg.visibility = View.VISIBLE
-                }
-            }
-        })
         setContentView(binding.root)
+
+        viewModel = ViewModelProvider(this)[LoginViewModel::class.java]
+
+        val sharedPref = this.getSharedPreferences("appPref", Context.MODE_PRIVATE)
+        val editor = sharedPref.edit()
+
+        binding.etEmail.addTextChangedListener(inputWatcher)
+        binding.etPassword.addTextChangedListener(inputWatcher)
+
         binding.actionbarLogin.btnLogin.setOnClickListener {
-            val email = binding.etEmail.text.toString().trim()
-            val password = binding.etPassword.text.toString().trim()
-
-            if (email.isEmpty() || password.isEmpty()) {
-                binding.tvMissingFieldMsg.visibility = View.VISIBLE
-            } else model.login(email, password)
+            binding.progressLogin.visibility = View.VISIBLE
+            val emailText = binding.etEmail.text.trim().toString()
+            val passwordText = binding.etPassword.text.trim().toString()
+            val code = viewModel.loginValidateInput(emailText, passwordText)
+            if (code != 0) {
+                displayErr(viewModel.loginChooseErrMsg(code))
+            } else {
+                lifecycleScope.launchWhenCreated {
+                    val response: retrofit2.Response<LoginResponse> = try {
+                        viewModel.login(emailText, passwordText)
+                    } catch (e: IOException) {
+                        displayErr("You might not have internet connection")
+                        return@launchWhenCreated
+                    } catch (e: HttpException) {
+                        displayErr(e.toString())
+                        return@launchWhenCreated
+                    }
+                    if (response.isSuccessful) {
+                        Log.i("LoginActivity", "Success")
+                        val token: String? = response.body()?.token
+                        editor.apply {
+                            putString("token", token)
+                        }.apply()
+                        Log.i("LoginActivity", "Token: $token")
+                    }else{
+                        displayErr("Email and Password do not match")
+                    }
+                }
+            }
+            binding.progressLogin.visibility = View.GONE
         }
-
         binding.actionbarLogin.btnBack.setOnClickListener {
             finish()
         }
     }
 
+
+    private val inputWatcher = object : TextWatcher {
+        override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+        }
+
+        override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+            if (binding.tvErrMsg.visibility == View.VISIBLE) binding.tvErrMsg.visibility = View.GONE
+        }
+
+        override fun afterTextChanged(s: Editable?) {
+        }
+    }
+
+    fun displayErr(errMsg: String) {
+        binding.tvErrMsg.text = errMsg
+        binding.tvErrMsg.visibility = View.VISIBLE
+    }
 }

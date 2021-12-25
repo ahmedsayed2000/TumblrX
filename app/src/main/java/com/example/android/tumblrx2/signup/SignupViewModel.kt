@@ -17,8 +17,8 @@ class SignupViewModel : ViewModel() {
      */
     fun validateInput(email: String, password: String, username: String, age: String): Int {
         return if (email.isEmpty() || password.isEmpty() || username.isEmpty() || age.isEmpty()) -1
-//        else if (!(android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches())) 1 //crashes
-        else if (email.length < 6) 1
+        else if (!(android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches())) 1 //crashes
+//        else if (email.length < 6) 1
         else if (password.length < 6) 2
         else if (username.length < 6) 3
         else 0

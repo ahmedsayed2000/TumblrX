@@ -43,13 +43,15 @@ class SignupActivity : AppCompatActivity() {
 
             //call function to check inputs, if there is an error, call displayErr
             val emailText = binding.etEmail.text.trim().toString()
-            val passwordText = binding.etEmail.text.trim().toString()
-            val usernameText = binding.etEmail.text.trim().toString()
-            val ageText = binding.etEmail.text.trim().toString()
+            val passwordText = binding.etPassword.text.trim().toString()
+            val usernameText = binding.etUsername.text.trim().toString()
+            val ageText = binding.etAge.text.trim().toString()
 
             val code = viewModel.validateInput(emailText, passwordText, usernameText, ageText)
 
-            if (code != 0) displayErr(viewModel.chooseErrMsg(code))
+            if (code != 0) {
+                displayErr(viewModel.chooseErrMsg(code))
+            }
             else {
                 lifecycleScope.launchWhenCreated {
                     val response: Response<RegisterResponse> = try {
@@ -84,10 +86,10 @@ class SignupActivity : AppCompatActivity() {
         }
 
         override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+            if (binding.tvErrMsg.visibility == View.VISIBLE) binding.tvErrMsg.visibility = View.GONE
         }
 
         override fun afterTextChanged(s: Editable?) {
-            if (binding.tvErrMsg.visibility == View.VISIBLE) binding.tvErrMsg.visibility = View.GONE
         }
     }
 
