@@ -1,9 +1,5 @@
 package com.example.android.tumblrx2
 
-import com.example.android.tumblrx2.postobjects.ImageObject
-import com.example.android.tumblrx2.postobjects.PostContent
-import com.example.android.tumblrx2.postobjects.PostObject
-import com.example.android.tumblrx2.postobjects.TextObject
 import org.junit.Assert.*
 
 import org.junit.Before

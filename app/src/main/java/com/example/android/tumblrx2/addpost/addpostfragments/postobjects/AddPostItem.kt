@@ -1,6 +1,5 @@
-package com.example.android.tumblrx2.postobjects
+package com.example.android.tumblrx2.addpost.addpostfragments.postobjects
 
-import android.provider.MediaStore
 import android.widget.MediaController
 import androidx.core.view.GestureDetectorCompat
 import com.giphy.sdk.core.models.Media

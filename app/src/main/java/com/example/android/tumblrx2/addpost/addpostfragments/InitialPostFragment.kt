@@ -1,30 +1,27 @@
-package com.example.android.tumblrx2.addpostfragments
+package com.example.android.tumblrx2.addpost.addpostfragments
 
 
 import android.app.Activity.RESULT_OK
+import android.app.AlertDialog
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.graphics.Color
+import android.os.Build
 import androidx.lifecycle.Observer
 import android.os.Bundle
-import android.text.TextWatcher
 import android.util.Log
 import android.view.*
 import android.widget.*
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.example.android.tumblrx2.AddPostViewModel
 import com.example.android.tumblrx2.R
 import com.example.android.tumblrx2.databinding.FragmentInitialPostBinding
-import com.example.android.tumblrx2.postobjects.AddPostAdapter
-import com.example.android.tumblrx2.postobjects.AddPostItem
-import com.giphy.sdk.core.models.Media
-import com.giphy.sdk.core.models.enums.MediaType
+import com.example.android.tumblrx2.addpost.addpostfragments.postobjects.AddPostAdapter
+import com.example.android.tumblrx2.addpost.addpostfragments.postobjects.AddPostItem
 import com.giphy.sdk.ui.Giphy
-import com.giphy.sdk.ui.pagination.GPHContent
-import com.giphy.sdk.ui.views.GPHGridCallback
-import com.giphy.sdk.ui.views.GiphyGridView
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
@@ -234,7 +231,7 @@ class InitialPostFragment : Fragment() {
 
 
         binding.insertMedia.setOnClickListener {
-            context?.let { it1 ->
+            /*context?.let { it1 ->
                 MaterialAlertDialogBuilder(it1)
                     .setTitle("Media Type")
                     .setItems(items) { _, item ->
@@ -256,7 +253,8 @@ class InitialPostFragment : Fragment() {
 
                     }
                     .show()
-            }
+            }*/
+            checkForPermission(android.Manifest.permission.READ_EXTERNAL_STORAGE, "", 101)
         }
 
         binding.insertText.setOnClickListener {
@@ -293,6 +291,11 @@ class InitialPostFragment : Fragment() {
             sheet?.show()
         }
 
+
+        binding.postButtonCard.setOnClickListener {
+            viewModel.postToBlog()
+        }
+
     }
 
 
@@ -319,7 +322,7 @@ class InitialPostFragment : Fragment() {
      */
     private fun insertImage() {
         val intent = Intent()
-        intent.action = Intent.ACTION_GET_CONTENT
+        intent.action = Intent.ACTION_PICK
         intent.type = "image/*"
         intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true)
         imageLauncher.launch(intent)
@@ -332,9 +335,62 @@ class InitialPostFragment : Fragment() {
 
     private fun insertVideo() {
         val intent = Intent()
-        intent.action = Intent.ACTION_GET_CONTENT
+        intent.action = Intent.ACTION_PICK
         intent.type = "video/*"
         videoLauncher.launch(intent)
+    }
+
+    fun checkForPermission(permission: String, name: String, code: Int) {
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            when {
+                ContextCompat.checkSelfPermission(requireContext(), permission) == PackageManager.PERMISSION_GRANTED -> {
+                    // add the code here
+                    context?.let { it1 ->
+                        MaterialAlertDialogBuilder(it1)
+                            .setTitle("Media Type")
+                            .setItems(items) { _, item ->
+                                // Respond to item chosen
+                                when (item) {
+                                    0 -> insertImage()
+                                    1 -> {
+                                        if (!oneVideo) {
+                                            insertVideo()
+                                            oneVideo = true
+                                        } else
+                                            Toast.makeText(
+                                                context,
+                                                "No more than one Video in a post",
+                                                Toast.LENGTH_SHORT
+                                            ).show()
+                                    }
+                                }
+
+                            }
+                            .show()
+                    }
+
+                }
+                shouldShowRequestPermissionRationale(permission) -> showDialog(permission, code)
+
+                else -> requireActivity().requestPermissions(arrayOf(permission), code)
+            }
+        }
+    }
+
+    fun showDialog(permission: String, code:Int ) {
+        val builder = AlertDialog.Builder(context)
+
+        builder.apply {
+            setMessage("permission to access the media is required")
+            setTitle("Permission required")
+            setPositiveButton("Ok") { dialog, which ->
+                requireActivity().requestPermissions(arrayOf(permission), code)
+            }
+        }
+
+        val dialog = builder.create()
+
+        dialog.show()
     }
 
 
