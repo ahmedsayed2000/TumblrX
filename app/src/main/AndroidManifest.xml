@@ -38,7 +38,7 @@
             android:name=".chat.NewMessageActivity"
             android:exported="false" />
         <activity
-            android:name=".blog.ActivityCreateBlog"
+            android:name=".ActivityCreateBlog"
             android:exported="true"
             android:theme="@style/splashScreenTheme">
             <intent-filter>

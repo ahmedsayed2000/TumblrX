@@ -1,4 +1,4 @@
-package com.example.android.tumblrx2.blog
+package com.example.android.tumblrx2
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
