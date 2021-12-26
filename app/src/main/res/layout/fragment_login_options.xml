@@ -4,29 +4,29 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".LoginOptionsFragment"
+    tools:context=".login.LoginOptionsFragment"
     tools:layout_editor_absoluteX="-8dp"
     tools:layout_editor_absoluteY="128dp">
 
     <Button
-        android:id="@+id/btn_login_google"
+        android:id="@+id/btn_signup_google"
         style="@style/IntroButtonsStyle"
         android:layout_width="300dp"
-        android:layout_height="40dp"
+        android:layout_height="50dp"
         android:text="Log in with Google"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_login_email" />
+        app:layout_constraintTop_toBottomOf="@+id/btn_signup_email" />
 
     <Button
-        android:id="@+id/btn_login_email"
+        android:id="@+id/btn_signup_email"
         style="@style/IntroButtonsStyle"
         android:layout_width="300dp"
-        android:layout_height="40dp"
+        android:layout_height="50dp"
         android:text="Log in with Email"
-        app:layout_constraintBottom_toTopOf="@+id/btn_login_google"
+        app:layout_constraintBottom_toTopOf="@+id/btn_signup_google"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"

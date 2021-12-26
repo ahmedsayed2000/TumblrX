@@ -25,8 +25,8 @@
 
         <ImageView
             android:id="@+id/img_logo"
-            android:layout_width="30dp"
-            android:layout_height="50dp"
+            android:layout_width="20dp"
+            android:layout_height="40dp"
             android:src="@drawable/tumblr_t_logo"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -34,10 +34,11 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
+        <Button
             android:id="@+id/btn_login"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
+            android:background="@android:color/transparent"
             android:text="Log in"
             android:textColor="@android:color/holo_blue_dark"
             android:textStyle="bold"

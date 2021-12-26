@@ -13,57 +13,97 @@
         android:layout_marginLeft="20dp"
         >
         <ImageButton
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
             android:id="@+id/black"
-            android:background="@drawable/circular_button"
-            android:layout_marginRight="10dp"
+            android:background="@drawable/circular_button_black"
+            android:layout_marginRight="20dp"
             android:outlineAmbientShadowColor="@color/white"
             />
         <ImageButton
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
             android:id="@+id/red"
-            android:layout_marginRight="10dp"
-            android:background="@drawable/circular_button"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/circular_button_red"
             />
         <ImageButton
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
             android:id="@+id/orange"
-            android:layout_marginRight="10dp"
-            android:background="@drawable/circular_button"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/circular_button_orange"
             />
         <ImageButton
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
             android:id="@+id/green"
-            android:layout_marginRight="10dp"
-            android:background="@drawable/circular_button"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/circular_button_green"
             />
         <ImageButton
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
             android:id="@+id/cyan"
-            android:layout_marginRight="10dp"
-            android:background="@drawable/circular_button"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/circular_button_cyan"
             />
         <ImageButton
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
             android:id="@+id/purple"
-            android:layout_marginRight="10dp"
-            android:background="@drawable/circular_button"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/circular_button_purple"
+            />
+        <ImageButton
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:id="@+id/pink"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/circular_button_pink"
+            />
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="20dp"
+        >
+        <ImageButton
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:id="@+id/text_size"
+            android:src="@drawable/ic_text_format_40"
+            android:background="?android:attr/selectableItemBackground"
             />
         <ImageButton
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:id="@+id/pink"
-            android:layout_marginRight="10dp"
-            android:background="@drawable/circular_button"
+            android:id="@+id/text_bold"
+            android:layout_marginLeft="100dp"
+            android:layout_marginRight="20dp"
+            android:src="@drawable/ic_bold"
+            android:background="?android:attr/selectableItemBackground"
             />
-
-
+        <ImageButton
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:id="@+id/text_italic"
+            android:layout_marginRight="20dp"
+            android:src="@drawable/ic_italic"
+            android:background="?android:attr/selectableItemBackground"
+            />
+        <ImageButton
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:id="@+id/text_strike"
+            android:src="@drawable/ic_strike"
+            android:background="?android:attr/selectableItemBackground"
+            />
     </LinearLayout>
 
 </LinearLayout>

@@ -1,10 +1,14 @@
 package com.example.android.tumblrx2
 
+import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.preference.PreferenceManager
+import android.util.Log
 import androidx.databinding.DataBindingUtil
 import com.example.android.tumblrx2.databinding.ActivityMainBinding
+import com.example.android.tumblrx2.intro.IntroActivity
 
 /**
  * the starter activity of the app
@@ -23,13 +27,23 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setTheme(R.style.Theme_TumblrX2)
+        val sharedPref = this.getSharedPreferences("appPref",Context.MODE_PRIVATE)
+
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
 
         binding.goToHome.setOnClickListener {
             startActivity(Intent(this, HomePageActivity::class.java))
         }
         binding.btnIntro.setOnClickListener {
-            startActivity(Intent(this, IntroActivity::class.java))
+            val token = sharedPref.getString("token", ".")
+//            if (token != ".") {
+//                Log.i("LoginActivity",token!!)
+//                startActivity(Intent(this, HomePageActivity::class.java))
+//            }
+            //else {
+                Log.i("LoginActivity","haha mafish token")
+                startActivity(Intent(this, IntroActivity::class.java))
+            //}
         }
         binding.btnActivity.setOnClickListener {
             startActivity(Intent(this, ActivityAndMessagesActivity::class.java))

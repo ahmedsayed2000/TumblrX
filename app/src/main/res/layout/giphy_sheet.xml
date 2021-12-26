@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_margin="8dp"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:layout_marginBottom="20dp"
+        android:orientation="horizontal"
+        >
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="30dp"
+            android:id="@+id/search_gif"
+            android:layout_gravity="center"
+            android:background="?android:attr/selectableItemBackground"
+            android:src="@drawable/gph_ic_search_pink" />
+
+        <EditText
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/gif_text"
+            android:hint="Find a GIF"
+            android:textSize="20sp"
+            android:background="@null"
+            android:layout_gravity="center"
+            />
+
+    </LinearLayout>
+
+    <com.giphy.sdk.ui.views.GiphyGridView
+        android:id="@+id/gifsGridView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:gphDirection="vertical"
+        app:gphSpanCount="2"
+        app:gphCellPadding="12dp"
+        app:gphShowCheckeredBackground="false"
+        />
+
+</LinearLayout>
