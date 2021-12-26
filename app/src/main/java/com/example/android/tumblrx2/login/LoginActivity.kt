@@ -13,7 +13,7 @@ import android.util.Log
 import android.view.View
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
-import com.example.android.tumblrx2.HomePageActivity
+import com.example.android.tumblrx2.home.HomePageActivity
 import com.example.android.tumblrx2.databinding.ActivityLoginBinding
 import com.example.android.tumblrx2.responses.LoginResponse
 import retrofit2.HttpException
@@ -61,7 +61,8 @@ class LoginActivity : AppCompatActivity() {
                             putString("token", token)
                         }.apply()
                         Log.i("LoginActivity", "Token: $token")
-                        startActivity(Intent(this@LoginActivity, HomePageActivity::class.java))
+                        startActivity(Intent(this@LoginActivity, HomePageActivity::class.java).
+                        addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK))
                     }else{
                         displayErr("Email and Password do not match")
                     }
