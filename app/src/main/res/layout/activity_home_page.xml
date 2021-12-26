@@ -22,12 +22,13 @@
             />
 
         <ListView
+            android:id="@+id/postList"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/postList"
             android:layout_below="@id/tv_test"
-            android:dividerHeight="4dp"
-            />
+            android:layout_alignParentBottom="true"
+            android:divider="@color/navy"
+            android:dividerHeight="8dp" />
         <TextView
             android:id="@+id/tv_test"
             android:layout_width="match_parent"

@@ -15,10 +15,10 @@
         android:layout_margin="8dp"
         >
         <ImageView
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:id="@+id/blog_img"
-            tools:src = "@drawable/ic_launcher_background"
+            android:src = "@drawable/ic_launcher_background"
             />
         <TextView
             android:layout_width="wrap_content"
@@ -41,6 +41,7 @@
         android:textSize="15sp"
         android:id="@+id/post_text"
         tools:text="post text"
+        android:layout_marginLeft="8dp"
         android:layout_marginBottom="8dp"
         />
 
@@ -59,10 +60,6 @@
         android:id="@+id/post_link"
         />
 
-    <com.giphy.sdk.ui.views.GPHMediaView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/post_gif"
-        />
+
 
 </LinearLayout>
