@@ -1,12 +1,8 @@
 package com.example.android.tumblrx2.signup
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.android.tumblrx2.network.WebServiceClient
-import com.example.android.tumblrx2.signup.network.ApiService
-import com.example.android.tumblrx2.signup.network.RegisterResponse
-import com.example.android.tumblrx2.signup.network.RetrofitInstance
+import com.example.android.tumblrx2.responses.RegisterResponse
+import com.example.android.tumblrx2.network.RetrofitInstance
 import retrofit2.Response
 
 class SignupViewModel : ViewModel() {

@@ -1,10 +1,8 @@
 package com.example.android.tumblrx2.login
 
 import androidx.lifecycle.*
-import com.example.android.tumblrx2.repository.LoginSignupRepository
 import com.example.android.tumblrx2.responses.LoginResponse
-import com.example.android.tumblrx2.signup.network.RetrofitInstance
-import kotlinx.coroutines.launch
+import com.example.android.tumblrx2.network.RetrofitInstance
 import retrofit2.Response
 
 class LoginViewModel() : ViewModel() {

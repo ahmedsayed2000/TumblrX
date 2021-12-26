@@ -1,4 +1,4 @@
-package com.example.android.tumblrx2.signup.network
+package com.example.android.tumblrx2.responses
 
 data class RegisterResponse(
     val status: String,

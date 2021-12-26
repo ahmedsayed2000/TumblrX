@@ -1,6 +1,7 @@
-package com.example.android.tumblrx2.signup.network
+package com.example.android.tumblrx2.network
 
 import com.example.android.tumblrx2.responses.LoginResponse
+import com.example.android.tumblrx2.responses.RegisterResponse
 import retrofit2.Response
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded

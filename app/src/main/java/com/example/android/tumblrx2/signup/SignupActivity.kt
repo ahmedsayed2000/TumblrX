@@ -8,14 +8,11 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
 import android.view.View
-import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelProviders
 import androidx.lifecycle.lifecycleScope
 import com.example.android.tumblrx2.HomePageActivity
 import com.example.android.tumblrx2.databinding.ActivitySignupBinding
-import com.example.android.tumblrx2.signup.network.RegisterResponse
-import org.json.JSONObject
+import com.example.android.tumblrx2.responses.RegisterResponse
 import retrofit2.HttpException
 import retrofit2.Response
 import java.io.IOException

@@ -1,4 +1,4 @@
-package com.example.android.tumblrx2.signup.network
+package com.example.android.tumblrx2.network
 
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
