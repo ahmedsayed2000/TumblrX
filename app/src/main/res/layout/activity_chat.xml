@@ -15,7 +15,7 @@
         android:drawableLeft="@drawable/ic_baseline_arrow_back_24"
         android:padding="16dp"
         android:text="other_user"
-        android:textColor="@color/white"
+        android:textColor="#616161"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

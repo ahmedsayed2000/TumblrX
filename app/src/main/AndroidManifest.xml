@@ -29,7 +29,10 @@
             android:name=".NewMessageActivity"
             android:exported="false" />
         <activity
-            android:name=".ActivityChat"
+            android:name=".ActivityCreateBlog"
+            android:exported="false" />
+        <activity
+            android:name=".ActivityBlog"
             android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

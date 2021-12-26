@@ -1,8 +1,13 @@
 package com.example.android.tumblrx2
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Button
+import android.widget.LinearLayout
+import android.widget.TextView
 import androidx.viewpager2.widget.ViewPager2
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 
@@ -30,5 +35,19 @@ class ActivityBlog : AppCompatActivity() {
             }
             viewPager!!.currentItem = tab.position
         }.attach()
+        var bottomBtn=findViewById<TextView>(R.id.blog_name)
+        bottomBtn.setOnClickListener {showBottomSheet()}
     }
+
+    private fun showBottomSheet()
+    {
+        val bottomSheetDialog = BottomSheetDialog(this)
+        bottomSheetDialog.setContentView(R.layout.blog_bottom_sheet_layout);
+        bottomSheetDialog.show()
+        val createBtn=bottomSheetDialog.findViewById<LinearLayout>(R.id.create_blog)
+        createBtn!!.setOnClickListener {
+            startActivity(Intent(this, ActivityCreateBlog::class.java))
+        }
+    }
+
 }

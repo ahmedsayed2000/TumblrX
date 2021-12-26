@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:orientation="vertical"
+    android:padding="16dp">
+    <View
+        android:layout_width="50dp"
+        android:layout_height="5dp"
+        android:background="#616161"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="8dp"
+        />
+
+    <LinearLayout
+        android:background="@drawable/bottom_border"
+        android:id="@+id/create_blog"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="8dp">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="8dp"
+            android:foregroundGravity="center"
+            app:srcCompat="@drawable/ic_add"
+            app:tint="@color/black" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:padding="8dp"
+            android:text="Create a new Tumblr"
+            android:textColor="@color/black"
+            android:textSize="15dp" />
+    </LinearLayout>
+</LinearLayout>
