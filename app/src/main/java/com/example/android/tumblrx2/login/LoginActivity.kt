@@ -72,6 +72,7 @@ class LoginActivity : AppCompatActivity() {
                             putString("token", token)
                         }.apply()
                         Log.i("LoginActivity", "Token: $token")
+                        startActivity(Intent(this@LoginActivity, HomePageActivity::class.java))
                     }else{
                         displayErr("Email and Password do not match")
                     }

@@ -1,6 +1,7 @@
 package com.example.android.tumblrx2.signup
 
 import android.content.Context
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
@@ -11,6 +12,7 @@ import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import androidx.lifecycle.lifecycleScope
+import com.example.android.tumblrx2.HomePageActivity
 import com.example.android.tumblrx2.databinding.ActivitySignupBinding
 import com.example.android.tumblrx2.signup.network.RegisterResponse
 import org.json.JSONObject
@@ -69,6 +71,7 @@ class SignupActivity : AppCompatActivity() {
                         editor.apply {
                             putString("token", token)
                         }
+                        startActivity(Intent(this@SignupActivity, HomePageActivity::class.java))
                     }
                 }
             }
