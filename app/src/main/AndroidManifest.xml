@@ -24,9 +24,11 @@
         <activity
             android:name=".intro.IntroActivity"
             android:exported="true"
-            android:theme="@style/splashScreenTheme"></activity>
+            android:theme="@style/splashScreenTheme">
+
+        </activity>
         <activity
-            android:name=".HomePageActivity"
+            android:name=".home.HomePageActivity"
             android:exported="false" />
         <activity
             android:name=".AddPostActivity"
@@ -46,6 +48,14 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+.
+        <activity
+            android:name=".ActivityCreateBlog"
+            android:exported="false" />
+        <activity
+            android:name=".ActivityBlog"
+            android:exported="true" >
         </activity>
     </application>
 

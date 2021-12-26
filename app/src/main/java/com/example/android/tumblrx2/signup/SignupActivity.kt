@@ -10,7 +10,7 @@ import android.util.Log
 import android.view.View
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
-import com.example.android.tumblrx2.HomePageActivity
+import com.example.android.tumblrx2.home.HomePageActivity
 import com.example.android.tumblrx2.databinding.ActivitySignupBinding
 import com.example.android.tumblrx2.responses.RegisterResponse
 import retrofit2.HttpException

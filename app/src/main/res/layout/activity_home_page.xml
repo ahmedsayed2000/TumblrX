@@ -6,7 +6,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/white"
-        tools:context=".HomePageActivity">
+        tools:context=".home.HomePageActivity">
+
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:layout_width="wrap_content"
@@ -24,9 +25,18 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/postList"
+            android:layout_below="@id/tv_test"
             android:dividerHeight="4dp"
             />
-
+        <TextView
+            android:id="@+id/tv_test"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="59dp"
+            android:layout_marginTop="69dp"
+            android:text="TextView" />
 
     </RelativeLayout>
 </layout>

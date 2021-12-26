@@ -40,6 +40,20 @@
             android:text="New Message"
             android:id="@+id/btn_new_message"/>
 
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/IntroButtonsStyle"
+            android:text="Create Blog"
+            android:id="@+id/btn_create_blog"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/IntroButtonsStyle"
+            android:text="Blog"
+            android:id="@+id/btn_blog"/>
+
 
     </LinearLayout>
 </layout>
