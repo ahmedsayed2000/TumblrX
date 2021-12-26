@@ -5,6 +5,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/white"
         tools:context=".HomePageActivity">
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -18,6 +19,14 @@
             android:layout_marginBottom="20dp"
             android:id="@+id/button_addPost"
             />
+
+        <ListView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/postList"
+            android:dividerHeight="4dp"
+            />
+
 
     </RelativeLayout>
 </layout>
