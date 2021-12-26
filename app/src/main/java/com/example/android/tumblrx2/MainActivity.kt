@@ -4,9 +4,10 @@ import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.preference.PreferenceManager
 import android.util.Log
 import androidx.databinding.DataBindingUtil
+import com.example.android.tumblrx2.activity.ActivityAndMessagesActivity
+import com.example.android.tumblrx2.chat.NewMessageActivity
 import com.example.android.tumblrx2.databinding.ActivityMainBinding
 import com.example.android.tumblrx2.intro.IntroActivity
 

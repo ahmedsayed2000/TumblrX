@@ -32,13 +32,13 @@
             android:name=".AddPostActivity"
             android:exported="false" />
         <activity
-            android:name=".ActivityAndMessagesActivity"
+            android:name=".activity.ActivityAndMessagesActivity"
             android:exported="false" />
         <activity
-            android:name=".NewMessageActivity"
+            android:name=".chat.NewMessageActivity"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".blog.ActivityCreateBlog"
             android:exported="true"
             android:theme="@style/splashScreenTheme">
             <intent-filter>
@@ -46,15 +46,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".ActivityCreateBlog"
-            android:exported="false" />
-        <activity
-            android:name=".ActivityBlog"
-            android:exported="false" >
-
-
-        </activity>
+<!--        <activity-->
+<!--            android:name=".blog.ActivityCreateBlog"-->
+<!--            android:exported="false" />-->
+<!--        <activity-->
+<!--            android:name=".blog.ActivityBlog"-->
+<!--            android:exported="false" >-->
+<!--        </activity>-->
     </application>
 
 </manifest>

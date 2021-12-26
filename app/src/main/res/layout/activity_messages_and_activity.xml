@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    tools:context=".ActivityAndMessagesActivity"
+    tools:context=".activity.ActivityAndMessagesActivity"
     android:orientation="vertical"
     android:background="@color/white">
 

@@ -1,4 +1,4 @@
-package com.example.android.tumblrx2
+package com.example.android.tumblrx2.activity
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.TextView
+import com.example.android.tumblrx2.R
 
 
 class ActivityListAdapter(context:Context): BaseAdapter() {
