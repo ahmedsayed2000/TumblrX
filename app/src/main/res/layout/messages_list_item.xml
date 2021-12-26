@@ -7,14 +7,14 @@
     android:background="@drawable/bottom_border">
 
     <ImageView
-        app:tint="@color/blue_bolt"
         android:id="@+id/imageView"
         android:layout_width="81dp"
         android:layout_height="107dp"
         android:layout_marginStart="8dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/outline_tag_black_24" />
+        app:srcCompat="@drawable/user_avatar"
+        />
 
     <TextView
         android:id="@+id/username_text"
