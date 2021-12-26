@@ -11,7 +11,7 @@ class LoginViewModelFactory(private val repository: BaseRepository) :
     ViewModelProvider.NewInstanceFactory() {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         return when {
-            modelClass.isAssignableFrom(LoginViewModel::class.java) -> LoginViewModel(repository as LoginSignupRepository) as T
+//            modelClass.isAssignableFrom(LoginViewModel::class.java) -> LoginViewModel(repository as LoginSignupRepository) as T
             else -> throw IllegalArgumentException("ViewModelClass not found")
         }
     }

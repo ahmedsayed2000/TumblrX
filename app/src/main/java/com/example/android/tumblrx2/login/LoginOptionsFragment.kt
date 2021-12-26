@@ -26,7 +26,7 @@ class LoginOptionsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val loginWithEmailButton=getView()?.findViewById<Button>(R.id.btn_login_email)
+        val loginWithEmailButton=getView()?.findViewById<Button>(R.id.btn_signup_email)
         loginWithEmailButton?.setOnClickListener {
             Intent(this@LoginOptionsFragment.context, LoginActivity::class.java).also{
                 startActivity(it)

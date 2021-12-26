@@ -1,43 +1,27 @@
 package com.example.android.tumblrx2.login
 
 import androidx.lifecycle.*
-import com.example.android.tumblrx2.network.Response
-import com.example.android.tumblrx2.repository.LoginSignupRepository
 import com.example.android.tumblrx2.responses.LoginResponse
-import kotlinx.coroutines.launch
+import com.example.android.tumblrx2.network.RetrofitInstance
+import retrofit2.Response
 
-class LoginViewModel(private val repository: LoginSignupRepository) : ViewModel() {
-    private val _loginResponse: MutableLiveData<Response<LoginResponse>> = MutableLiveData()
-    val loginResponse: LiveData<Response<LoginResponse>>
-        get() = _loginResponse
+class LoginViewModel() : ViewModel() {
+    fun loginValidateInput(email: String, password: String): Int {
+        return if (email.isEmpty() || password.isEmpty()) -1
+        else if (!(android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches())) 1
+        else if (password.length < 6) 2
+        else 0
+    }
 
-    private val _emailInput: MutableLiveData<String> = MutableLiveData()
-    val emailInput: LiveData<String>
-        get() = _emailInput
+    fun loginChooseErrMsg(errCode: Int): String {
+        return when (errCode) {
+            -1 -> "Make sure all fields are filled"
+            1 -> "Enter a valid email"
+            else -> "Password is too short"
+        }
+    }
 
-    private val _passwordInput: MutableLiveData<String> = MutableLiveData()
-    val passwordInput: LiveData<String>
-        get() = _passwordInput
-
-//    val _loginMediator = MediatorLiveData<Boolean>()
-//
-//    init {
-//        _loginMediator.addSource(_emailInput) { validateForm() }
-//        _loginMediator.addSource(_passwordInput) { validateForm() }
-//    }
-//
-//    private fun validateForm(): Boolean {
-//        if (_emailInput.toString().isEmpty() || _passwordInput.toString().isEmpty()) return false
-//        return true
-//    }
-//
-//    override fun onCleared() {
-//        _loginMediator.removeSource(_emailInput)
-//        _loginMediator.removeSource(_passwordInput)
-//    }
-
-
-    fun login(email: String, password: String) = viewModelScope.launch {
-        _loginResponse.value = repository.login(email, password)
+    suspend fun login(email: String, password: String): Response<LoginResponse> {
+        return RetrofitInstance.api.login(email, password)
     }
 }

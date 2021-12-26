@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import com.example.android.tumblrx2.R
 import com.example.android.tumblrx2.login.LoginOptionsFragment
+import com.example.android.tumblrx2.signup.SignupOptionsFragment
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -38,11 +39,24 @@ class IntroOptionsFragment : Fragment() {
         val loginOptionsFragment = LoginOptionsFragment()
         loginButton?.setOnClickListener {
             parentFragmentManager.beginTransaction().apply {
+                setCustomAnimations(R.anim.from_bottom, R.anim.to_top,R.anim.to_bottom,R.anim.from_top)
                 replace(R.id.frameLayout_fragment, loginOptionsFragment)
                 addToBackStack(null)
                 commit()
             }
         }
+
+        val signupButton = getView()?.findViewById<Button>(R.id.btn_signup)
+        val signupOptionsFragment = SignupOptionsFragment()
+        signupButton?.setOnClickListener {
+            parentFragmentManager.beginTransaction().apply {
+                setCustomAnimations(R.anim.from_bottom, R.anim.to_top,R.anim.to_bottom,R.anim.from_top)
+                replace(R.id.frameLayout_fragment,signupOptionsFragment)
+                addToBackStack(null)
+                commit()
+            }
+        }
+
     }
 
 

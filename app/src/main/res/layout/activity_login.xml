@@ -20,12 +20,14 @@
         android:layout_height="60dp"
         android:backgroundTint="@android:color/transparent"
         android:textColorHint="@color/gray"
+        app:boxStrokeColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.491"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/actionbar_login"
-        app:layout_constraintVertical_bias="0.4" >
+        app:layout_constraintVertical_bias="0.4">
+
         <EditText
             android:id="@+id/et_email"
             android:layout_width="350dp"
@@ -33,8 +35,7 @@
             android:backgroundTint="@android:color/transparent"
             android:hint="email"
             android:textColor="@color/white"
-            android:textColorHint="@color/gray"
-            />
+            android:textColorHint="@color/gray" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -43,10 +44,11 @@
         android:layout_height="60dp"
         android:backgroundTint="@android:color/transparent"
         android:textColorHint="@color/gray"
-        app:passwordToggleEnabled="true"
+        app:boxStrokeColor="@color/white"
         app:layout_constraintEnd_toEndOf="@+id/layout_et_email"
         app:layout_constraintStart_toStartOf="@+id/layout_et_email"
-        app:layout_constraintTop_toBottomOf="@+id/layout_et_email">
+        app:layout_constraintTop_toBottomOf="@+id/layout_et_email"
+        app:passwordToggleEnabled="true">
 
         <EditText
             android:id="@+id/et_password"
@@ -78,22 +80,22 @@
         android:id="@+id/tv_err_msg"
         android:layout_width="350dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
         android:text="Incorrect email address or password. Please try again."
+        android:textColor="#F44336"
         android:textSize="15sp"
-        android:textColor="@color/red"
         android:visibility="gone"
         app:layout_constraintStart_toStartOf="@+id/layout_et_password"
         app:layout_constraintTop_toBottomOf="@+id/layout_et_password" />
 
-    <TextView
-        android:id="@+id/tv_missing_field_msg"
-        android:layout_width="350dp"
+    <ProgressBar
+        android:id="@+id/progress_login"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Make sure both fields are filled."
-        android:textSize="15sp"
-        android:textColor="@color/red"
         android:visibility="gone"
-        app:layout_constraintStart_toStartOf="@+id/layout_et_password"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/layout_et_password" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,7 +1,4 @@
-//resources:
-//https://www.youtube.com/playlist?list=PLk7v1Z2rk4hgmIvyw8rvpiEQxIAbJvDAF
-//https://classroom.udacity.com/courses/ud9012 lessons 5,8
-package com.example.android.tumblrx2.login
+package com.example.android.tumblrx2.signup
 
 import android.content.Context
 import android.content.Intent
@@ -14,39 +11,50 @@ import android.view.View
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.example.android.tumblrx2.HomePageActivity
-import com.example.android.tumblrx2.databinding.ActivityLoginBinding
-import com.example.android.tumblrx2.responses.LoginResponse
+import com.example.android.tumblrx2.databinding.ActivitySignupBinding
+import com.example.android.tumblrx2.responses.RegisterResponse
 import retrofit2.HttpException
+import retrofit2.Response
 import java.io.IOException
 
-class LoginActivity : AppCompatActivity() {
-    private lateinit var binding: ActivityLoginBinding
-    private lateinit var viewModel: LoginViewModel
+
+class SignupActivity : AppCompatActivity() {
+    private lateinit var binding: ActivitySignupBinding
+    private lateinit var viewModel: SignupViewModel
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-//        setContentView(R.layout.activity_login)
-        binding = ActivityLoginBinding.inflate(layoutInflater)
+        binding = ActivitySignupBinding.inflate(layoutInflater)
+        viewModel = ViewModelProvider(this)[SignupViewModel::class.java]
         setContentView(binding.root)
 
-        viewModel = ViewModelProvider(this)[LoginViewModel::class.java]
-
-        val sharedPref = this.getSharedPreferences("appPref", Context.MODE_PRIVATE)
+        val sharedPref = getSharedPreferences("appPref", Context.MODE_PRIVATE)
         val editor = sharedPref.edit()
+//        setContentView(R.layout.activity_signup)
 
         binding.etEmail.addTextChangedListener(inputWatcher)
         binding.etPassword.addTextChangedListener(inputWatcher)
+        binding.etUsername.addTextChangedListener(inputWatcher)
+        binding.etAge.addTextChangedListener(inputWatcher)
 
-        binding.actionbarLogin.btnLogin.setOnClickListener {
-            binding.progressLogin.visibility = View.VISIBLE
+        binding.btnSignup.setOnClickListener {
+            binding.progressSignup.visibility = View.VISIBLE
+
+            //call function to check inputs, if there is an error, call displayErr
             val emailText = binding.etEmail.text.trim().toString()
             val passwordText = binding.etPassword.text.trim().toString()
-            val code = viewModel.loginValidateInput(emailText, passwordText)
+            val usernameText = binding.etUsername.text.trim().toString()
+            val ageText = binding.etAge.text.trim().toString()
+
+            val code = viewModel.validateInput(emailText, passwordText, usernameText, ageText)
+
             if (code != 0) {
-                displayErr(viewModel.loginChooseErrMsg(code))
-            } else {
+                displayErr(viewModel.chooseErrMsg(code))
+            }
+            else {
                 lifecycleScope.launchWhenCreated {
-                    val response: retrofit2.Response<LoginResponse> = try {
-                        viewModel.login(emailText, passwordText)
+                    val response: Response<RegisterResponse> = try {
+                        viewModel.signup(emailText, passwordText, usernameText)
                     } catch (e: IOException) {
                         displayErr("You might not have internet connection")
                         return@launchWhenCreated
@@ -54,26 +62,24 @@ class LoginActivity : AppCompatActivity() {
                         displayErr(e.toString())
                         return@launchWhenCreated
                     }
-                    if (response.isSuccessful) {
-                        Log.i("LoginActivity", "Success")
+                    if(response.isSuccessful){
+                        Log.i("SignupActivity", "Success")
                         val token: String? = response.body()?.token
                         editor.apply {
                             putString("token", token)
-                        }.apply()
-                        Log.i("LoginActivity", "Token: $token")
-                        startActivity(Intent(this@LoginActivity, HomePageActivity::class.java))
-                    }else{
-                        displayErr("Email and Password do not match")
+                        }
+                        startActivity(Intent(this@SignupActivity, HomePageActivity::class.java))
                     }
                 }
             }
-            binding.progressLogin.visibility = View.GONE
+            binding.progressSignup.visibility=View.GONE
         }
-        binding.actionbarLogin.btnBack.setOnClickListener {
+
+        binding.btnBack.setOnClickListener {
             finish()
         }
-    }
 
+    }
 
     private val inputWatcher = object : TextWatcher {
         override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
@@ -87,8 +93,12 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
+    /**
+     * Shows an error message with [errMsg]
+     */
     fun displayErr(errMsg: String) {
         binding.tvErrMsg.text = errMsg
         binding.tvErrMsg.visibility = View.VISIBLE
     }
+
 }
