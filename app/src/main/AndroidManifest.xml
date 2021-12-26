@@ -28,7 +28,7 @@
 
         </activity>
         <activity
-            android:name=".HomePageActivity"
+            android:name=".home.HomePageActivity"
             android:exported="false" />
         <activity
             android:name=".AddPostActivity"

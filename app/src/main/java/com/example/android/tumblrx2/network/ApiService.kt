@@ -1,11 +1,10 @@
 package com.example.android.tumblrx2.network
 
+import com.example.android.tumblrx2.responses.InfoResponse
 import com.example.android.tumblrx2.responses.LoginResponse
 import com.example.android.tumblrx2.responses.RegisterResponse
 import retrofit2.Response
-import retrofit2.http.Field
-import retrofit2.http.FormUrlEncoded
-import retrofit2.http.POST
+import retrofit2.http.*
 
 interface ApiService {
     @FormUrlEncoded
@@ -22,4 +21,9 @@ interface ApiService {
         @Field("email") email: String,
         @Field("password") password: String
     ): Response<LoginResponse>
+
+    @GET("api/user/info")
+    suspend fun getInfo(
+        @Header("Authorization") token:String
+    ): Response<InfoResponse>
 }
