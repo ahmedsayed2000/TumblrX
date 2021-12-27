@@ -12,12 +12,12 @@ class SignupViewModel : ViewModel() {
      * returns a code to specify if either [email], [password], [username], or [age] fields are invalid
      */
     fun validateInput(email: String, password: String, username: String, age: String): Int {
-        val usernameRegex = Regex("/^[A-Za-z0-9-]*$/")
+        val usernameRegex = Regex("""^[A-Za-z0-9-]*$""")
         return if (email.isEmpty() || password.isEmpty() || username.isEmpty() || age.isEmpty()) -1
         else if (!(android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches())) 1 //crashes
 //        else if (email.length < 6) 1
         else if (password.length < 6) 2
-        else if (username.length > 32 || !username.matches(usernameRegex)) 3
+        else if (username.length > 32 || !usernameRegex.containsMatchIn(username)) 3
         else if (age.toInt() < 13 || age.toInt() > 130) 4
         else 0
     }

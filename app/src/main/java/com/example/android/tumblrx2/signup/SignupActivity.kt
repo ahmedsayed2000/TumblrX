@@ -69,6 +69,8 @@ class SignupActivity : AppCompatActivity() {
                             putString("token", token)
                         }
                         startActivity(Intent(this@SignupActivity, HomePageActivity::class.java))
+                    }else{
+                        displayErr("User is already registered")
                     }
                 }
             }
