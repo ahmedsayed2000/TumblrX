@@ -2,9 +2,18 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.android.tumblrx2">
 
+
+    <instrumentation
+        android:name="com.example.android.tumblrx2.JacocoInstrumentation"
+        android:targetPackage="com.example.android.tumblrx2"
+        android:targetProcesses="*">
+    </instrumentation>
+
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
+
 
     <application
         android:allowBackup="true"
@@ -26,6 +35,11 @@
             android:exported="true"
             android:theme="@style/splashScreenTheme">
 
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity
             android:name=".home.HomePageActivity"
@@ -43,11 +57,7 @@
             android:name=".MainActivity"
             android:exported="true"
             android:theme="@style/splashScreenTheme">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
 .
         <activity
@@ -57,6 +67,18 @@
             android:name=".ActivityBlog"
             android:exported="true" >
         </activity>
+
+
+        <!-- adb shell am broadcast -a com.example.pkg.END_EMMA -->
+        <receiver android:name="com.example.android.tumblrx2.EndEmmaBroadcast"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.example.android.tumblrx2.END_EMMA" />
+            </intent-filter>
+        </receiver>
+
     </application>
+
+
 
 </manifest>

@@ -2,6 +2,8 @@ plugins {
     id 'com.android.application'
     id 'kotlin-android'
     id 'org.jetbrains.dokka'
+    id 'jacoco'
+
 }
 
 tasks.dokkaHtml.configure {
@@ -13,6 +15,7 @@ tasks.withType(dokkaHtml.getClass()).configureEach {
             ["org.jetbrains.dokka.base.DokkaBase": """{ "separateInheritedMembers": true}"""]
     )
 }
+
 android {
     compileSdk 31
 
@@ -30,6 +33,9 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+        debug{
+            testCoverageEnabled = true
         }
     }
     compileOptions {
@@ -109,5 +115,9 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.4.0"
 
     implementation "com.squareup.okhttp3:logging-interceptor:4.9.3"
+
+    //uiautomator
+    androidTestImplementation 'com.android.support.test.uiautomator:uiautomator-v18:2.1.0'
+
 
 }
