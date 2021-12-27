@@ -1,13 +1,11 @@
 package com.example.android.tumblrx2.network
 
+import com.example.android.tumblrx2.chat.response.ConversationsResponse
 import com.example.android.tumblrx2.responses.CreateBlogResponse
 import com.example.android.tumblrx2.responses.LoginResponse
 import com.example.android.tumblrx2.responses.RegisterResponse
 import retrofit2.Response
-import retrofit2.http.Field
-import retrofit2.http.FormUrlEncoded
-import retrofit2.http.Header
-import retrofit2.http.POST
+import retrofit2.http.*
 
 interface ApiService {
     @FormUrlEncoded
@@ -33,6 +31,7 @@ interface ApiService {
         @Field("handle") handle: String,
         @Field("private") private: Boolean,
     ): Response<CreateBlogResponse>
+
 
 
 }

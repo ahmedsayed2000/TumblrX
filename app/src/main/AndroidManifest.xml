@@ -38,21 +38,28 @@
             android:name=".chat.NewMessageActivity"
             android:exported="false" />
         <activity
-            android:name=".ActivityCreateBlog"
-            android:exported="true"
+            android:name=".chat.ActivityChat"
+            android:exported="false" />
+        <activity
+            android:name=".blog.ActivityBlog"
+            android:exported="false"
             android:theme="@style/splashScreenTheme">
+<!--            <intent-filter>-->
+<!--                <action android:name="android.intent.action.MAIN" />-->
+<!--                <category android:name="android.intent.category.LAUNCHER" />-->
+<!--            </intent-filter>-->
+        </activity>
+        <activity
+            android:name=".blog.ActivityCreateBlog"
+            android:exported="false" />
+        <activity
+            android:name=".MainActivity"
+            android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-<!--        <activity-->
-<!--            android:name=".blog.ActivityCreateBlog"-->
-<!--            android:exported="false" />-->
-<!--        <activity-->
-<!--            android:name=".blog.ActivityBlog"-->
-<!--            android:exported="false" >-->
-<!--        </activity>-->
     </application>
 
 </manifest>

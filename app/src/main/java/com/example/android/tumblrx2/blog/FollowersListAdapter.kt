@@ -1,7 +1,6 @@
-package com.example.android.tumblrx2.chat
+package com.example.android.tumblrx2.blog
 
 import android.content.Context
-import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,18 +9,15 @@ import android.widget.TextView
 import com.example.android.tumblrx2.R
 
 
-class MessagesListAdapter(context:Context): BaseAdapter() {
+class FollowersListAdapter(context:Context): BaseAdapter() {
 
     private val myContext: Context
 
-    init {
-        myContext=context
+    init {myContext=context}
 
-    }
     override fun getCount(): Int {
-        return 8
+        return 2
     }
-
     override fun getItem(position: Int): Any {
         TODO("Not yet implemented")
     }
@@ -30,12 +26,8 @@ class MessagesListAdapter(context:Context): BaseAdapter() {
     }
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
         val layoutInflater=LayoutInflater.from(myContext)
-        val row= layoutInflater.inflate(R.layout.messages_list_item,parent,false)
-        row.findViewById<TextView>(R.id.username_text).text="someone_".plus(position)
-        row.findViewById<TextView>(R.id.snippet_msg).text="Text Message ".plus(position)
-        row.setOnClickListener{
-            myContext.startActivity(Intent(myContext, ActivityChat::class.java))
-        }
+        val row= layoutInflater.inflate(R.layout.followers_list_item,parent,false)
+//        row.findViewById<TextView>(R.id.row_text).text="someone_".plus(position).plus(" started following mariam.a.malak")
         return row
     }
 }
