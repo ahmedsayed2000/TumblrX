@@ -13,10 +13,10 @@ class SignupViewModel : ViewModel() {
      */
     fun validateInput(email: String, password: String, username: String, age: String): Int {
         return if (email.isEmpty() || password.isEmpty() || username.isEmpty() || age.isEmpty()) -1
-        else if (!(android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches())) 1 //crashes
-//        else if (email.length < 6) 1
+        else if (!(android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches())) 1
         else if (password.length < 6) 2
-        else if (username.length < 6) 3
+        else if (username.length > 32) 3
+        else if (age.toInt() < 13 || age.toInt() > 130) 4
         else 0
     }
 
@@ -28,8 +28,8 @@ class SignupViewModel : ViewModel() {
             -1 -> "Make sure all fields are filled"
             1 -> "Enter a correct email"
             2 -> "Password is too short"
-            3 -> "Username length is too short"
-            else -> "Enter a valid age"
+            3 -> "Username length is too long, should be less than 32 characters"
+            else -> "Enter a valid age between 13 and 130"
         }
     }
 
