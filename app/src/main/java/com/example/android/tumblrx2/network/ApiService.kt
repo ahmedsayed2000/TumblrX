@@ -3,6 +3,8 @@ package com.example.android.tumblrx2.network
 import com.example.android.tumblrx2.responses.InfoResponse
 import com.example.android.tumblrx2.responses.LoginResponse
 import com.example.android.tumblrx2.responses.RegisterResponse
+import com.example.android.tumblrx2.responses.dashboarddata.DashboardResponse
+import retrofit2.Call
 import retrofit2.Response
 import retrofit2.http.*
 
@@ -24,6 +26,12 @@ interface ApiService {
 
     @GET("api/user/info")
     suspend fun getInfo(
-        @Header("Authorization") token:String
+        @Header("Authorization") token: String
     ): Response<InfoResponse>
+
+    @GET("api/user/dashboard")
+    suspend fun getDashboardPosts(
+        @Header("Authorization") token: String,
+        @Query("limit") limit: Int = 10, @Query("page") page: Int = 1
+    ): Response<DashboardResponse>
 }
