@@ -2,6 +2,7 @@ plugins {
     id 'com.android.application'
     id 'kotlin-android'
     id 'org.jetbrains.dokka'
+    id "org.jetbrains.kotlin.kapt"
 }
 
 tasks.dokkaHtml.configure {
@@ -109,5 +110,8 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.4.0"
 
     implementation "com.squareup.okhttp3:logging-interceptor:4.9.3"
+
+    //glide for loading and caching images
+    implementation 'com.github.bumptech.glide:glide:4.12.0'
 
 }

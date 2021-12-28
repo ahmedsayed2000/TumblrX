@@ -4,10 +4,10 @@ import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.preference.PreferenceManager
 import android.util.Log
 import androidx.databinding.DataBindingUtil
 import com.example.android.tumblrx2.databinding.ActivityMainBinding
+import com.example.android.tumblrx2.home.HomePageActivity
 import com.example.android.tumblrx2.intro.IntroActivity
 
 /**
@@ -50,6 +50,12 @@ class MainActivity : AppCompatActivity() {
         }
         binding.btnNewMessage.setOnClickListener {
             startActivity(Intent(this, NewMessageActivity::class.java))
+        }
+        binding.btnCreateBlog.setOnClickListener {
+            startActivity(Intent(this, ActivityCreateBlog::class.java))
+        }
+        binding.btnBlog.setOnClickListener {
+            startActivity(Intent(this, ActivityBlog::class.java))
         }
     }
 

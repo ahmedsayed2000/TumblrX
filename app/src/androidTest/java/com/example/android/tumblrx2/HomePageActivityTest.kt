@@ -1,6 +1,7 @@
 package com.example.android.tumblrx2
 
 import androidx.test.ext.junit.rules.ActivityScenarioRule
+import com.example.android.tumblrx2.home.HomePageActivity
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import org.junit.Assert.*
 
