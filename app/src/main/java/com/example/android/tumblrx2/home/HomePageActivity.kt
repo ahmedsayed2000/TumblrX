@@ -10,6 +10,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.example.android.tumblrx2.*
 import com.example.android.tumblrx2.databinding.ActivityHomePageBinding
+import com.example.android.tumblrx2.intro.IntroActivity
 import kotlinx.coroutines.launch
 
 /**
@@ -106,9 +107,22 @@ class HomePageActivity : AppCompatActivity() {
                     overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
                     return@setOnItemSelectedListener false
                 }
-                else -> {
+                R.id.ic_profile -> {
                     startActivity(Intent(this@HomePageActivity, ActivityBlog::class.java))
                     overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
+                    return@setOnItemSelectedListener false
+                }
+                else -> {
+                    val editor = sharedPref.edit()
+                    editor.clear()
+                    editor.apply()
+                    startActivity(
+                        Intent(
+                            this@HomePageActivity, IntroActivity::class.java
+                        )
+                            .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
+                    )
+
                     return@setOnItemSelectedListener false
                 }
             }

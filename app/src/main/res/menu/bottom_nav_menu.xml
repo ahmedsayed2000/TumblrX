@@ -20,4 +20,9 @@
         android:icon="@drawable/ic_user"
         android:title="Profile"/>
 
+    <item
+        android:id="@+id/ic_logout"
+        android:icon="@drawable/ic_exit"
+        android:title="Logout" />
+
 </menu>
