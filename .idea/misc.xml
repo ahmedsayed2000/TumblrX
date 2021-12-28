@@ -3,17 +3,21 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/GitHub projects/TumblrX/app/src/main/res/drawable/ic_home.xml" value="0.23796296296296296" />
         <entry key="..\:/GitHub projects/TumblrX/app/src/main/res/drawable/splash_image.xml" value="0.20555555555555555" />
-        <entry key="..\:/GitHub projects/TumblrX/app/src/main/res/layout/activity_home_page.xml" value="0.13020833333333334" />
+        <entry key="..\:/GitHub projects/TumblrX/app/src/main/res/layout/activity_home_page.xml" value="0.264" />
         <entry key="..\:/GitHub projects/TumblrX/app/src/main/res/layout/activity_intro.xml" value="0.176" />
         <entry key="..\:/GitHub projects/TumblrX/app/src/main/res/layout/activity_log_in2.xml" value="0.18432971014492755" />
         <entry key="..\:/GitHub projects/TumblrX/app/src/main/res/layout/activity_login.xml" value="0.2" />
         <entry key="..\:/GitHub projects/TumblrX/app/src/main/res/layout/activity_main.xml" value="0.13020833333333334" />
+        <entry key="..\:/GitHub projects/TumblrX/app/src/main/res/layout/activity_signup.xml" value="0.264" />
         <entry key="..\:/GitHub projects/TumblrX/app/src/main/res/layout/fragment_intro_options.xml" value="0.264" />
         <entry key="..\:/GitHub projects/TumblrX/app/src/main/res/layout/fragment_login_options.xml" value="0.2" />
         <entry key="..\:/GitHub projects/TumblrX/app/src/main/res/layout/partial_actionbar_login.xml" value="0.4433399602385686" />
+        <entry key="..\:/GitHub projects/TumblrX/app/src/main/res/layout/post_item.xml" value="0.24954710144927536" />
         <entry key="..\:/GitHub projects/TumblrX/app/src/main/res/layout/tag_bottomsheet.xml" value="0.20380434782608695" />
         <entry key="..\:/GitHub projects/TumblrX/app/src/main/res/layout/text_bottomsheet.xml" value="0.20380434782608695" />
+        <entry key="..\:/GitHub projects/TumblrX/app/src/main/res/menu/bottom_nav_menu.xml" value="0.4" />
         <entry key="..\:/Mariam/College/Software Engineering/Project/TumblrX/app/src/main/res/drawable/bottom_border.xml" value="0.2703125" />
         <entry key="..\:/Mariam/College/Software Engineering/Project/TumblrX/app/src/main/res/drawable/corner.xml" value="0.2703125" />
         <entry key="..\:/Mariam/College/Software Engineering/Project/TumblrX/app/src/main/res/drawable/ic_arrow.xml" value="0.2703125" />
@@ -59,18 +63,16 @@
         <entry key="..\:/Users/pc/Desktop/project/TumblrX/app/src/main/res/layout/activity_intro.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/pc/Desktop/project/TumblrX/app/src/main/res/layout/activity_list_item.xml" value="0.22552083333333334" />
         <entry key="..\:/Users/pc/Desktop/project/TumblrX/app/src/main/res/layout/activity_login.xml" value="0.25416666666666665" />
-        <entry key="..\:/Users/pc/Desktop/project/TumblrX/app/src/main/res/layout/activity_main.xml" value="0.25" />
+        <entry key="..\:/Users/pc/Desktop/project/TumblrX/app/src/main/res/layout/activity_main.xml" value="0.12037037037037036" />
         <entry key="..\:/Users/pc/Desktop/project/TumblrX/app/src/main/res/layout/activity_messages_and_activity.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/pc/Desktop/project/TumblrX/app/src/main/res/layout/bottom_sheet_layout.xml" value="0.22552083333333334" />
         <entry key="..\:/Users/pc/Desktop/project/TumblrX/app/src/main/res/layout/custom_link_preview.xml" value="0.1875" />
-        <entry key="..\:/Users/pc/Desktop/project/TumblrX/app/src/main/res/layout/fragment_initial_post.xml" value="0.25" />
+        <entry key="..\:/Users/pc/Desktop/project/TumblrX/app/src/main/res/layout/fragment_initial_post.xml" value="0.13020833333333334" />
         <entry key="..\:/Users/pc/Desktop/project/TumblrX/app/src/main/res/layout/fragment_intro_options.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/pc/Desktop/project/TumblrX/app/src/main/res/layout/fragment_login_options.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/pc/Desktop/project/TumblrX/app/src/main/res/layout/giphy_sheet.xml" value="0.25" />
         <entry key="..\:/Users/pc/Desktop/project/TumblrX/app/src/main/res/layout/link_card.xml" value="0.1875" />
         <entry key="..\:/Users/pc/Desktop/project/TumblrX/app/src/main/res/layout/text_bottomsheet.xml" value="0.25" />
-        <entry key="..\:/Users/pc/Desktop/project/TumblrX/app/src/main/res/layout/activity_main.xml" value="0.12037037037037036" />
-        <entry key="..\:/Users/pc/Desktop/project/TumblrX/app/src/main/res/layout/fragment_initial_post.xml" value="0.13020833333333334" />
       </map>
     </option>
   </component>
