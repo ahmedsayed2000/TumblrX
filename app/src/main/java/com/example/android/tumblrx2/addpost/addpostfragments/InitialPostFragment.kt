@@ -123,6 +123,11 @@ class InitialPostFragment : Fragment() {
         }
         viewModel.togglePostButton.observe(viewLifecycleOwner, togglePostButtonObserver)
 
+        // observing the tags
+        val tagObserver = Observer<Int> {
+            insertTags(it)
+        }
+        viewModel.tagsCount.observe(viewLifecycleOwner, tagObserver)
 
 
         // init the list view and the adapter
@@ -174,6 +179,29 @@ class InitialPostFragment : Fragment() {
     }
 
     /**
+     *
+     */
+    private fun insertTags(count: Int) {
+
+        //binding.root.requestFocus()
+
+        Log.d("initial fragment", "tags observed")
+
+        if(count > 0) {
+            binding.tagsCard.visibility = View.INVISIBLE
+
+            binding.tagsArea.visibility = View.VISIBLE
+
+        }
+        else {
+            binding.tagsCard.visibility = View.VISIBLE
+
+            binding.tagsArea.visibility = View.INVISIBLE
+        }
+
+    }
+
+    /**
      * this function initialise the post list
      */
     private fun initPostList() {
@@ -216,13 +244,25 @@ class InitialPostFragment : Fragment() {
         }
 
         binding.tags.setOnClickListener {
-            val sheet = TagBottomSheet()
-            activity?.let { it1 -> sheet.show(it1.supportFragmentManager, "tag") }
+
+            val view = LayoutInflater.from(context).inflate(R.layout.tag_bottomsheet, null, false)
+            viewModel.initTagSheet(view)
+
+            // creating a bottom sheet
+            val sheet = activity?.let { it1 -> BottomSheetDialog(it1) }
+            sheet?.setContentView(view)
+            sheet?.show()
+
         }
 
         binding.tagsCard.setOnClickListener {
-            val sheet = TagBottomSheet()
-            activity?.let { it1 -> sheet.show(it1.supportFragmentManager, "tag") }
+            val view = LayoutInflater.from(context).inflate(R.layout.tag_bottomsheet, null, false)
+            viewModel.initTagSheet(view)
+
+            // creating a bottom sheet
+            val sheet = activity?.let { it1 -> BottomSheetDialog(it1) }
+            sheet?.setContentView(view)
+            sheet?.show()
         }
 
 
@@ -231,29 +271,7 @@ class InitialPostFragment : Fragment() {
 
 
         binding.insertMedia.setOnClickListener {
-            /*context?.let { it1 ->
-                MaterialAlertDialogBuilder(it1)
-                    .setTitle("Media Type")
-                    .setItems(items) { _, item ->
-                        // Respond to item chosen
-                        when (item) {
-                            0 -> insertImage()
-                            1 -> {
-                                if (!oneVideo) {
-                                    insertVideo()
-                                    oneVideo = true
-                                } else
-                                    Toast.makeText(
-                                        context,
-                                        "No more than one Video in a post",
-                                        Toast.LENGTH_SHORT
-                                    ).show()
-                            }
-                        }
 
-                    }
-                    .show()
-            }*/
             checkForPermission(android.Manifest.permission.READ_EXTERNAL_STORAGE, "", 101)
         }
 
@@ -297,6 +315,7 @@ class InitialPostFragment : Fragment() {
         }
 
     }
+
 
 
 

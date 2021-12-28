@@ -249,5 +249,42 @@
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
 
+        <HorizontalScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/tags_area"
+            android:layout_alignStart="@id/tags_card"
+            android:layout_alignTop="@id/tags_card"
+            android:layout_above="@id/insertion_bar"
+            android:visibility="invisible"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginLeft="8dp">
+
+            <com.google.android.material.chip.ChipGroup
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/tags_group"
+                app:singleLine="true">
+
+                <com.google.android.material.chip.Chip
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="blog 1"
+                    android:textSize="15sp"
+                    />
+                <com.google.android.material.chip.Chip
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="blog 2"
+                    android:textSize="15sp"
+                    />
+
+            </com.google.android.material.chip.ChipGroup>
+
+        </HorizontalScrollView>
+
+
     </RelativeLayout>
 </layout>

@@ -6,7 +6,9 @@ import android.graphics.Color
 import android.graphics.Typeface
 import android.net.Uri
 import android.provider.MediaStore
+import android.text.Editable
 import android.text.SpannableStringBuilder
+import android.text.TextWatcher
 import android.text.style.AbsoluteSizeSpan
 import android.text.style.ForegroundColorSpan
 import android.text.style.StrikethroughSpan
@@ -15,10 +17,12 @@ import android.util.Log
 import android.view.GestureDetector
 import android.view.MotionEvent
 import android.view.View
+import android.view.ViewGroup
 import android.widget.*
 import androidx.core.view.GestureDetectorCompat
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.example.android.tumblrx2.R
 import com.example.android.tumblrx2.addpost.addpostfragments.postobjects.*
 import com.example.android.tumblrx2.repository.AddPostRepository
@@ -28,6 +32,14 @@ import com.giphy.sdk.ui.pagination.GPHContent
 import com.giphy.sdk.ui.views.GPHGridCallback
 import com.giphy.sdk.ui.views.GPHMediaView
 import com.giphy.sdk.ui.views.GiphyGridView
+import com.google.android.material.chip.Chip
+import com.google.android.material.chip.ChipGroup
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers.IO
+import kotlinx.coroutines.Dispatchers.Main
+import kotlinx.coroutines.async
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody.Companion.asRequestBody
@@ -68,6 +80,8 @@ class AddPostViewModel : ViewModel() {
     // list of post objects
     val fileList = mutableListOf<MultipartBody.Part>()
     val contentList = mutableListOf<MultipartBody.Part>()
+    val tagsList = mutableListOf<MultipartBody.Part>()
+
 
     // the activity context
     private lateinit var context: Context
@@ -96,7 +110,6 @@ class AddPostViewModel : ViewModel() {
         arrayOf("black", "red", "orange", "green", "cyan", "purple", "pink")  // 7 colors
     private val textStyles = arrayOf("Bold", "Italic", "Strike")
     private var textMap = mutableMapOf<AddPostItem, Int>()
-    private var styleMap = mutableMapOf<AddPostItem, Int>()
     private var boldList = mutableListOf<AddPostItem>()
     private var italicList = mutableListOf<AddPostItem>()
     private var strikeList = mutableListOf<AddPostItem>()
@@ -104,6 +117,12 @@ class AddPostViewModel : ViewModel() {
 
     // first text
     private val firstItem = AddPostItem(1, "")
+
+    // for the tags sheet
+    var selectedBlogs = MutableLiveData<MutableList<String>>()
+    var tagsCount = MutableLiveData<Int>()
+
+    var searchedBlogs: MutableList<BlogSearch>? = null
 
 
     init {
@@ -119,6 +138,11 @@ class AddPostViewModel : ViewModel() {
 
         // init the toggle post button
         togglePostButton.value = false
+
+        // init the selected tags
+        selectedBlogs.value = mutableListOf()
+        tagsCount.value = selectedBlogs.value!!.size
+        Log.d("tags count", "count is ${tagsCount.value}")
     }
 
     fun initViews(view: ListView, context: Context) {
@@ -622,106 +646,32 @@ class AddPostViewModel : ViewModel() {
     }
 
     fun postToBlog() {
-        prepareList()
+        //prepareList()
+        prepareTags()
+
         val repo = AddPostRepository()
-        repo?.postToBlog(context, contentList, fileList)
+        if(postListItems.value?.size!! > 1 || firstItem.content != "" ) {
+            prepareList()
+            repo?.postToBlog(context, contentList, fileList, tagsList)
+        }
+        else {
+            Toast.makeText(context, "no items to post", Toast.LENGTH_SHORT).show()
+        }
     }
 
-
-    /*fun restoreTextProp(view: EditText, index: Int) {
-        val item = postListItems.value?.get(index) as AddPostItem
-
-        //view.setText(item.content)
-
-        when (textMap[item]) {
-            0 -> {
-                resizeText(view, 15)
-            }
-            1 -> {
-                resizeText(view, 20)
-            }
-            2 -> {
-                resizeText(view, 25)
-            }
-        }
-        /*if(colorMap.containsKey(item)) {
-            when(colorMap[item]) {
-                0 -> colorText(view, Color.BLACK)
-                1 -> colorText(view, Color.RED)
-                2 -> colorText(view, Color.parseColor("#FF9100"))
-                3 -> colorText(view, Color.GREEN)
-                4 -> colorText(view, Color.CYAN)
-                5 -> colorText(view, Color.parseColor("#FF6200EE"))
-                6 -> colorText(view, Color.parseColor("#FF4081"))
-            }
+    private fun prepareTags() {
+        /*val index = 0
+        for (tag in selectedBlogs.value!!) {
+            val part = MultipartBody.Part.createFormData("tags[${index}]", tag)
+            tagsList.add(part)
         }*/
 
-        /*if(styleMap.contains(item)) {
-            when(styleMap[item]) {
-                1 -> styleText(view, Typeface.BOLD)
-                2 -> styleText(view, Typeface.ITALIC)
-                3 -> strikeText(view)
-            }
-        }*/
+        val part = MultipartBody.Part.createFormData("tags[0]", "#Ammar")
+        tagsList.add(part)
 
-        if (boldList.contains(item)) {
-            styleText(view, Typeface.BOLD)
-        }
-        if (italicList.contains(item)) {
-            styleText(view, Typeface.ITALIC)
-        }
-        if (strikeList.contains(item)) {
-            strikeText(view)
-        }
 
-        //adapter.notifyDataSetChanged()
     }
 
-    private fun resizeText(view: EditText, size: Int) {
-        val spanString = SpannableStringBuilder(view.text)
-        spanString.setSpan(
-            AbsoluteSizeSpan(size, true),
-            0,
-            view.text.length,
-            0
-        )
-
-        view.text = spanString
-    }
-
-    private fun colorText(view: EditText, color: Int) {
-        val spanString = SpannableStringBuilder(view.text)
-        spanString.setSpan(
-            ForegroundColorSpan(color),
-            0,
-            view.text.length - 1,
-            0
-        )
-
-        view.text = spanString
-    }
-
-    private fun styleText(view: EditText, style: Int) {
-        val spanString = SpannableStringBuilder(view.text)
-        spanString.setSpan(
-            StyleSpan(style),
-            0,
-            view.text.length - 1,
-            0
-        )
-        view.text = spanString
-    }
-
-    private fun strikeText(view: EditText) {
-        val spanString = SpannableStringBuilder(view.text)
-        spanString.setSpan(
-            StrikethroughSpan(),
-            0,
-            view.text.length - 1,
-            0
-        )
-        view.text = spanString
-    }*/
 
 
     private fun prepareList() {
@@ -928,6 +878,136 @@ class AddPostViewModel : ViewModel() {
             return result
         }
         return result
+    }
+
+
+    fun initTagSheet(view: View) {
+        val button = view.findViewById<Button>(R.id.done_button)
+        val topChipGroup = view.findViewById<ChipGroup>(R.id.top_chipGroup)
+        val bottomChipGroup = view.findViewById<ChipGroup>(R.id.bottom_chip_group)
+        val searchText = view.findViewById<EditText>(R.id.search_tags)
+
+        initTopChipGroup(topChipGroup, bottomChipGroup)
+
+        searchText.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+
+            }
+
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+            }
+
+            override fun afterTextChanged(p0: Editable?) {
+
+                Log.d("searh string", p0.toString())
+                if (p0.toString() != "") {
+
+
+                    viewModelScope.launch {
+                        val repo = AddPostRepository()
+                        repo.searchTags(p0.toString(), context, this@AddPostViewModel)
+                        fillChipGroup(bottomChipGroup, topChipGroup)
+                    }
+
+                }
+
+            }
+        })
+
+        button.setOnClickListener {
+
+        }
+
+
+    }
+
+    private fun initTopChipGroup(topGroup: ChipGroup, bottomGroup: ChipGroup) {
+        val list = selectedBlogs.value
+        for (chip in list!!) {
+            addTopChip(chip, topGroup, bottomGroup, false)
+        }
+    }
+
+    private fun fillChipGroup(bottomChipGroup: ChipGroup, topChipGroup: ChipGroup) {
+
+        if (searchedBlogs != null) {
+            /*Log.d(
+                "view model",
+                "the search Blogs list is not empty with size = ${searchedBlogs!!.size}"
+            )
+            for (blog in searchedBlogs!!) {
+                if (!selectedBlogs.value!!.contains("#" + blog.title)!!) {
+                    addBottomChip("#" + blog.title, topChipGroup, bottomChipGroup)
+                }
+            }*/
+            addBottomChip("#" + searchedBlogs!![0].title, topChipGroup, bottomChipGroup)
+        }
+
+        Log.d("view model", "the search Blogs list is empty")
+        addBottomChip("#blog", topChipGroup, bottomChipGroup)
+
+
+    }
+
+    fun addBottomChip(text: String, topGroup: ChipGroup, bottomGroup: ChipGroup) {
+        val chip = Chip(context)
+
+        chip.text = text
+        val param = RelativeLayout.LayoutParams(
+            ViewGroup.LayoutParams.WRAP_CONTENT,
+            ViewGroup.LayoutParams.WRAP_CONTENT
+        )
+        chip.layoutParams = param
+        chip.setOnClickListener {
+            addTopChip(chip.text.toString(), topGroup, bottomGroup, true)
+            bottomGroup.removeView(chip)
+        }
+
+        bottomGroup.addView(chip)
+    }
+
+    fun addTopChip(text: String, topGroup: ChipGroup, bottomGroup: ChipGroup, add: Boolean) {
+        val chip = Chip(context)
+
+        chip.text = text
+        val param = RelativeLayout.LayoutParams(
+            ViewGroup.LayoutParams.WRAP_CONTENT,
+            ViewGroup.LayoutParams.WRAP_CONTENT
+        )
+        chip.layoutParams = param
+
+        topGroup.isSingleSelection = true
+
+
+        chip.setOnClickListener {
+            chip.isChecked = true
+            chip.isCloseIconVisible = true
+        }
+
+        chip.setOnCloseIconClickListener {
+            val text = chip.text.toString()
+            addBottomChip(chip.text.toString(), topGroup, bottomGroup)
+            topGroup.removeView(chip)
+
+            if (selectedBlogs.value!!.contains(text)) {
+                selectedBlogs.value!!.remove(text)
+                tagsCount.value = selectedBlogs.value!!.size
+                Log.d("tag removed", "count is ${tagsCount.value}")
+            }
+
+        }
+
+        topGroup.addView(chip)
+
+        // updating the selected tags
+        if (add) {
+            selectedBlogs.value!!.add(chip.text.toString())
+
+            tagsCount.value = selectedBlogs.value!!.size
+            Log.d("tag added", "count is ${tagsCount.value}")
+        }
+
+
     }
 
 

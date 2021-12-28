@@ -248,7 +248,7 @@ class AddPostAdapter : ArrayAdapter<AddPostItem> {
     private fun initImage(view: ImageView, content: String) {
         val param = RelativeLayout.LayoutParams(
             ViewGroup.LayoutParams.MATCH_PARENT,
-            800
+            ViewGroup.LayoutParams.WRAP_CONTENT
         )
         param.setMargins(8, 8, 8, 8)
 
