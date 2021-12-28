@@ -12,7 +12,12 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.example.android.tumblrx2.home.HomePageActivity
 import com.example.android.tumblrx2.databinding.ActivitySignupBinding
+import com.example.android.tumblrx2.responses.RegisterError
 import com.example.android.tumblrx2.responses.RegisterResponse
+import com.google.gson.Gson
+import com.google.gson.GsonBuilder
+import com.google.gson.reflect.TypeToken
+import org.json.JSONObject
 import retrofit2.HttpException
 import retrofit2.Response
 import java.io.IOException
@@ -50,8 +55,7 @@ class SignupActivity : AppCompatActivity() {
 
             if (code != 0) {
                 displayErr(viewModel.chooseErrMsg(code))
-            }
-            else {
+            } else {
                 lifecycleScope.launchWhenCreated {
                     val response: Response<RegisterResponse> = try {
                         viewModel.signup(emailText, passwordText, usernameText)
@@ -62,17 +66,28 @@ class SignupActivity : AppCompatActivity() {
                         displayErr(e.toString())
                         return@launchWhenCreated
                     }
-                    if(response.isSuccessful){
+                    if (response.isSuccessful) {
                         Log.i("SignupActivity", "Success")
                         val token: String? = response.body()?.token
                         editor.apply {
                             putString("token", token)
                         }
                         startActivity(Intent(this@SignupActivity, HomePageActivity::class.java))
+                    } else {
+                        try {
+                            val message = Gson().fromJson(
+                                response.errorBody()?.charStream(),
+                                RegisterError::class.java
+                            )
+                            displayErr(message!!.message)
+                        } catch (e: Exception) {
+                            Log.i("SignupActivity", e.toString())
+
+                        }
                     }
                 }
             }
-            binding.progressSignup.visibility=View.GONE
+            binding.progressSignup.visibility = View.GONE
         }
 
         binding.btnBack.setOnClickListener {
