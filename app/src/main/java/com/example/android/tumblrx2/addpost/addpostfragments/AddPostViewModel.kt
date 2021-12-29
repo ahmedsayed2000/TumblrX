@@ -1006,7 +1006,7 @@ class AddPostViewModel : ViewModel() {
             )
             for (blog in searchedBlogs!!) {
 
-                addBottomChip("#" + blog.title, topChipGroup, bottomChipGroup)
+                addBottomChip("#" + blog.handle, topChipGroup, bottomChipGroup)
 
             }
 
