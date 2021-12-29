@@ -1,5 +1,6 @@
 package com.example.android.tumblrx2.blog
 
+import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -10,6 +11,8 @@ import com.example.android.tumblrx2.blog.ActivityCreateBlog
 import com.example.android.tumblrx2.R
 import com.example.android.tumblrx2.activity.ActivityAndMessagesActivity
 import com.example.android.tumblrx2.home.HomePageActivity
+import com.example.android.tumblrx2.intro.IntroActivity
+import com.giphy.sdk.analytics.GiphyPingbacks.sharedPref
 import com.google.android.material.bottomappbar.BottomAppBar
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.bottomsheet.BottomSheetDialog
@@ -24,6 +27,7 @@ class ActivityBlog : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setTheme(R.style.Theme_TumblrX2)
         setContentView(R.layout.activity_blog)
+        val sharedPref = getSharedPreferences("appPref", Context.MODE_PRIVATE)
         tabLayout = findViewById(R.id.tabLayout2)
         tabLayout!!.addTab(tabLayout!!.newTab().setText("Posts"))
         tabLayout!!.addTab(tabLayout!!.newTab().setText("Likes"))
@@ -43,7 +47,10 @@ class ActivityBlog : AppCompatActivity() {
         var bottomBtn=findViewById<TextView>(R.id.blog_name)
         bottomBtn.setOnClickListener {showBottomSheet()}
 
-        findViewById<BottomNavigationView>(R.id.bottom_navbar).setOnItemSelectedListener {
+        val bottomNavBar = findViewById<BottomNavigationView>(R.id.bottom_navbar)
+        bottomNavBar.selectedItemId = R.id.ic_profile
+
+        bottomNavBar.setOnItemSelectedListener {
             when (it.itemId) {
                 R.id.ic_home -> {
                     startActivity(Intent(this, HomePageActivity::class.java))
@@ -65,9 +72,22 @@ class ActivityBlog : AppCompatActivity() {
                     overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
                     return@setOnItemSelectedListener false
                 }
-                else -> {
+                R.id.ic_profile -> {
                     startActivity(Intent(this, ActivityBlog::class.java))
                     overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
+                    return@setOnItemSelectedListener false
+                }
+                else -> {
+                    val editor = sharedPref.edit()
+                    editor.clear()
+                    editor.apply()
+                    startActivity(
+                        Intent(
+                            this, IntroActivity::class.java
+                        )
+                            .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
+                    )
+
                     return@setOnItemSelectedListener false
                 }
             }

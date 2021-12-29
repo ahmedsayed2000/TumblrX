@@ -31,37 +31,17 @@ open class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setTheme(R.style.Theme_TumblrX2)
-        val sharedPref = this.getSharedPreferences("appPref",Context.MODE_PRIVATE)
+        val sharedPref = this.getSharedPreferences("appPref", Context.MODE_PRIVATE)
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
 
-        binding.goToHome.setOnClickListener {
+        val token = sharedPref.getString("token", ".")
+        if (token != ".") {
             startActivity(Intent(this, HomePageActivity::class.java))
-        }
-        binding.btnIntro.setOnClickListener {
-            val token = sharedPref.getString("token", ".")
-            if (token != ".") {
-                Log.i("LoginActivity",token!!)
-                startActivity(Intent(this, HomePageActivity::class.java))
-            }
-            else {
-                Log.i("LoginActivity","haha mafish token")
-                startActivity(Intent(this, IntroActivity::class.java))
-            }
-        }
-        binding.btnActivity.setOnClickListener {
-            startActivity(Intent(this, ActivityAndMessagesActivity::class.java))
-        }
-        binding.btnNewMessage.setOnClickListener {
-            startActivity(Intent(this, NewMessageActivity::class.java))
+        } else {
+            startActivity(Intent(this, IntroActivity::class.java))
         }
 
-        binding.userBlog.setOnClickListener {
-            startActivity(Intent(this, ActivityBlog::class.java))
-        }
-        binding.btnCreateBlog.setOnClickListener {
-            startActivity(Intent(this, ActivityCreateBlog::class.java))
-        }
     }
 
 }
