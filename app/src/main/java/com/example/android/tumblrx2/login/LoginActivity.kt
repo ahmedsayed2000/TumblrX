@@ -48,7 +48,7 @@ class LoginActivity : AppCompatActivity() {
                     val response: retrofit2.Response<LoginResponse> = try {
                         viewModel.login(emailText, passwordText)
                     } catch (e: IOException) {
-                        displayErr("You might not have internet connection")
+                        displayErr("Something is wrong with the server. Try again later")
                         return@launchWhenCreated
                     } catch (e: HttpException) {
                         displayErr(e.toString())

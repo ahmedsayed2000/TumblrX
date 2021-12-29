@@ -35,8 +35,8 @@ open class MainActivity : AppCompatActivity() {
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
 
-        val token = sharedPref.getString("token", ".")
-        if (token != ".") {
+        val token = sharedPref.getString("token", null)
+        if (token != null) {
             startActivity(Intent(this, HomePageActivity::class.java))
         } else {
             startActivity(Intent(this, IntroActivity::class.java))
