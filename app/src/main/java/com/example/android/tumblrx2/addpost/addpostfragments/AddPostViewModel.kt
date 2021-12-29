@@ -2,6 +2,7 @@ package com.example.android.tumblrx2.addpost.addpostfragments
 
 import android.content.ClipData
 import android.content.Context
+import android.graphics.Bitmap
 import android.graphics.Color
 import android.graphics.Typeface
 import android.net.Uri
@@ -19,10 +20,12 @@ import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
+import androidx.core.graphics.drawable.toBitmap
 import androidx.core.view.GestureDetectorCompat
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.android.tumblrx2.BlogSearchList
 import com.example.android.tumblrx2.R
 import com.example.android.tumblrx2.addpost.addpostfragments.postobjects.*
 import com.example.android.tumblrx2.repository.AddPostRepository
@@ -43,7 +46,12 @@ import kotlinx.coroutines.withContext
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody.Companion.asRequestBody
+import okhttp3.RequestBody.Companion.toRequestBody
 import okhttp3.internal.toHexString
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import java.io.ByteArrayOutputStream
 import java.io.File
 
 class AddPostViewModel : ViewModel() {
@@ -106,9 +114,6 @@ class AddPostViewModel : ViewModel() {
 
     // objects concerning the text sizes in the editors
     private val textSizes = arrayOf("Regular", "Bigger", "Biggest")
-    private val textColors =
-        arrayOf("black", "red", "orange", "green", "cyan", "purple", "pink")  // 7 colors
-    private val textStyles = arrayOf("Bold", "Italic", "Strike")
     private var textMap = mutableMapOf<AddPostItem, Int>()
     private var boldList = mutableListOf<AddPostItem>()
     private var italicList = mutableListOf<AddPostItem>()
@@ -121,9 +126,13 @@ class AddPostViewModel : ViewModel() {
     // for the tags sheet
     var selectedBlogs = MutableLiveData<MutableList<String>>()
     var tagsCount = MutableLiveData<Int>()
-
     var searchedBlogs: MutableList<BlogSearch>? = null
 
+    // to finish the post
+    var finishPost = MutableLiveData<Boolean>()
+
+    // the repository
+    val repo = AddPostRepository()
 
     init {
         Log.d("initial fragment", " view model created")
@@ -143,6 +152,7 @@ class AddPostViewModel : ViewModel() {
         selectedBlogs.value = mutableListOf()
         tagsCount.value = selectedBlogs.value!!.size
         Log.d("tags count", "count is ${tagsCount.value}")
+
     }
 
     fun initViews(view: ListView, context: Context) {
@@ -633,7 +643,9 @@ class AddPostViewModel : ViewModel() {
     }
 
     fun addVideo(uri: Uri) {
-        val item = AddPostItem(3, uri.toString())
+        val real = getRealPath(uri.toString())
+
+        val item = AddPostItem(3, real)
         item.mediaController = mediaController
 
         val index = getActiveText()
@@ -642,36 +654,32 @@ class AddPostViewModel : ViewModel() {
         } else {
             postListItems.value?.add(index + 1, item)
         }
+        Log.d("Post view model", "the video is added")
+        Log.d("Post view model", "type at 2 is ${postListItems.value!![1].type}")
         togglePostButton(true)
+
+        //adapter.notifyDataSetChanged()
     }
 
-    fun postToBlog() {
+    fun postToBlog(id: String, postType: String) {
         //prepareList()
         prepareTags()
 
-        val repo = AddPostRepository()
-        if(postListItems.value?.size!! > 1 || firstItem.content != "" ) {
+        if (postListItems.value?.size!! > 1 || firstItem.content != "") {
             prepareList()
-            repo?.postToBlog(context, contentList, fileList, tagsList)
-        }
-        else {
+            repo?.postToBlog(context, this, id, postType, contentList, fileList, tagsList)
+        } else {
             Toast.makeText(context, "no items to post", Toast.LENGTH_SHORT).show()
         }
     }
 
     private fun prepareTags() {
-        /*val index = 0
+        val index = 0
         for (tag in selectedBlogs.value!!) {
             val part = MultipartBody.Part.createFormData("tags[${index}]", tag)
             tagsList.add(part)
-        }*/
-
-        val part = MultipartBody.Part.createFormData("tags[0]", "#Ammar")
-        tagsList.add(part)
-
-
+        }
     }
-
 
 
     private fun prepareList() {
@@ -681,17 +689,20 @@ class AddPostViewModel : ViewModel() {
             when (item.type) {
                 1 -> {
                     // text
-                    prepareTextPart(index)
+                    if (item.content != "") {
+                        prepareTextPart(index)
+                    }
                 }
                 2 -> {
                     // the image item
                     prepareImagePart(item.content, index)
+                    //tryImage(item.content, index)
                 }
                 3 -> {
-
+                    prepareVideoPart(item.content, index)
                 }
                 4 -> {
-                    prepareLinkPart(index, item)
+                    //prepareLinkPart(index, item)
                 }
                 5 -> {
                     preparePreviewPart(index, item)
@@ -707,9 +718,6 @@ class AddPostViewModel : ViewModel() {
 
     }
 
-    private fun prepareLinkPart(index: Int, item: AddPostItem) {
-
-    }
 
     private fun preparePreviewPart(index: Int, item: AddPostItem) {
         val part = MultipartBody.Part.createFormData("content[${index}][type]", "link")
@@ -845,6 +853,41 @@ class AddPostViewModel : ViewModel() {
         contentList.add(part2)
     }
 
+    private fun prepareVideoPart(path: String, index: Int) {
+        val file = File(path)
+
+        val extention = path.substring(path.lastIndexOf(".") + 1)
+        Log.d("extention is", extention)
+
+        if (extention.lowercase() == "mp4") {
+            val requestBody = file.asRequestBody("video/mp4".toMediaTypeOrNull())
+
+            val part = MultipartBody.Part.createFormData("video" + index, file.name, requestBody)
+
+            fileList.add(part)
+
+            val part1 = MultipartBody.Part.createFormData("content[$index][type]", "video")
+            val part2 =
+                MultipartBody.Part.createFormData("content[$index][identifier]", "video${index}")
+
+            contentList.add(part1)
+            contentList.add(part2)
+        } else if (extention.lowercase() == "gif") {
+            val requestBody = file.asRequestBody("image/*".toMediaTypeOrNull())
+
+            val part = MultipartBody.Part.createFormData("gif" + index, file.name, requestBody)
+
+            fileList.add(part)
+
+            val part1 = MultipartBody.Part.createFormData("content[$index][type]", "image")
+            val part2 =
+                MultipartBody.Part.createFormData("content[$index][identifier]", "gif${index}")
+
+            contentList.add(part1)
+            contentList.add(part2)
+        }
+    }
+
 
     private fun prepareImagePart(uriString: String, index: Int) {
         val uri = (Uri.parse(uriString)) as Uri
@@ -854,17 +897,23 @@ class AddPostViewModel : ViewModel() {
         Log.d("real image path", "${real}")
         val file = File(real)
 
-        val requestBody = file.asRequestBody("image/*".toMediaTypeOrNull())
+        val extention = real.substring(real.lastIndexOf(".") + 1)
+        Log.d("extention is", extention)
+        val requestBody = file.asRequestBody("image/${extention}".toMediaTypeOrNull())
 
         val part = MultipartBody.Part.createFormData("image" + index, file.name, requestBody)
 
         fileList.add(part)
 
+        val part1 = MultipartBody.Part.createFormData("content[$index][type]", "image")
+        val part2 =
+            MultipartBody.Part.createFormData("content[$index][identifier]", "image${index}")
+
+        contentList.add(part1)
+        contentList.add(part2)
     }
 
-    fun prepareGif(index: Int, content: String) {
 
-    }
 
     private fun getRealPath(uriString: String): String {
         val proj = arrayOf(MediaStore.Images.Media.DATA)
@@ -902,17 +951,37 @@ class AddPostViewModel : ViewModel() {
                 Log.d("searh string", p0.toString())
                 if (p0.toString() != "") {
 
+                    val call = repo.searchBlogs(p0.toString())
 
-                    viewModelScope.launch {
-                        val repo = AddPostRepository()
-                        repo.searchTags(p0.toString(), context, this@AddPostViewModel)
-                        fillChipGroup(bottomChipGroup, topChipGroup)
-                    }
+                    call.enqueue(object : Callback<BlogSearchList> {
+                        override fun onResponse(
+                            call: Call<BlogSearchList>,
+                            response: Response<BlogSearchList>
+                        ) {
+                            /*Toast.makeText(
+                                context,
+                                "response happened with status ${response.code()}",
+                                Toast.LENGTH_SHORT
+                            ).show()*/
+                            Log.d("request", response.message())
+
+                            searchedBlogs = response.body()!!.blogs
+                            fillChipGroup(bottomChipGroup, topChipGroup)
+                        }
+
+                        override fun onFailure(call: Call<BlogSearchList>, t: Throwable) {
+
+                            //Toast.makeText(context, "response failed", Toast.LENGTH_SHORT).show()
+                            Log.d("request failed", t.message.toString()!!)
+                        }
+                    })
 
                 }
 
             }
         })
+
+
 
         button.setOnClickListener {
 
@@ -931,20 +1000,17 @@ class AddPostViewModel : ViewModel() {
     private fun fillChipGroup(bottomChipGroup: ChipGroup, topChipGroup: ChipGroup) {
 
         if (searchedBlogs != null) {
-            /*Log.d(
+            Log.d(
                 "view model",
                 "the search Blogs list is not empty with size = ${searchedBlogs!!.size}"
             )
             for (blog in searchedBlogs!!) {
-                if (!selectedBlogs.value!!.contains("#" + blog.title)!!) {
-                    addBottomChip("#" + blog.title, topChipGroup, bottomChipGroup)
-                }
-            }*/
-            addBottomChip("#" + searchedBlogs!![0].title, topChipGroup, bottomChipGroup)
-        }
 
-        Log.d("view model", "the search Blogs list is empty")
-        addBottomChip("#blog", topChipGroup, bottomChipGroup)
+                addBottomChip("#" + blog.title, topChipGroup, bottomChipGroup)
+
+            }
+
+        }
 
 
     }

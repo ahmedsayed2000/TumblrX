@@ -1,9 +1,12 @@
 package com.example.android.tumblrx2.addpost.addpostfragments.postobjects
 
 import android.content.Context
+import android.graphics.Color
+import android.media.MediaPlayer
 import android.net.Uri
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -217,7 +220,7 @@ class AddPostAdapter : ArrayAdapter<AddPostItem> {
         view.textSize = 15.0f
         view.background = null
         view.layoutParams = param
-        view.hint = "add something you,d like"
+        view.hint = "add something if you'd like"
         view.setText(item.content)
 
         view.setOnTouchListener { view, motionEvent ->
@@ -259,23 +262,33 @@ class AddPostAdapter : ArrayAdapter<AddPostItem> {
     }
 
     private fun initVideo(view: VideoView, mediaController: MediaController, content: String) {
-        /*val param = RelativeLayout.LayoutParams(
+        val param = RelativeLayout.LayoutParams(
             ViewGroup.LayoutParams.MATCH_PARENT,
             ViewGroup.LayoutParams.WRAP_CONTENT
         )
-        param.setMargins(8, 8, 8, 8)*/
+        param.setMargins(8, 8, 8, 8)
 
+
+        Log.d("the video path is", content)
         val uri = Uri.parse(content)
         mediaController.setMediaPlayer(view)
         mediaController.setAnchorView(view)
         view.setMediaController(mediaController)
         view.setVideoURI(uri)
-        //view.setVideoPath(uri.path)
+        view.setVideoPath(content)
+        view.layoutParams = param
+        view.setBackgroundColor(Color.TRANSPARENT)
+        view.setZOrderOnTop(true)
 
-        view.setOnCompletionListener {
-            view.start()
-        }
-
+        view.setOnPreparedListener(object: MediaPlayer.OnPreparedListener{
+            override fun onPrepared(p0: MediaPlayer?) {
+                view.requestFocus()
+                view.start()
+                p0?.isLooping = true
+                this@AddPostAdapter.notifyDataSetChanged()
+                Log.d("post adapter", "video is about to start")
+            }
+        })
         /*view.setVideoURI(uri)
         view.start()*/
     }

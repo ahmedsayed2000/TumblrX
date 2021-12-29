@@ -48,7 +48,9 @@
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:id="@+id/post_now_card"
         android:clickable="true"
+
         >
         <RelativeLayout
             android:layout_width="match_parent"
@@ -79,17 +81,19 @@
                 android:textSize="18sp" />
 
             <RadioButton
-                android:shadowColor="#00B0FF"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
-                android:gravity="center" />
+                android:id="@+id/now_button"
+                android:gravity="center"
+                android:shadowColor="#00B0FF" />
         </RelativeLayout>
     </com.google.android.material.card.MaterialCardView>
 
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:id="@+id/post_draft_card"
         android:clickable="true"
         >
         <RelativeLayout
@@ -123,15 +127,17 @@
             <RadioButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:shadowColor="#00B0FF"
                 android:layout_alignParentEnd="true"
-                android:gravity="center" />
+                android:gravity="center"
+                android:id="@+id/draft_button"
+                android:shadowColor="#00B0FF" />
         </RelativeLayout>
     </com.google.android.material.card.MaterialCardView>
 
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:id="@+id/post_private_card"
         android:clickable="true"
         >
         <RelativeLayout
@@ -139,6 +145,7 @@
             android:layout_height="wrap_content"
             android:paddingBottom="8dp"
             android:paddingTop="8dp"
+
             >
             <ImageView
                 android:layout_width="wrap_content"
@@ -165,9 +172,10 @@
             <RadioButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:shadowColor="#00B0FF"
                 android:layout_alignParentEnd="true"
-                android:gravity="center" />
+                android:id="@+id/private_button"
+                android:gravity="center"
+                android:shadowColor="#00B0FF" />
         </RelativeLayout>
     </com.google.android.material.card.MaterialCardView>
 

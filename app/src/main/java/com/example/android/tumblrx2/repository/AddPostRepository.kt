@@ -5,6 +5,7 @@ import android.util.Log
 import android.widget.Toast
 import com.example.android.tumblrx2.BlogSearchList
 import com.example.android.tumblrx2.addpost.addpostfragments.AddPostViewModel
+import com.example.android.tumblrx2.addpost.addpostfragments.BlogEntity
 import com.example.android.tumblrx2.addpost.addpostfragments.BlogSearch
 import com.example.android.tumblrx2.network.AddPostApi
 import com.example.android.tumblrx2.network.WebServiceClient
@@ -23,6 +24,9 @@ class AddPostRepository() {
 
     fun postToBlog(
         context: Context,
+        postViewModel: AddPostViewModel,
+        id: String,
+        postType: String,
         contentList: MutableList<MultipartBody.Part>,
         fileList: MutableList<MultipartBody.Part>?,
         tagsList: MutableList<MultipartBody.Part>?
@@ -37,18 +41,18 @@ class AddPostRepository() {
 
         val header = token
 
-
-        val tag = MultipartBody.Part.createFormData("tags[0]", "Ammar")
+        val type = MultipartBody.Part.createFormData("state", postType)
 
         val call = WebServiceClient().buildApi(AddPostApi::class.java)
-            .postToBlog(contentList, tagsList!!, header!!, fileList)
+            .postToBlog(id, type, contentList, tagsList!!, header!!, fileList)
         call.enqueue(object : retrofit2.Callback<LoginResponse> {
             override fun onResponse(call: Call<LoginResponse>, response: Response<LoginResponse>) {
                 Toast.makeText(
                     context,
-                    "response happened with status ${response.code()}",
+                    "posted to the server",
                     Toast.LENGTH_SHORT
                 ).show()
+                postViewModel.finishPost.value = true
                 Log.d("request", response.message())
             }
 
@@ -60,52 +64,34 @@ class AddPostRepository() {
         )
     }
 
-    fun searchBlogs(searchBlog: String, context: Context, postViewModel: AddPostViewModel) {
-
-        var list: MutableList<BlogSearch> = mutableListOf()
+    fun searchBlogs(searchBlog: String): Call<BlogSearchList> {
 
         val client = WebServiceClient().buildApi(AddPostApi::class.java)
-        client.getBlogSearch(searchBlog).enqueue(object: Callback<BlogSearchList>{
-            override fun onResponse(
-                call: Call<BlogSearchList>,
-                response: Response<BlogSearchList>
-            ) {
 
-                list = response.body()!!.blogs
+        return client.getTagSearch(searchBlog)
 
-                Toast.makeText(
-                    context,
-                    "response happened with status ${response.code()}",
-                    Toast.LENGTH_SHORT
-                ).show()
-                Log.d("request", response.message())
-                Log.d("response size", "${list.size}")
-
-                postViewModel.searchedBlogs = list
-            }
-
-            override fun onFailure(call: Call<BlogSearchList>, t: Throwable) {
-
-                Toast.makeText(context, "response failed", Toast.LENGTH_SHORT).show()
-                Log.d("request failed", t.message.toString()!!)
-            }
-        })
-
-
-
-        //return list
 
     }
 
-    fun searchTags(search: String, context: Context, postViewModel: AddPostViewModel) {
-        val client = WebServiceClient().buildApi(AddPostApi::class.java)
 
-        CoroutineScope(IO).launch {
-            val job = client.getBlogTags(search).await()
-            postViewModel.searchedBlogs = job.blogs
+
+    fun getBlogs(context: Context): Call<MutableList<BlogEntity>> {
+        val sharedPref = context.getSharedPreferences("appPref", Context.MODE_PRIVATE)
+        val token = sharedPref.getString("token", null)
+        if (token != null) {
+            Log.i("LoginActivity", token!!)
         }
 
+        val header = token
+
+        val client = WebServiceClient().buildApi(AddPostApi::class.java)
+
+        val call = client.getBlogs(header!!)
+
+        return call
     }
+
+
 
 
 

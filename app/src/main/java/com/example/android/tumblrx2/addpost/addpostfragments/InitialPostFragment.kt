@@ -21,9 +21,18 @@ import com.example.android.tumblrx2.R
 import com.example.android.tumblrx2.databinding.FragmentInitialPostBinding
 import com.example.android.tumblrx2.addpost.addpostfragments.postobjects.AddPostAdapter
 import com.example.android.tumblrx2.addpost.addpostfragments.postobjects.AddPostItem
+import com.example.android.tumblrx2.repository.AddPostRepository
 import com.giphy.sdk.ui.Giphy
 import com.google.android.material.bottomsheet.BottomSheetDialog
+import com.google.android.material.card.MaterialCardView
+import com.google.android.material.chip.Chip
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.squareup.picasso.Picasso
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers.IO
+import kotlinx.coroutines.launch
+import retrofit2.Call
+import retrofit2.Response
 
 
 /**
@@ -56,6 +65,16 @@ class InitialPostFragment : Fragment() {
     // the AddPostViewModel
     private lateinit var viewModel: AddPostViewModel
 
+    // user info
+    var blogList = mutableListOf<BlogEntity>()
+    var userIds = mutableListOf<String>()
+    var userTitles = mutableListOf<String>()
+    var userHandles = mutableListOf<String>()
+    var userImageUrls = mutableListOf<String>()
+    var currentBlog = 0
+
+    // post type  1-published  2-private  3-draft
+    var postType: String = "published"
 
     private val imageLauncher =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
@@ -77,7 +96,8 @@ class InitialPostFragment : Fragment() {
             if (it.resultCode == RESULT_OK) {
                 val uri = it.data?.data!!
                 viewModel.addVideo(uri)
-                adapter.notifyDataSetChanged()
+                oneVideo = true
+                //adapter.notifyDataSetChanged()
             }
         }
 
@@ -95,6 +115,11 @@ class InitialPostFragment : Fragment() {
         // Inflate the layout for this fragment
         binding =
             DataBindingUtil.inflate(inflater, R.layout.fragment_initial_post, container, false)
+
+
+
+
+
 
 
         // init all the bottom sheets and buttons listeners
@@ -129,55 +154,74 @@ class InitialPostFragment : Fragment() {
         }
         viewModel.tagsCount.observe(viewLifecycleOwner, tagObserver)
 
+        // observing the finish post Boolean
+        val finishObserver = Observer<Boolean> {
+            if(it)
+                activity?.finish()
+        }
+        viewModel.finishPost.observe(viewLifecycleOwner, finishObserver)
+
 
         // init the list view and the adapter
         initPostList()
 
 
-        // for link previewer
-        /*richPreview = RichPreview(object : ResponseListener {
-            override fun onData(metaData: MetaData?) {
-                val title = metaData?.title
-                val imgUrl = metaData?.imageurl
-                val description = metaData?.description
-                val view = LayoutInflater.from(context).inflate(R.layout.custom_link_preview, null)
 
-                val previewTitle = view.findViewById<TextView>(R.id.preview_title)
-                val previewDesc = view.findViewById<TextView>(R.id.preview_description)
-                val previewImg = view.findViewById<ImageView>(R.id.preview_image)
-                val close = view.findViewById<ImageButton>(R.id.close_preview)
-                close.setOnClickListener {
-                    val count = binding.postList.childCount
-                    for (i in 0..count) {
-                        if (binding.postList.getChildAt(i) is MaterialCardView) {
-                            val view: View =
-                                (binding.postList.getChildAt(i)).findViewById<ImageButton>(R.id.close_preview)
-                            if (view == it) {
-                                binding.postList.removeViewAt(i)
-                                break
-                            }
-                        }
-                    }
-                }
+       // init the blog list
+        initBlogList()
 
-                previewTitle.text = title
-                previewDesc.text = description
-
-                Picasso.get().load(imgUrl).into(previewImg)
-
-                binding.postList.addView(view, previewIndex)
-            }
-
-            override fun onError(e: Exception?) {
-                Toast.makeText(context, "Please insert a correct link", Toast.LENGTH_SHORT).show()
-            }
-        })*/
 
 
         // returning the root view
         return binding.root
     }
 
+
+
+
+
+    fun initBlogList() {
+        val repo = AddPostRepository()
+
+        val call = repo.getBlogs(requireContext()).enqueue(object: retrofit2.Callback<MutableList<BlogEntity>>{
+            override fun onResponse(
+                call: Call<MutableList<BlogEntity>>,
+                response: Response<MutableList<BlogEntity>>
+            ) {
+                if(response.isSuccessful) {
+                    Log.d("initial fragment", "response happened with status ${response.code()}")
+                    blogList = response.body()!!
+                    Log.d("initial fragment", "blog list size is ${blogList.size} and first handle is")
+                }
+                initUserInfo()
+
+                binding.profileName.setText(userHandles[0])
+                if(userImageUrls.get(0) != null) {
+                    Picasso.get().load(userImageUrls[0]).into(binding.profileImage)
+                }
+            }
+
+            override fun onFailure(call: Call<MutableList<BlogEntity>>, t: Throwable) {
+                Log.d("initial fragment", "response failed with message ${t.message}")
+            }
+        })
+
+
+
+    }
+
+    /**
+     *
+     */
+    fun initUserInfo() {
+        for(blog in blogList) {
+            Log.d("initial fragment","user handled: ${blog.handle}")
+            userHandles.add(blog.handle)
+            userIds.add(blog._id)
+            userTitles.add(blog.title)
+            userImageUrls.add(blog.headerImage)
+        }
+    }
     /**
      *
      */
@@ -191,6 +235,16 @@ class InitialPostFragment : Fragment() {
             binding.tagsCard.visibility = View.INVISIBLE
 
             binding.tagsArea.visibility = View.VISIBLE
+
+            binding.tagsGroup.removeAllViews()
+
+            for(tag in viewModel.selectedBlogs.value!!) {
+                val chip = Chip(context)
+
+                chip.text = tag
+
+                binding.tagsGroup.addView(chip)
+            }
 
         }
         else {
@@ -236,11 +290,16 @@ class InitialPostFragment : Fragment() {
 
         binding.close.setOnClickListener {
             activity?.finish()
+
         }
 
         binding.iconMore.setOnClickListener {
-            val sheet = MoreBottomSheet()
-            activity?.let { it1 -> sheet.show(it1.supportFragmentManager, "tag") }
+            val view = LayoutInflater.from(context).inflate(R.layout.more_bottomsheet, null, false)
+            // creating a bottom sheet
+            initMoresheet(view)
+            val sheet = activity?.let { it1 -> BottomSheetDialog(it1) }
+            sheet?.setContentView(view)
+            sheet?.show()
         }
 
         binding.tags.setOnClickListener {
@@ -311,13 +370,95 @@ class InitialPostFragment : Fragment() {
 
 
         binding.postButtonCard.setOnClickListener {
-            viewModel.postToBlog()
+            viewModel.postToBlog(userIds[currentBlog], postType)
         }
+
+
+
+
+        binding.profileCard.setOnClickListener {
+            MaterialAlertDialogBuilder(requireContext())
+                .setTitle("Blogs")
+                .setItems(userHandles.toTypedArray()) { dialog, which ->
+                    // Respond to item chosen
+                    binding.profileName.setText(userHandles.get(which))
+                    if(userImageUrls.get(which) != null) {
+                        Picasso.get().load(userImageUrls[which]).into(binding.profileImage)
+                    }
+                    currentBlog = which
+
+                }
+                .show()
+        }
+
+
 
     }
 
 
+    /**
+     *
+     */
+    fun initMoresheet(view: View) {
+        val now = view.findViewById<MaterialCardView>(R.id.post_now_card)
+        val draft = view.findViewById<MaterialCardView>(R.id.post_draft_card)
+        val private = view.findViewById<MaterialCardView>(R.id.post_private_card)
 
+        val buttonNow = view.findViewById<RadioButton>(R.id.now_button)
+        val buttonDraft = view.findViewById<RadioButton>(R.id.draft_button)
+        val buttonPrivate = view.findViewById<RadioButton>(R.id.private_button)
+
+        when(postType) {
+            "published" -> buttonNow.isChecked = true
+            "draft" -> buttonDraft.isChecked = true
+            "private" -> buttonPrivate.isChecked = true
+        }
+
+        now.setOnClickListener {
+            buttonDraft.isChecked = false
+            buttonPrivate.isChecked = false
+            buttonNow.isChecked = true
+            postType = "published"
+            binding.postButtonText.setText("Post")
+        }
+        draft.setOnClickListener {
+            buttonNow.isChecked = false
+            buttonPrivate.isChecked = false
+            buttonDraft.isChecked = true
+            postType = "draft"
+            binding.postButtonText.setText("Save draft")
+        }
+        private.setOnClickListener {
+            buttonNow.isChecked = false
+            buttonDraft.isChecked = false
+            buttonPrivate.isChecked = true
+            postType = "private"
+            binding.postButtonText.setText("Private")
+        }
+
+        buttonNow.setOnClickListener {
+            buttonNow.isChecked = true
+            buttonDraft.isChecked = false
+            buttonPrivate.isChecked = false
+            postType = "published"
+            binding.postButtonText.setText("Post")
+        }
+        buttonDraft.setOnClickListener {
+            buttonNow.isChecked = false
+            buttonPrivate.isChecked = false
+            buttonDraft.isChecked = true
+            postType = "draft"
+            binding.postButtonText.setText("Save draft")
+        }
+        buttonPrivate.setOnClickListener {
+            buttonNow.isChecked = false
+            buttonDraft.isChecked = false
+            buttonPrivate.isChecked = true
+            postType = "private"
+            binding.postButtonText.setText("Private")
+        }
+
+    }
 
 
 
@@ -374,7 +515,6 @@ class InitialPostFragment : Fragment() {
                                     1 -> {
                                         if (!oneVideo) {
                                             insertVideo()
-                                            oneVideo = true
                                         } else
                                             Toast.makeText(
                                                 context,
