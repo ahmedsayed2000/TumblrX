@@ -82,7 +82,6 @@ class SignupActivity : AppCompatActivity() {
                             displayErr(message!!.message)
                         } catch (e: Exception) {
                             Log.i("SignupActivity", e.toString())
-
                         }
                     }
                 }
