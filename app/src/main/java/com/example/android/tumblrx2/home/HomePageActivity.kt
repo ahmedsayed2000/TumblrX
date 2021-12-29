@@ -124,19 +124,19 @@ class HomePageActivity : AppCompatActivity() {
                     overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
                     return@setOnItemSelectedListener false
                 }
-                else -> {
+                R.id.ic_logout -> {
                     val editor = sharedPref.edit()
                     editor.clear()
                     editor.apply()
                     startActivity(
                         Intent(
-                            this@HomePageActivity, IntroActivity::class.java
+                            this, IntroActivity::class.java
                         )
                             .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
                     )
-
                     return@setOnItemSelectedListener false
                 }
+                else ->{ return@setOnItemSelectedListener false }
             }
         }
 

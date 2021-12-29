@@ -60,7 +60,7 @@ class SignupActivity : AppCompatActivity() {
                     val response: Response<RegisterResponse> = try {
                         viewModel.signup(emailText, passwordText, usernameText)
                     } catch (e: IOException) {
-                        displayErr("You might not have internet connection")
+                        displayErr("Something is wrong with the server, try again later")
                         return@launchWhenCreated
                     } catch (e: HttpException) {
                         displayErr(e.toString())
