@@ -13,6 +13,8 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.android.tumblrx2.*
+import com.example.android.tumblrx2.activity.ActivityAndMessagesActivity
+import com.example.android.tumblrx2.blog.ActivityBlog
 import com.example.android.tumblrx2.databinding.ActivityHomePageBinding
 import com.example.android.tumblrx2.intro.IntroActivity
 import kotlinx.coroutines.launch

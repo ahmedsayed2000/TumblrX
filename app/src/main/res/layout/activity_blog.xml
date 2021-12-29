@@ -1,85 +1,102 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
-    tools:context=".ActivityBlog">
-
-    <androidx.constraintlayout.widget.ConstraintLayout
+    tools:context=".blog.ActivityBlog"
+    android:background="@color/white">
+    <RelativeLayout
+        android:background="@color/purple_200"
+        android:id="@+id/relativeLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-        <RelativeLayout
-            android:id="@+id/relativeLayout"
+        <TextView
+            android:textStyle="bold"
+            android:id="@+id/blog_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/purple_200"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            android:padding="16dp"
+            android:textSize="8pt"
+            android:drawableRight="@drawable/ic_arrow"
+            android:text="mariam.a.malak12"
+            android:textColor="@color/white" />
 
-            <TextView
-                android:id="@+id/blog_name"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="16dp"
-                android:text="mariam.a.malak12"
-                android:textColor="@color/white" />
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_below="@id/blog_name"
+            app:srcCompat="@color/purple_200"
+            tools:ignore="UnknownId" />
 
-            <ImageView
-                android:id="@+id/imageView2"
-                android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:layout_below="@id/blog_name"
-                app:srcCompat="@color/purple_200"
-                tools:ignore="UnknownId" />
-        </RelativeLayout>
+        <ImageView
+            android:id="@+id/imageView4"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_above="@id/imageView2"
+            android:layout_marginLeft="160dp"
+            android:layout_marginBottom="-197dp"
+            app:srcCompat="@drawable/user_avatar" />
+    </RelativeLayout>
 
-        <LinearLayout
+    <LinearLayout
+        android:id="@+id/linearLayout4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.55"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/relativeLayout">
+
+        <TextView
+            android:id="@+id/textView3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.55"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/relativeLayout">
+            android:padding="16dp"
+            android:text="Untitled"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="30dp"
+            android:textStyle="bold" />
 
-            <TextView
-                android:id="@+id/textView3"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="16dp"
-                android:text="Untitled"
-                android:textAlignment="center"
-                android:textColor="@color/black"
-                android:textSize="30dp"
-                android:textStyle="bold" />
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tabLayout2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bottom_border"
+            app:tabIndicatorColor="@color/blue_bolt"
+            app:tabSelectedTextColor="@color/blue_bolt"
+            app:tabTextColor="@color/purple_200">
 
-            <com.google.android.material.tabs.TabLayout
-                android:id="@+id/tabLayout2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/bottom_border"
-                app:tabIndicatorColor="@color/blue_bolt"
-                app:tabSelectedTextColor="@color/blue_bolt"
-                app:tabTextColor="@color/purple_200">
+        </com.google.android.material.tabs.TabLayout>
 
-            </com.google.android.material.tabs.TabLayout>
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/viewPager2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-            <androidx.viewpager2.widget.ViewPager2
-                android:id="@+id/viewPager2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+        </androidx.viewpager2.widget.ViewPager2>
 
-            </androidx.viewpager2.widget.ViewPager2>
+    </LinearLayout>
 
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottom_navbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@color/navy"
+        app:labelVisibilityMode="unlabeled"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:menu="@menu/bottom_nav_menu"/>
+</androidx.constraintlayout.widget.ConstraintLayout>
 
-        </LinearLayout>
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-</ScrollView>

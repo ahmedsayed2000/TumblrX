@@ -1,5 +1,7 @@
 package com.example.android.tumblrx2.network
 
+import com.example.android.tumblrx2.chat.response.ConversationsResponse
+import com.example.android.tumblrx2.responses.CreateBlogResponse
 import com.example.android.tumblrx2.responses.InfoResponse
 import com.example.android.tumblrx2.responses.LoginResponse
 import com.example.android.tumblrx2.responses.RegisterResponse
@@ -22,6 +24,16 @@ interface ApiService {
         @Field("email") email: String,
         @Field("password") password: String
     ): Response<LoginResponse>
+
+    @FormUrlEncoded
+    @POST("/api/blog/61b2131d0b8aaec60c5af0eb")
+    suspend fun createBlog(
+        @Header("Authorization") header: String,
+        @Field("title") title: String,
+        @Field("handle") handle: String,
+        @Field("private") private: Boolean,
+    ): Response<CreateBlogResponse>
+
 
     @GET("api/user/info")
     suspend fun getInfo(

@@ -3,49 +3,47 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/GitHub projects/TumblrX/app/src/main/res/drawable/ic_home.xml" value="0.23796296296296296" />
         <entry key="..\:/GitHub projects/TumblrX/app/src/main/res/drawable/splash_image.xml" value="0.20555555555555555" />
-        <entry key="..\:/GitHub projects/TumblrX/app/src/main/res/layout/activity_blog.xml" value="0.2269021739130435" />
-        <entry key="..\:/GitHub projects/TumblrX/app/src/main/res/layout/activity_chat.xml" value="0.2269021739130435" />
-        <entry key="..\:/GitHub projects/TumblrX/app/src/main/res/layout/activity_home_page.xml" value="0.1" />
+        <entry key="..\:/GitHub projects/TumblrX/app/src/main/res/layout/activity_home_page.xml" value="0.13020833333333334" />
         <entry key="..\:/GitHub projects/TumblrX/app/src/main/res/layout/activity_intro.xml" value="0.176" />
         <entry key="..\:/GitHub projects/TumblrX/app/src/main/res/layout/activity_log_in2.xml" value="0.18432971014492755" />
         <entry key="..\:/GitHub projects/TumblrX/app/src/main/res/layout/activity_login.xml" value="0.2" />
         <entry key="..\:/GitHub projects/TumblrX/app/src/main/res/layout/activity_main.xml" value="0.13020833333333334" />
-        <entry key="..\:/GitHub projects/TumblrX/app/src/main/res/layout/activity_messages_and_activity.xml" value="0.2269021739130435" />
-        <entry key="..\:/GitHub projects/TumblrX/app/src/main/res/layout/activity_signup.xml" value="0.264" />
         <entry key="..\:/GitHub projects/TumblrX/app/src/main/res/layout/fragment_intro_options.xml" value="0.264" />
         <entry key="..\:/GitHub projects/TumblrX/app/src/main/res/layout/fragment_login_options.xml" value="0.2" />
         <entry key="..\:/GitHub projects/TumblrX/app/src/main/res/layout/partial_actionbar_login.xml" value="0.4433399602385686" />
-        <entry key="..\:/GitHub projects/TumblrX/app/src/main/res/layout/post_item.xml" value="0.24954710144927536" />
         <entry key="..\:/GitHub projects/TumblrX/app/src/main/res/layout/tag_bottomsheet.xml" value="0.20380434782608695" />
         <entry key="..\:/GitHub projects/TumblrX/app/src/main/res/layout/text_bottomsheet.xml" value="0.20380434782608695" />
-        <entry key="..\:/GitHub projects/TumblrX/app/src/main/res/menu/bottom_nav_menu.xml" value="0.4" />
         <entry key="..\:/Mariam/College/Software Engineering/Project/TumblrX/app/src/main/res/drawable/bottom_border.xml" value="0.2703125" />
         <entry key="..\:/Mariam/College/Software Engineering/Project/TumblrX/app/src/main/res/drawable/corner.xml" value="0.2703125" />
         <entry key="..\:/Mariam/College/Software Engineering/Project/TumblrX/app/src/main/res/drawable/ic_arrow.xml" value="0.2703125" />
         <entry key="..\:/Mariam/College/Software Engineering/Project/TumblrX/app/src/main/res/layout/activity_add_post.xml" value="0.264" />
         <entry key="..\:/Mariam/College/Software Engineering/Project/TumblrX/app/src/main/res/layout/activity_blog.xml" value="0.2" />
-        <entry key="..\:/Mariam/College/Software Engineering/Project/TumblrX/app/src/main/res/layout/activity_chat.xml" value="0.1" />
+        <entry key="..\:/Mariam/College/Software Engineering/Project/TumblrX/app/src/main/res/layout/activity_chat.xml" value="0.2" />
         <entry key="..\:/Mariam/College/Software Engineering/Project/TumblrX/app/src/main/res/layout/activity_chat_message.xml" value="0.264" />
         <entry key="..\:/Mariam/College/Software Engineering/Project/TumblrX/app/src/main/res/layout/activity_create_blog.xml" value="0.264" />
         <entry key="..\:/Mariam/College/Software Engineering/Project/TumblrX/app/src/main/res/layout/activity_home_page.xml" value="0.13020833333333334" />
+        <entry key="..\:/Mariam/College/Software Engineering/Project/TumblrX/app/src/main/res/layout/activity_intro.xml" value="0.1" />
         <entry key="..\:/Mariam/College/Software Engineering/Project/TumblrX/app/src/main/res/layout/activity_list_item.xml" value="0.1" />
         <entry key="..\:/Mariam/College/Software Engineering/Project/TumblrX/app/src/main/res/layout/activity_login.xml" value="0.12360688956433637" />
-        <entry key="..\:/Mariam/College/Software Engineering/Project/TumblrX/app/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="..\:/Mariam/College/Software Engineering/Project/TumblrX/app/src/main/res/layout/activity_main.xml" value="0.128" />
         <entry key="..\:/Mariam/College/Software Engineering/Project/TumblrX/app/src/main/res/layout/activity_messages_and_activity.xml" value="0.17300724637681159" />
         <entry key="..\:/Mariam/College/Software Engineering/Project/TumblrX/app/src/main/res/layout/blog_bottom_sheet_layout.xml" value="0.23143115942028986" />
         <entry key="..\:/Mariam/College/Software Engineering/Project/TumblrX/app/src/main/res/layout/bottom_sheet_layout.xml" value="0.4" />
+        <entry key="..\:/Mariam/College/Software Engineering/Project/TumblrX/app/src/main/res/layout/followers_list_item.xml" value="0.4" />
         <entry key="..\:/Mariam/College/Software Engineering/Project/TumblrX/app/src/main/res/layout/fragment_activity.xml" value="0.2" />
+        <entry key="..\:/Mariam/College/Software Engineering/Project/TumblrX/app/src/main/res/layout/fragment_followers.xml" value="0.2" />
         <entry key="..\:/Mariam/College/Software Engineering/Project/TumblrX/app/src/main/res/layout/fragment_initial_post.xml" value="0.1875" />
         <entry key="..\:/Mariam/College/Software Engineering/Project/TumblrX/app/src/main/res/layout/fragment_intro_options.xml" value="0.14583333333333334" />
         <entry key="..\:/Mariam/College/Software Engineering/Project/TumblrX/app/src/main/res/layout/fragment_login_options.xml" value="0.14583333333333334" />
+        <entry key="..\:/Mariam/College/Software Engineering/Project/TumblrX/app/src/main/res/layout/fragment_messages.xml" value="0.2" />
         <entry key="..\:/Mariam/College/Software Engineering/Project/TumblrX/app/src/main/res/layout/messages_list_item.xml" value="0.14583333333333334" />
         <entry key="..\:/Mariam/College/Software Engineering/Project/TumblrX/app/src/main/res/layout/more_bottomsheet.xml" value="0.1" />
         <entry key="..\:/Mariam/College/Software Engineering/Project/TumblrX/app/src/main/res/layout/new_message_layout.xml" value="0.14583333333333334" />
         <entry key="..\:/Mariam/College/Software Engineering/Project/TumblrX/app/src/main/res/layout/partial_actionbar_login.xml" value="0.14583333333333334" />
         <entry key="..\:/Mariam/College/Software Engineering/Project/TumblrX/app/src/main/res/layout/tag_bottomsheet.xml" value="0.14583333333333334" />
         <entry key="..\:/Mariam/College/Software Engineering/Project/TumblrX/app/src/main/res/layout/text_bottomsheet.xml" value="0.14583333333333334" />
+        <entry key="..\:/Mariam/College/Software Engineering/Project/TumblrX/app/src/main/res/menu/bottom_nav_menu.xml" value="0.1648148148148148" />
         <entry key="..\:/Users/pc/Desktop/Android projects/TumblrX2/app/src/main/res/drawable/circular_button.xml" value="0.13055555555555556" />
         <entry key="..\:/Users/pc/Desktop/Android projects/TumblrX2/app/src/main/res/layout/activity_add_post.xml" value="0.11614583333333334" />
         <entry key="..\:/Users/pc/Desktop/Android projects/TumblrX2/app/src/main/res/layout/activity_homa_page.xml" value="0.25" />

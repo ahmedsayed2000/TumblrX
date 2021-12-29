@@ -1,9 +1,11 @@
-package com.example.android.tumblrx2
+package com.example.android.tumblrx2.activity
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Lifecycle
 import androidx.viewpager2.adapter.FragmentStateAdapter
+import com.example.android.tumblrx2.activity.ActivityFragment
+import com.example.android.tumblrx2.chat.MessagesFragment
 
 class TabsAdapter(fragmentManager: FragmentManager, lifecycle: Lifecycle) :
     FragmentStateAdapter(fragmentManager, lifecycle) {
