@@ -1,5 +1,6 @@
 package com.example.android.tumblrx2.blog
 
+import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -20,6 +21,7 @@ import java.io.IOException
 class ActivityCreateBlog : AppCompatActivity() {
     private lateinit var viewModel: BlogModelView
     override fun onCreate(savedInstanceState: Bundle?) {
+        val sharedPref = this.getSharedPreferences("appPref", Context.MODE_PRIVATE)
         super.onCreate(savedInstanceState)
         setTheme(R.style.Theme_TumblrX2)
         setContentView(R.layout.activity_create_blog)
@@ -37,8 +39,10 @@ class ActivityCreateBlog : AppCompatActivity() {
                     title,
                     Toast.LENGTH_SHORT).show();
                 lifecycleScope.launchWhenCreated {
+                    val token = sharedPref.getString("token", null)
+                    val blogId = sharedPref.getString("primaryBlogId", null)
                     val response: retrofit2.Response<CreateBlogResponse> = try {
-                        viewModel.createBlog(title)
+                        viewModel.createBlog(title,blogId!!,token!!)
                     } catch (e: IOException) {
                         Toast.makeText(getApplicationContext(),
                             "You might not have internet connection",

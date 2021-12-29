@@ -14,10 +14,10 @@ class BlogTabsAdapter(fragmentManager: FragmentManager, lifecycle: Lifecycle) :
     }
     override fun createFragment(position: Int): Fragment {
         when (position) {
-            0 -> return FollowersFragment()
-            1 -> return FollowersFragment()
+            0 -> return PostsFragment()
+            1 -> return LikesFragment()
             2 -> return FollowersFragment()
         }
-        return FollowersFragment()
+        return PostsFragment()
     }
 }

@@ -1,4 +1,4 @@
-package com.example.android.tumblrx2.chat.response
+package com.example.android.tumblrx2.responses.chatsresponse
 
 data class Data(
     val avatar: String,

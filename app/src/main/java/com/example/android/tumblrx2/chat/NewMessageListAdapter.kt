@@ -14,39 +14,40 @@ import androidx.core.content.ContextCompat.startActivity
 
 import android.R.id
 import androidx.core.content.ContextCompat
+import com.example.android.tumblrx2.responses.following.FollowingBlog
 
 
-class MessagesListAdapter(context:Context,chats:List<Data>): BaseAdapter() {
+class NewMessageListAdapter(context:Context,following:List<FollowingBlog>): BaseAdapter() {
 
     private val myContext: Context
-    private val myChats:List<Data>
+    private val myFollowing:List<FollowingBlog>
 
 
     init {
         myContext=context
-        myChats=chats
+        myFollowing=following
 
     }
     override fun getCount(): Int {
-        return myChats.count()
+        return myFollowing.count()
     }
 
-    override fun getItem(position: Int): Data {
-        return myChats[position]
+    override fun getItem(position: Int): FollowingBlog {
+        return myFollowing[position]
     }
     override fun getItemId(position: Int): Long {
         return position.toLong()
     }
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
-        val chat:Data=getItem(position)
+        val chat:FollowingBlog=getItem(position)
         val layoutInflater=LayoutInflater.from(myContext)
         val row= layoutInflater.inflate(R.layout.messages_list_item,parent,false)
-        row.findViewById<TextView>(R.id.username_text).text=chat.blogHandle
-        row.findViewById<TextView>(R.id.snippet_msg).text=chat.message
+        row.findViewById<TextView>(R.id.username_text).text=chat.handle
+        row.findViewById<TextView>(R.id.snippet_msg).text=""
         row.setOnClickListener{
             val i = Intent(myContext, ActivityChat::class.java)
-            i.putExtra("id", chat.chatId)
-            i.putExtra("name", chat.blogHandle)
+            i.putExtra("id", chat._id)
+            i.putExtra("name", chat.handle)
             myContext.startActivity(i)
 //            myContext.startActivity(Intent(myContext, ActivityChat::class.java))
         }

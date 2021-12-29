@@ -43,6 +43,7 @@
             android:layout_gravity="center"
             android:padding="8dp"
             android:text="other_user"
+            android:id="@+id/other_user"
             android:textColor="@color/white"
             android:textStyle="bold" />
 

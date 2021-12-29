@@ -18,7 +18,7 @@
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:id="@+id/blog_img"
-            android:src = "@drawable/ic_launcher_background"
+            android:src = "@drawable/user_avatar"
             />
         <TextView
             android:layout_width="wrap_content"
@@ -47,20 +47,7 @@
         android:layout_marginBottom="8dp"
         />
 
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/post_image"
-        android:scaleType="centerCrop"
-        android:layout_marginBottom="8dp"
-        tools:src = "@drawable/ic_launcher_background"
-        />
-    <io.github.ponnamkarthik.richlinkpreview.RichLinkView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:id="@+id/post_link"
-        />
+
 
 
 

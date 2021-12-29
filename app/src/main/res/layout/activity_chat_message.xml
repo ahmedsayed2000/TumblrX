@@ -23,12 +23,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="username"
+            android:id="@+id/blog_username"
             android:textColor="@color/black"
             android:textStyle="bold">
         </TextView>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:id="@+id/message"
             android:text="Hi There!"
             android:textColor="@color/black"/>
 
