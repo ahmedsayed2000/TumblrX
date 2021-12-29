@@ -13,21 +13,24 @@ import io.github.ponnamkarthik.richlinkpreview.RichLinkView
 import io.github.ponnamkarthik.richlinkpreview.ViewListener
 import java.lang.Exception
 
-class PostAdapter: ArrayAdapter<PostItem> {
+class PostAdapter : ArrayAdapter<PostItem> {
 
     var listOfPosts: MutableList<PostItem>
 
-    constructor(context: Context, res: Int,  postList: MutableList<PostItem>) : super(context, res, postList) {
+    constructor(context: Context, res: Int, postList: MutableList<PostItem>) : super(
+        context,
+        res,
+        postList
+    ) {
         listOfPosts = postList
     }
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
 
 
-
         var view = convertView
 
-        if(convertView == null) {
+        if (convertView == null) {
             view = LayoutInflater.from(context).inflate(R.layout.post_item, parent, false)
         }
 
@@ -47,22 +50,20 @@ class PostAdapter: ArrayAdapter<PostItem> {
         val link = view?.findViewById<RichLinkView>(R.id.post_link)
         //val gif = view.findViewById<GPHMediaView>(R.id.post_gif)
 
-        if(item.text != null) {
+        if (item.text != null) {
             text?.setText(item.text)
-        }
-        else{
+        } else {
             text?.visibility = View.GONE
         }
 
-        if(item.image != null) {
+        if (item.image != null) {
 
-        }
-        else{
+        } else {
             image?.visibility = View.GONE
         }
 
-        if(item.link != null) {
-            link?.setLink(item.link, object: ViewListener{
+        if (item.link != null) {
+            link?.setLink(item.link, object : ViewListener {
                 override fun onSuccess(status: Boolean) {
 
                 }
@@ -70,8 +71,7 @@ class PostAdapter: ArrayAdapter<PostItem> {
                 override fun onError(e: Exception?) {
                 }
             })
-        }
-        else{
+        } else {
             link?.visibility = View.GONE
         }
 
@@ -81,4 +81,6 @@ class PostAdapter: ArrayAdapter<PostItem> {
 
         return view!!
     }
+
+
 }

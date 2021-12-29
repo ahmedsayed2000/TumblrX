@@ -4,7 +4,6 @@ import com.example.android.tumblrx2.responses.InfoResponse
 import com.example.android.tumblrx2.responses.LoginResponse
 import com.example.android.tumblrx2.responses.RegisterResponse
 import com.example.android.tumblrx2.responses.dashboarddata.DashboardResponse
-import retrofit2.Call
 import retrofit2.Response
 import retrofit2.http.*
 

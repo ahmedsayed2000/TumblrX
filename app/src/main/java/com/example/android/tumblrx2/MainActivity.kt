@@ -36,14 +36,14 @@ class MainActivity : AppCompatActivity() {
         }
         binding.btnIntro.setOnClickListener {
             val token = sharedPref.getString("token", ".")
-//            if (token != ".") {
-//                Log.i("LoginActivity",token!!)
-//                startActivity(Intent(this, HomePageActivity::class.java))
-//            }
-            //else {
+            if (token != ".") {
+                Log.i("LoginActivity",token!!)
+                startActivity(Intent(this, HomePageActivity::class.java))
+            }
+            else {
                 Log.i("LoginActivity","haha mafish token")
                 startActivity(Intent(this, IntroActivity::class.java))
-            //}
+            }
         }
         binding.btnActivity.setOnClickListener {
             startActivity(Intent(this, ActivityAndMessagesActivity::class.java))

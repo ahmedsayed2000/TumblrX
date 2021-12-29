@@ -4,10 +4,14 @@ import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
+import android.widget.RelativeLayout
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.android.tumblrx2.*
 import com.example.android.tumblrx2.databinding.ActivityHomePageBinding
 import com.example.android.tumblrx2.intro.IntroActivity
@@ -25,6 +29,9 @@ class HomePageActivity : AppCompatActivity() {
     private lateinit var adapter: PostAdapter
     private val postList = mutableListOf<PostItem>()
 
+    private lateinit var manager: RecyclerView.LayoutManager
+    private lateinit var myAdapter: RecyclerView.Adapter<*>
+
     /**
      * creates the Main layout and renders it
      * @param[savedInstanceState] a Bundle that has the extras sent to this activity
@@ -35,6 +42,8 @@ class HomePageActivity : AppCompatActivity() {
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_home_page)
         viewModel = ViewModelProvider(this)[HomeViewModel::class.java]
+
+        manager = LinearLayoutManager(this)
 
         binding.buttonAddPost.setOnClickListener {
             var primaryBlog: String = ""
@@ -62,8 +71,6 @@ class HomePageActivity : AppCompatActivity() {
                     Toast.makeText(this@HomePageActivity, "User Info Retrieved", Toast.LENGTH_SHORT)
                         .show()
                     viewModel.userInfo = response.body()!!
-                    val name = viewModel.userInfo.name
-//                    binding.tvTest.text = "Hello $name!"
                 } else {
                     Toast.makeText(
                         this@HomePageActivity,
@@ -74,16 +81,19 @@ class HomePageActivity : AppCompatActivity() {
             }
         }
 
-//        lifecycleScope.launch {
-//            val token = sharedPref.getString("token", null)
-//            if (token != null) {
-//                val postsResponse = viewModel.getDashboardPosts(token)
-//                if (postsResponse.isSuccessful) {
-//                    val post = postsResponse.body()?.forYouPosts?.get(2)
-//                    val imgUrl = post?.content?.get(1)?.url!!
-//                }
-//            }
-//        }
+        lifecycleScope.launch {
+            val token = sharedPref.getString("token", null)
+            if (token != null) {
+                val postsResponse = viewModel.getDashboardPosts(token)
+                if (postsResponse.isSuccessful) {
+                    binding.rvDashboard.apply{
+                        myAdapter = DashboardAdapter(postsResponse.body()!!.forYouPosts)
+                        layoutManager = manager
+                        adapter = myAdapter
+                    }
+                }
+            }
+        }
 
         binding.bottomNavbar.setOnItemSelectedListener {
             when (it.itemId) {
