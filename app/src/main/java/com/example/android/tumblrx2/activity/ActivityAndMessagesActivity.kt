@@ -70,7 +70,7 @@ class ActivityAndMessagesActivity : AppCompatActivity() {
                     overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
                     return@setOnItemSelectedListener false
                 }
-                R.id.ic_logout -> {
+                else -> {
                     val editor = sharedPref.edit()
                     editor.clear()
                     editor.apply()
@@ -80,9 +80,9 @@ class ActivityAndMessagesActivity : AppCompatActivity() {
                         )
                             .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
                     )
+
                     return@setOnItemSelectedListener false
                 }
-                else ->{ return@setOnItemSelectedListener false }
             }
         }
     }
