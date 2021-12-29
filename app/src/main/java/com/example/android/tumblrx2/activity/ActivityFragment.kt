@@ -1,4 +1,4 @@
-package com.example.android.tumblrx2
+package com.example.android.tumblrx2.activity
 
 import androidx.fragment.app.Fragment
 import android.os.Bundle
@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.*
+import com.example.android.tumblrx2.R
 import com.google.android.material.bottomsheet.BottomSheetDialog
 
 
@@ -16,7 +17,7 @@ class ActivityFragment: Fragment() {
         var bottomBtn=view.findViewById<Button>(R.id.bottomSheetBtn)
         bottomBtn.setOnClickListener {showBottomSheet()}
         var activityList= view.findViewById<ListView>(R.id.activity_list)
-        activityList.adapter=ActivityListAdapter(requireContext())
+        activityList.adapter= ActivityListAdapter(requireContext())
         return view
     }
 

@@ -6,6 +6,7 @@ import com.example.android.tumblrx2.network.RetrofitInstance
 import retrofit2.Response
 
 class LoginViewModel() : ViewModel() {
+
     fun loginValidateInput(email: String, password: String): Int {
         return if (email.isEmpty() || password.isEmpty()) -1
         else if (!(android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches())) 1

@@ -1,34 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    >
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/white"
         tools:context=".home.HomePageActivity">
 
-
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_add_post"
-            android:background="#4FC3F7"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentBottom="true"
-            android:layout_marginRight="10dp"
-            android:layout_marginBottom="20dp"
-            android:id="@+id/button_addPost"
-            />
-
-        <ListView
-            android:id="@+id/postList"
+        <ImageView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/tv_test"
+            android:id="@+id/iv_test"/>
+
+
+<!--                <ListView-->
+<!--            android:id="@+id/postList"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_below="@id/tv_test"-->
+<!--            android:layout_alignParentBottom="true"-->
+<!--            android:divider="@color/navy"-->
+<!--            android:dividerHeight="8dp" />-->
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/rv_dashboard">
+
+
+        </androidx.recyclerview.widget.RecyclerView>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/button_addPost"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
             android:layout_alignParentBottom="true"
-            android:divider="@color/navy"
-            android:dividerHeight="8dp" />
+            android:layout_marginEnd="13dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="70dp"
+            android:background="#4FC3F7"
+            android:src="@drawable/ic_add_post" />
+
         <TextView
             android:id="@+id/tv_test"
             android:layout_width="match_parent"
@@ -37,7 +53,17 @@
             android:layout_alignParentTop="true"
             android:layout_marginStart="59dp"
             android:layout_marginTop="69dp"
+            android:visibility="gone"
             android:text="TextView" />
+
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:id="@+id/bottom_navbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            app:menu="@menu/bottom_nav_menu"
+            android:background="@color/navy"
+            app:labelVisibilityMode="unlabeled"/>
 
     </RelativeLayout>
 </layout>

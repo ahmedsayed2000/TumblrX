@@ -4,6 +4,7 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.test.ext.junit.rules.ActivityScenarioRule
 import androidx.viewpager2.widget.ViewPager2
+import com.example.android.tumblrx2.activity.ActivityAndMessagesActivity
 import com.google.android.material.tabs.TabLayout
 import org.junit.Assert.*
 

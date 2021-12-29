@@ -1,6 +1,7 @@
 package com.example.android.tumblrx2.responses
 
 data class Settings(
+
     val actionNotify: Boolean,
     val dashBoardInfiniteScrolling: Boolean,
     val findMeByEmail: Boolean,
