@@ -24,9 +24,11 @@
         <activity
             android:name=".intro.IntroActivity"
             android:exported="true"
-            android:theme="@style/splashScreenTheme"></activity>
+            android:theme="@style/splashScreenTheme">
+
+        </activity>
         <activity
-            android:name=".HomePageActivity"
+            android:name=".home.HomePageActivity"
             android:exported="false" />
         <activity
             android:name=".AddPostActivity"
@@ -42,23 +44,23 @@
             android:exported="false" />
         <activity
             android:name=".blog.ActivityBlog"
-            android:exported="true"
+            android:exported="false"
             android:theme="@style/splashScreenTheme">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+<!--            <intent-filter>-->
+<!--                <action android:name="android.intent.action.MAIN" />-->
+<!--                <category android:name="android.intent.category.LAUNCHER" />-->
+<!--            </intent-filter>-->
         </activity>
         <activity
             android:name=".blog.ActivityCreateBlog"
             android:exported="false" />
         <activity
             android:name=".MainActivity"
-            android:exported="false" >
-<!--            <intent-filter>-->
-<!--                <action android:name="android.intent.action.MAIN" />-->
-<!--                <category android:name="android.intent.category.LAUNCHER" />-->
-<!--            </intent-filter>-->
+            android:exported="true" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
     </application>
 

@@ -8,8 +8,10 @@ import android.util.Log
 import androidx.databinding.DataBindingUtil
 import com.example.android.tumblrx2.activity.ActivityAndMessagesActivity
 import com.example.android.tumblrx2.blog.ActivityBlog
+import com.example.android.tumblrx2.blog.ActivityCreateBlog
 import com.example.android.tumblrx2.chat.NewMessageActivity
 import com.example.android.tumblrx2.databinding.ActivityMainBinding
+import com.example.android.tumblrx2.home.HomePageActivity
 import com.example.android.tumblrx2.intro.IntroActivity
 
 /**
@@ -53,8 +55,12 @@ class MainActivity : AppCompatActivity() {
         binding.btnNewMessage.setOnClickListener {
             startActivity(Intent(this, NewMessageActivity::class.java))
         }
+
         binding.userBlog.setOnClickListener {
             startActivity(Intent(this, ActivityBlog::class.java))
+        }
+        binding.btnCreateBlog.setOnClickListener {
+            startActivity(Intent(this, ActivityCreateBlog::class.java))
         }
     }
 

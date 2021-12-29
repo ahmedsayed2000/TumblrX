@@ -1,13 +1,12 @@
 package com.example.android.tumblrx2.responses
 
 data class Settings(
-    val activatePassward: Boolean,
-    val allowAsk: Boolean,
-    val allowSubmission: Boolean,
-    val blogAvatar: Boolean,
-    val hideFromSearch: Boolean,
-    val messaging: Boolean,
-    val replies: Boolean,
-    val shareFollowing: Boolean,
-    val shareLikes: Boolean
+
+    val actionNotify: Boolean,
+    val dashBoardInfiniteScrolling: Boolean,
+    val findMeByEmail: Boolean,
+    val hideFollowing: Boolean,
+    val hide_likes: Boolean,
+    val messagingSounds: Boolean,
+    val showTimestampOnPosts: Boolean
 )

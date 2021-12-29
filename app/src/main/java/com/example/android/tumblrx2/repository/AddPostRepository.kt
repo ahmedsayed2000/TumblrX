@@ -19,27 +19,25 @@ class AddPostRepository() {
         fileList: MutableList<MultipartBody.Part>?
     ) {
 
-        val header =
-            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MWMxZTNiODZiODI3YTdlMTQ0NDU4ZjYiLCJwcmltYXJ5QmxvZyI6IjYxYzFlM2I4NmI4MjdhN2UxNDQ0NThmOSIsImlhdCI6MTY0MDM4MTUzMH0.WhorTIkfmeGWOMgWXi55HTc8EEu57O2Jej3Sl__JF2g"
 
-        //val postEntity = PostEntity(null, null, null, postObjects)
+        val sharedPref = context.getSharedPreferences("appPref", Context.MODE_PRIVATE)
+        val token = sharedPref.getString("token", null)
+        if (token != null) {
+            Log.i("LoginActivity", token!!)
+        }
 
-        //val postString = Gson().toJson(PostContent(postObjects))
-        //val requestBody = postString.toRequestBody("text/*".toMediaTypeOrNull())
+        val header = token
 
-        //val part = MultipartBody.Part.createFormData("content", postString)
+
         val part = MultipartBody.Part.createFormData("content[0][type]", "text")
 
         val part1 = MultipartBody.Part.createFormData("content[0][text]", "ahmed")
         val part2 = MultipartBody.Part.createFormData("content[1][type]", "image")
         val part3 = MultipartBody.Part.createFormData("content[1][identifier]", "image1")
 
-        //Log.d("post string", postString)
-
-        //val postPart = MultipartBody.Part.createFormData("postSequence", postString)
 
         val call = WebServiceClient().buildApi(AddPostApi::class.java)
-            .postToBlog(contentList, header, fileList)
+            .postToBlog(contentList, header!!, fileList)
         call.enqueue(object : retrofit2.Callback<LoginResponse> {
             override fun onResponse(call: Call<LoginResponse>, response: Response<LoginResponse>) {
                 Toast.makeText(

@@ -9,7 +9,6 @@ import android.widget.EditText
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
-import com.example.android.tumblrx2.HomePageActivity
 import com.example.android.tumblrx2.R
 import com.example.android.tumblrx2.login.BlogModelView
 import com.example.android.tumblrx2.login.LoginViewModel
