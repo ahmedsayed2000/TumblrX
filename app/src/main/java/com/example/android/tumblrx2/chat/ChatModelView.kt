@@ -10,4 +10,6 @@ class ChatModelView() : ViewModel() {
      suspend fun getChats(token:String) :Response<ChatsResponse>{
         return RetrofitInstance.api.getChats(token)
     }
+
+
 }

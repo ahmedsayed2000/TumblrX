@@ -2,14 +2,15 @@ package com.example.android.tumblrx2.chat
 
 import android.content.Context
 import android.os.Bundle
-import android.widget.ListView
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.example.android.tumblrx2.R
+import com.example.android.tumblrx2.responses.CreateBlogResponse
 import kotlinx.coroutines.launch
+import retrofit2.HttpException
+import java.io.IOException
 
 class ActivityChat(): AppCompatActivity() {
 

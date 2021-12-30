@@ -11,4 +11,5 @@ class MessagesModelView() : ViewModel() {
     suspend fun getChatMessages(id:String,token:String) :Response<MessagesResponse>{
         return RetrofitInstance.api.getChatsMessages(token,id)
     }
+
 }

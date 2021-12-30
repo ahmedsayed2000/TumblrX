@@ -40,7 +40,6 @@ interface ApiService {
         @Path("id") id:String,
         ): Response<CreateBlogResponse>
 
-
     @GET("api/user/info")
     suspend fun getInfo(
         @Header("Authorization") token: String
