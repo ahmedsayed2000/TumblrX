@@ -31,7 +31,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setTheme(R.style.Theme_TumblrX2)
-        val sharedPref = this.getSharedPreferences("appPref",Context.MODE_PRIVATE)
+        val sharedPref = this.getSharedPreferences("appPref", Context.MODE_PRIVATE)
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
 
@@ -39,13 +39,22 @@ class MainActivity : AppCompatActivity() {
 //            startActivity(Intent(this, HomePageActivity::class.java))
 //        }
 //        binding.btnIntro.setOnClickListener {
-            val token = sharedPref.getString("token", ".")
-            if (token != ".") {
-                startActivity(Intent(this, HomePageActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK))
-            }
-            else {
-                startActivity(Intent(this, IntroActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK))
-            }
+        val token = sharedPref.getString("token", ".")
+        if (token != ".") {
+            startActivity(
+                Intent(
+                    this,
+                    HomePageActivity::class.java
+                ).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
+            )
+        } else {
+            startActivity(
+                Intent(
+                    this,
+                    IntroActivity::class.java
+                ).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
+            )
+        }
 //        }
 //        binding.btnActivity.setOnClickListener {
 //            startActivity(Intent(this, ActivityAndMessagesActivity::class.java))
