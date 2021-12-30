@@ -40,7 +40,8 @@
             android:layout_below="@id/tv_test"
             android:layout_alignParentBottom="true"
             android:divider="@color/navy"
-            android:dividerHeight="8dp" />
+            android:dividerHeight="8dp"
+            android:visibility="gone"/>
 
         <TextView
             android:id="@+id/tv_test"
@@ -50,7 +51,8 @@
             android:layout_alignParentTop="true"
             android:layout_marginStart="59dp"
             android:layout_marginTop="69dp"
-            android:text="TextView" />
+            android:text="TextView"
+            android:visibility="gone"/>
 
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/bottom_navbar"

@@ -71,7 +71,8 @@ class SignupActivity : AppCompatActivity() {
                         editor.apply {
                             putString("token", token)
                         }
-                        startActivity(Intent(this@SignupActivity, HomePageActivity::class.java))
+                        startActivity(Intent(this@SignupActivity, HomePageActivity::class.java).
+                        addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK))
                     } else {
                         try {
                             val message = Gson().fromJson(

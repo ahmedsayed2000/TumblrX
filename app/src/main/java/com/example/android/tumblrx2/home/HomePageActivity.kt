@@ -139,9 +139,11 @@ class HomePageActivity : AppCompatActivity() {
 //                        layoutManager = manager
 //                        adapter = myAdapter
 //                    }
-                    Log.i("HomePageActivity", postsResponse.body()!!.posts.size.toString())
-                    postList.addAll(postsResponse.body()!!.posts)
-                    adapter.notifyDataSetChanged()
+                    if(postsResponse.body()?.posts != null){
+                        Log.i("HomePageActivity", postsResponse.body()!!.posts.size.toString())
+                        postList.addAll(postsResponse.body()!!.posts)
+                        adapter.notifyDataSetChanged()
+                    }
                 }
             }
         }

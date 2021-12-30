@@ -9,6 +9,7 @@ class LoginViewModel() : ViewModel() {
     fun loginValidateInput(email: String, password: String): Int {
         return if (email.isEmpty() || password.isEmpty()) -1
         else if (!(android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches())) 1
+//        else if (email.length < 5) 1
         else if (password.length < 6) 2
         else 0
     }
