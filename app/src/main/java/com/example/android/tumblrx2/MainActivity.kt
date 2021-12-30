@@ -19,7 +19,7 @@ import com.example.android.tumblrx2.intro.IntroActivity
  * @property binding the binding variable that contains the layout
  */
 
-class MainActivity : AppCompatActivity() {
+open class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
 

@@ -6,6 +6,7 @@ import com.example.android.tumblrx2.responses.LoginResponse
 import com.example.android.tumblrx2.responses.RegisterResponse
 import com.example.android.tumblrx2.responses.chatsresponse.ChatsResponse
 import com.example.android.tumblrx2.responses.dashboarddata.DashboardResponse
+import com.example.android.tumblrx2.responses.dashboardpost.DashboardPost
 import com.example.android.tumblrx2.responses.following.FollowingResponse
 import com.example.android.tumblrx2.responses.likes.LikesResponse
 import com.example.android.tumblrx2.responses.messages.MessagesResponse
@@ -49,7 +50,7 @@ interface ApiService {
     suspend fun getDashboardPosts(
         @Header("Authorization") token: String,
         @Query("limit") limit: Int = 10, @Query("page") page: Int = 1
-    ): Response<DashboardResponse>
+    ): Response<DashboardPost>
 
     @GET("api/blog/{id}/posts")
     suspend fun getBlogPosts(

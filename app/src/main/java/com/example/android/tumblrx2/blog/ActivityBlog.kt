@@ -100,7 +100,6 @@ class ActivityBlog : AppCompatActivity() {
                     return@setOnItemSelectedListener false
                 }
                 else -> {
-                    val editor = sharedPref.edit()
                     editor.clear()
                     editor.apply()
                     startActivity(

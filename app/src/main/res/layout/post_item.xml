@@ -55,6 +55,15 @@
         android:layout_marginBottom="8dp"
         tools:src = "@drawable/ic_launcher_background"
         />
+
+
+
+    <pl.droidsonroids.gif.GifImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/post_gif"/>
+
+
     <io.github.ponnamkarthik.richlinkpreview.RichLinkView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

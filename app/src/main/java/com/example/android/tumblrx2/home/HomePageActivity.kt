@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
@@ -14,6 +15,7 @@ import com.example.android.tumblrx2.intro.IntroActivity
 import com.example.android.tumblrx2.network.RetrofitInstance
 import com.example.android.tumblrx2.activity.ActivityAndMessagesActivity
 import com.example.android.tumblrx2.blog.ActivityBlog
+import com.example.android.tumblrx2.responses.dashboardpost.Post
 import kotlinx.coroutines.launch
 
 /**
@@ -26,7 +28,7 @@ class HomePageActivity : AppCompatActivity() {
     private lateinit var viewModel: HomeViewModel
 
     private lateinit var adapter: PostAdapter
-    private val postList = mutableListOf<PostItem>()
+    private var postList = mutableListOf<Post>()
 
     /**
      * creates the Main layout and renders it
@@ -120,47 +122,31 @@ class HomePageActivity : AppCompatActivity() {
             }
         }
 
-        // init the adapter
+
+//         init the adapter
         adapter = PostAdapter(this, 0, postList)
 
+        // init the listView
+        binding.postList.adapter = adapter
 
-        binding.bottomNavbar.setOnItemSelectedListener {
-            when (it.itemId) {
-                R.id.ic_home -> {
-                    startActivity(Intent(this@HomePageActivity, HomePageActivity::class.java))
-                    overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
-                    return@setOnItemSelectedListener false
-                }
-                R.id.ic_explore -> {
-                    return@setOnItemSelectedListener false
-//                    startActivity(Intent(this@HomePageActivity,HomePageActivity::class.java))
-//                    overridePendingTransition(android.R.anim.fade_in,android.R.anim.fade_out)
-                }
-                R.id.ic_messages -> {
-                    startActivity(
-                        Intent(
-                            this@HomePageActivity,
-                            ActivityAndMessagesActivity::class.java
-                        )
-                    )
-                    overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
-                    return@setOnItemSelectedListener false
-                }
-                else -> {
-                    startActivity(Intent(this@HomePageActivity, ActivityBlog::class.java))
-                    overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
-                    return@setOnItemSelectedListener false
+        lifecycleScope.launch {
+            val token = sharedPref.getString("token", null)
+            if (token != null) {
+                val postsResponse = viewModel.getDashboardPosts(token)
+                if (postsResponse.isSuccessful) {
+//                    binding.rvDashboard.apply{
+//                        myAdapter = DashboardAdapter(postsResponse.body()!!.forYouPosts)
+//                        layoutManager = manager
+//                        adapter = myAdapter
+//                    }
+                    Log.i("HomePageActivity", postsResponse.body()!!.posts.size.toString())
+                    postList.addAll(postsResponse.body()!!.posts)
+                    adapter.notifyDataSetChanged()
                 }
             }
         }
 
-        // init the adapter
-//        adapter = PostAdapter(this, 0, postList)
-//
-//        // init the listView
-//        binding.postList.adapter = adapter
-//
-//        // adding some posts
+        // adding some posts
 //        postList.add(PostItem("text 1", null, "https://stackoverflow.com", "User 1"))
 //        postList.add(PostItem("text 2", null, "https://stackoverflow.com", "User 2"))
 //        postList.add(PostItem("text 3", null, "https://stackoverflow.com", "User 3"))
@@ -168,8 +154,7 @@ class HomePageActivity : AppCompatActivity() {
 //        postList.add(PostItem("text 5", null, "https://stackoverflow.com", "User 5"))
 //        postList.add(PostItem("text 6", null, "https://stackoverflow.com", "User 6"))
 //        postList.add(PostItem("text 7", null, "https://stackoverflow.com", "User 7"))
-//        // notify the adapter
-//        adapter.notifyDataSetChanged()
+        // notify the adapter
     }
 
 
