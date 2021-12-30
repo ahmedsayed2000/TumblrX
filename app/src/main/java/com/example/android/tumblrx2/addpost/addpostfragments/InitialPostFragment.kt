@@ -336,7 +336,7 @@ class InitialPostFragment : Fragment() {
 
         binding.insertText.setOnClickListener {
             viewModel.insertOrEditText()
-//            adapter.notifyDataSetChanged()
+            adapter.notifyDataSetChanged()
         }
 
         binding.insertText.setOnLongClickListener {
