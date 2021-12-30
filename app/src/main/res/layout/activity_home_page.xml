@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -10,16 +11,15 @@
 
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/button_addPost"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_add_post"
-            android:background="#4FC3F7"
             android:layout_alignParentEnd="true"
             android:layout_alignParentBottom="true"
             android:layout_marginRight="10dp"
             android:layout_marginBottom="20dp"
-            android:id="@+id/button_addPost"
-            />
+            android:background="#4FC3F7"
+            android:src="@drawable/ic_add_post" />
 
         <ListView
             android:id="@+id/postList"
@@ -29,6 +29,7 @@
             android:layout_alignParentBottom="true"
             android:divider="@color/navy"
             android:dividerHeight="8dp" />
+
         <TextView
             android:id="@+id/tv_test"
             android:layout_width="match_parent"
@@ -38,6 +39,16 @@
             android:layout_marginStart="59dp"
             android:layout_marginTop="69dp"
             android:text="TextView" />
+
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:id="@+id/bottom_navbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:background="@color/navy"
+            app:labelVisibilityMode="unlabeled"
+            app:menu="@menu/bottom_nav_menu" />
+
 
     </RelativeLayout>
 </layout>

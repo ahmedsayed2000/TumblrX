@@ -43,12 +43,13 @@ class LoginActivity : AppCompatActivity() {
             val code = viewModel.loginValidateInput(emailText, passwordText)
             if (code != 0) {
                 displayErr(viewModel.loginChooseErrMsg(code))
+                binding.progressLogin.visibility = View.GONE
             } else {
                 lifecycleScope.launchWhenCreated {
                     val response: retrofit2.Response<LoginResponse> = try {
                         viewModel.login(emailText, passwordText)
                     } catch (e: IOException) {
-                        displayErr("You might not have internet connection")
+                        displayErr("Something is wrong with the server, try again later")
                         return@launchWhenCreated
                     } catch (e: HttpException) {
                         displayErr(e.toString())
@@ -60,15 +61,14 @@ class LoginActivity : AppCompatActivity() {
                         editor.apply {
                             putString("token", token)
                         }.apply()
-                        Log.i("LoginActivity", "Token: $token")
                         startActivity(Intent(this@LoginActivity, HomePageActivity::class.java).
                         addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK))
                     }else{
                         displayErr("Email and Password do not match")
+                        binding.progressLogin.visibility = View.GONE
                     }
                 }
             }
-            binding.progressLogin.visibility = View.GONE
         }
         binding.actionbarLogin.btnBack.setOnClickListener {
             finish()

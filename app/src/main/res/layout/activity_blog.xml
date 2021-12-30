@@ -1,19 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<ScrollView
+<androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ActivityBlog"
+    tools:context=".blog.ActivityBlog"
     android:background="@color/white">
-
-<androidx.constraintlayout.widget.ConstraintLayout
-    android:layout_height="match_parent"
-    android:layout_width="match_parent"
-    android:orientation="vertical">
-
     <RelativeLayout
         android:background="@color/purple_200"
         android:id="@+id/relativeLayout"
@@ -24,10 +18,13 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
+            android:textStyle="bold"
             android:id="@+id/blog_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="16dp"
+            android:textSize="8pt"
+            android:drawableRight="@drawable/ic_arrow"
             android:text="mariam.a.malak12"
             android:textColor="@color/white" />
 
@@ -38,9 +35,19 @@
             android:layout_below="@id/blog_name"
             app:srcCompat="@color/purple_200"
             tools:ignore="UnknownId" />
+
+        <ImageView
+            android:id="@+id/imageView4"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_above="@id/imageView2"
+            android:layout_marginLeft="160dp"
+            android:layout_marginBottom="-197dp"
+            app:srcCompat="@drawable/user_avatar" />
     </RelativeLayout>
 
     <LinearLayout
+        android:id="@+id/linearLayout4"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
@@ -55,10 +62,10 @@
             android:layout_height="wrap_content"
             android:padding="16dp"
             android:text="Untitled"
-            android:textStyle="bold"
             android:textAlignment="center"
+            android:textColor="@color/black"
             android:textSize="30dp"
-            android:textColor="@color/black" />
+            android:textStyle="bold" />
 
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tabLayout2"
@@ -80,5 +87,15 @@
 
     </LinearLayout>
 
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottom_navbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@color/navy"
+        app:labelVisibilityMode="unlabeled"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:menu="@menu/bottom_nav_menu"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
-</ScrollView>

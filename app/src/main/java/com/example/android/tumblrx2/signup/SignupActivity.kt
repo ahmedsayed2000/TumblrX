@@ -12,7 +12,9 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.example.android.tumblrx2.home.HomePageActivity
 import com.example.android.tumblrx2.databinding.ActivitySignupBinding
+import com.example.android.tumblrx2.responses.RegisterError
 import com.example.android.tumblrx2.responses.RegisterResponse
+import com.google.gson.Gson
 import retrofit2.HttpException
 import retrofit2.Response
 import java.io.IOException
@@ -56,19 +58,28 @@ class SignupActivity : AppCompatActivity() {
                     val response: Response<RegisterResponse> = try {
                         viewModel.signup(emailText, passwordText, usernameText)
                     } catch (e: IOException) {
-                        displayErr("You might not have internet connection")
+                        displayErr("Something is wrong with the server, try again later")
                         return@launchWhenCreated
                     } catch (e: HttpException) {
                         displayErr(e.toString())
                         return@launchWhenCreated
                     }
                     if(response.isSuccessful){
-                        Log.i("SignupActivity", "Success")
                         val token: String? = response.body()?.token
                         editor.apply {
                             putString("token", token)
                         }
                         startActivity(Intent(this@SignupActivity, HomePageActivity::class.java))
+                    } else {
+                        try {
+                            val message = Gson().fromJson(
+                                response.errorBody()?.charStream(),
+                                RegisterError::class.java
+                            )
+                            displayErr(message!!.message)
+                        } catch (e: Exception) {
+                            Log.i("SignupActivity", e.toString())
+                        }
                     }
                 }
             }

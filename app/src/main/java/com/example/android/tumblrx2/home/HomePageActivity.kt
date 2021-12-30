@@ -7,11 +7,9 @@ import android.os.Bundle
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
-import com.example.android.tumblrx2.AddPostActivity
-import com.example.android.tumblrx2.PostAdapter
-import com.example.android.tumblrx2.PostItem
-import com.example.android.tumblrx2.R
+import com.example.android.tumblrx2.*
 import com.example.android.tumblrx2.databinding.ActivityHomePageBinding
+import com.example.android.tumblrx2.intro.IntroActivity
 import com.example.android.tumblrx2.network.RetrofitInstance
 import kotlinx.coroutines.launch
 
@@ -49,6 +47,49 @@ class HomePageActivity : AppCompatActivity() {
                     viewModel.userInfo = response.body()!!
                     val name = viewModel.userInfo.name
                     binding.tvTest.text = "Hello $name!"
+                }
+            }
+        }
+
+        binding.bottomNavbar.setOnItemSelectedListener {
+            when (it.itemId) {
+                R.id.ic_home -> {
+                    startActivity(Intent(this@HomePageActivity, HomePageActivity::class.java))
+                    overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
+                    return@setOnItemSelectedListener false
+                }
+                R.id.ic_explore -> {
+                    return@setOnItemSelectedListener false
+//                    startActivity(Intent(this@HomePageActivity,HomePageActivity::class.java))
+//                    overridePendingTransition(android.R.anim.fade_in,android.R.anim.fade_out)
+                }
+                R.id.ic_messages -> {
+                    startActivity(
+                        Intent(
+                            this@HomePageActivity,
+                            ActivityAndMessagesActivity::class.java
+                        )
+                    )
+                    overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
+                    return@setOnItemSelectedListener false
+                }
+                R.id.ic_profile -> {
+                    startActivity(Intent(this@HomePageActivity, ActivityBlog::class.java))
+                    overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
+                    return@setOnItemSelectedListener false
+                }
+                else -> {
+                    val editor = sharedPref.edit()
+                    editor.clear()
+                    editor.apply()
+                    startActivity(
+                        Intent(
+                            this@HomePageActivity, IntroActivity::class.java
+                        )
+                            .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
+                    )
+
+                    return@setOnItemSelectedListener false
                 }
             }
         }
