@@ -56,7 +56,7 @@ class PostAdapter : ArrayAdapter<Post> {
         // setting the view elements (image , text , link , gif)
         val text = view?.findViewById<TextView>(R.id.post_text)
         val image = view?.findViewById<ImageView>(R.id.post_image)
-        val link = view?.findViewById<RichLinkView>(R.id.post_link)
+//        val link = view?.findViewById<RichLinkView>(R.id.post_link)
         val gif = view?.findViewById<GifImageView>(R.id.post_gif)
 
         var postImage: String = ""
@@ -70,8 +70,8 @@ class PostAdapter : ArrayAdapter<Post> {
                     postText = content.text
                 } else if (content.type == "image") {
                     postImage = content.url
-                } else if (content.type == "link") {
-                    postLink = content.url
+//                } else if (content.type == "link") {
+//                    postLink = content.url
                 } else if(content.type =="image/gif"){
                     postGif = content.url
                 }
@@ -91,18 +91,18 @@ class PostAdapter : ArrayAdapter<Post> {
             image?.visibility = View.GONE
         }
 
-        if (postLink != "") {
-            link?.setLink(postLink, object : ViewListener {
-                override fun onSuccess(status: Boolean) {
-//                    Toast.makeText(context, "Link added", Toast.LENGTH_SHORT).show()
-                }
-
-                override fun onError(e: Exception?) {
-                }
-            })
-        } else{
-            link?.visibility = View.GONE
-        }
+//        if (postLink != "") {
+//            link?.setLink(postLink, object : ViewListener {
+//                override fun onSuccess(status: Boolean) {
+////                    Toast.makeText(context, "Link added", Toast.LENGTH_SHORT).show()
+//                }
+//
+//                override fun onError(e: Exception?) {
+//                }
+//            })
+//        } else{
+//            link?.visibility = View.GONE
+//        }
 
         if(postGif != ""){
             Picasso.get().load(postGif).into(gif)
