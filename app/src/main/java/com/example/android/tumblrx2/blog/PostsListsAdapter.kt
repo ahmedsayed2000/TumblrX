@@ -33,10 +33,17 @@ class PostsListsAdapter(context:Context,posts:List<Data>): BaseAdapter() {
     }
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
         val post:Data = getItem(position)
+        var postText:String
         val layoutInflater=LayoutInflater.from(myContext)
         val row= layoutInflater.inflate(R.layout.post_item_blog,parent,false)
         row.findViewById<TextView>(R.id.blog_name).text=post.blogAttribution.handle
-        row.findViewById<TextView>(R.id.post_text).text=post.content[0].text
+        for (content in post.content) {
+            if (content != null) {
+                if (content.type == "text") {
+                    row.findViewById<TextView>(R.id.post_text).text=content.text
+                }
+            }
+        }
         return row
     }
 }

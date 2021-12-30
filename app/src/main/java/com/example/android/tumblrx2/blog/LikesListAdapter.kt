@@ -37,7 +37,13 @@ class LikesListAdapter(context:Context,posts:List<LikePost>): BaseAdapter() {
         val layoutInflater=LayoutInflater.from(myContext)
         val row= layoutInflater.inflate(R.layout.post_item_blog,parent,false)
         row.findViewById<TextView>(R.id.blog_name).text=post.blogAttribution.handle
-        row.findViewById<TextView>(R.id.post_text).text=post.content[0].text
+        for (content in post.content) {
+            if (content != null) {
+                if (content.type == "text") {
+                    row.findViewById<TextView>(R.id.post_text).text=content.text
+                }
+            }
+        }
         return row
     }
 }
