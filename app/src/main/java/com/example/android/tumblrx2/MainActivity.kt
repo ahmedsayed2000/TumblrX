@@ -31,32 +31,30 @@ class MainActivity : AppCompatActivity() {
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
 
-        binding.goToHome.setOnClickListener {
-            startActivity(Intent(this, HomePageActivity::class.java))
-        }
-        binding.btnIntro.setOnClickListener {
+//        binding.goToHome.setOnClickListener {
+//            startActivity(Intent(this, HomePageActivity::class.java))
+//        }
+//        binding.btnIntro.setOnClickListener {
             val token = sharedPref.getString("token", ".")
-//            if (token != ".") {
-//                Log.i("LoginActivity",token!!)
-//                startActivity(Intent(this, HomePageActivity::class.java))
-//            }
-            //else {
-                Log.i("LoginActivity","haha mafish token")
-                startActivity(Intent(this, IntroActivity::class.java))
-            //}
-        }
-        binding.btnActivity.setOnClickListener {
-            startActivity(Intent(this, ActivityAndMessagesActivity::class.java))
-        }
-        binding.btnNewMessage.setOnClickListener {
-            startActivity(Intent(this, NewMessageActivity::class.java))
-        }
-        binding.btnCreateBlog.setOnClickListener {
-            startActivity(Intent(this, ActivityCreateBlog::class.java))
-        }
-        binding.btnBlog.setOnClickListener {
-            startActivity(Intent(this, ActivityBlog::class.java))
-        }
+            if (token != ".") {
+                startActivity(Intent(this, HomePageActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK))
+            }
+            else {
+                startActivity(Intent(this, IntroActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK))
+            }
+//        }
+//        binding.btnActivity.setOnClickListener {
+//            startActivity(Intent(this, ActivityAndMessagesActivity::class.java))
+//        }
+//        binding.btnNewMessage.setOnClickListener {
+//            startActivity(Intent(this, NewMessageActivity::class.java))
+//        }
+//        binding.btnCreateBlog.setOnClickListener {
+//            startActivity(Intent(this, ActivityCreateBlog::class.java))
+//        }
+//        binding.btnBlog.setOnClickListener {
+//            startActivity(Intent(this, ActivityBlog::class.java))
+//        }
     }
 
 }
