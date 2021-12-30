@@ -43,6 +43,7 @@
             android:layout_gravity="center"
             android:padding="8dp"
             android:text="other_user"
+            android:id="@+id/other_user"
             android:textColor="@color/white"
             android:textStyle="bold" />
 
@@ -66,20 +67,34 @@
         android:divider="@null"
         android:dividerHeight="0dp"/>
 
-    <EditText
-        android:id="@+id/editTextTextPersonName2"
+    <LinearLayout
+        android:orientation="horizontal"
+        android:id="@+id/linear5"
         android:layout_width="match_parent"
-        android:layout_height="40dp"
+        android:layout_height="50dp"
         android:background="@color/white"
-        android:drawableRight="@drawable/quantum_ic_play_arrow_grey600_36"
-        android:drawableTint="@color/gold"
-        android:hint="Say your thing..."
-        android:inputType="text"
-        android:paddingLeft="16dp"
-        android:textColorHint="#757575"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent" >
+
+        <EditText
+            android:id="@+id/textMsg"
+            android:layout_width="370dp"
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            android:drawableTint="@color/gold"
+            android:hint="Say your thing..."
+            android:inputType="text"
+            android:paddingLeft="16dp"
+            android:textColorHint="#757575" />
+
+        <ImageView
+            android:id="@+id/sendMsg"
+            android:layout_width="40dp"
+            android:layout_height="match_parent"
+            app:srcCompat="@drawable/quantum_ic_play_arrow_grey600_36"
+            app:tint="@color/gold" />
+    </LinearLayout>
 
     <LinearLayout
         android:id="@+id/linearLayout2"
@@ -87,7 +102,7 @@
         android:layout_height="40dp"
         android:background="@color/white"
         android:orientation="horizontal"
-        app:layout_constraintBottom_toTopOf="@+id/editTextTextPersonName2"
+        app:layout_constraintBottom_toTopOf="@+id/linear5"
         tools:layout_editor_absoluteX="1dp">
 
         <ImageView

@@ -1,9 +1,10 @@
-package com.example.android.tumblrx2
+package com.example.android.tumblrx2.blog
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Lifecycle
 import androidx.viewpager2.adapter.FragmentStateAdapter
+import com.example.android.tumblrx2.activity.ActivityFragment
 
 class BlogTabsAdapter(fragmentManager: FragmentManager, lifecycle: Lifecycle) :
     FragmentStateAdapter(fragmentManager, lifecycle) {
@@ -13,10 +14,10 @@ class BlogTabsAdapter(fragmentManager: FragmentManager, lifecycle: Lifecycle) :
     }
     override fun createFragment(position: Int): Fragment {
         when (position) {
-            0 -> return ActivityFragment()
-            1 -> return ActivityFragment()
-            2 -> return ActivityFragment()
+            0 -> return PostsFragment()
+            1 -> return LikesFragment()
+            2 -> return FollowersFragment()
         }
-        return ActivityFragment()
+        return PostsFragment()
     }
 }

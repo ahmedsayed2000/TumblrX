@@ -29,6 +29,7 @@
             android:textSize="15sp"
             android:textStyle="bold"
             tools:text="blog name"
+            android:textColor="@color/black"
             android:id="@+id/blog_name"
             />
 
@@ -41,6 +42,7 @@
         android:textSize="15sp"
         android:id="@+id/post_text"
         tools:text="post text"
+        android:textColor="@color/black"
         android:layout_marginLeft="8dp"
         android:layout_marginBottom="8dp"
         />

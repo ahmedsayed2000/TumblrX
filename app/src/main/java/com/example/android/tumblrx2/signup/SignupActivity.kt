@@ -15,6 +15,9 @@ import com.example.android.tumblrx2.databinding.ActivitySignupBinding
 import com.example.android.tumblrx2.responses.RegisterError
 import com.example.android.tumblrx2.responses.RegisterResponse
 import com.google.gson.Gson
+import com.google.gson.GsonBuilder
+import com.google.gson.reflect.TypeToken
+import org.json.JSONObject
 import retrofit2.HttpException
 import retrofit2.Response
 import java.io.IOException
@@ -52,8 +55,7 @@ class SignupActivity : AppCompatActivity() {
 
             if (code != 0) {
                 displayErr(viewModel.chooseErrMsg(code))
-            }
-            else {
+            } else {
                 lifecycleScope.launchWhenCreated {
                     val response: Response<RegisterResponse> = try {
                         viewModel.signup(emailText, passwordText, usernameText)
@@ -83,7 +85,7 @@ class SignupActivity : AppCompatActivity() {
                     }
                 }
             }
-            binding.progressSignup.visibility=View.GONE
+            binding.progressSignup.visibility = View.GONE
         }
 
         binding.btnBack.setOnClickListener {
