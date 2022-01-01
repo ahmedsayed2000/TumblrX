@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>EndEmmaBroadcast.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">TumblrX2$LoginViewModelTest.exec</a> &gt; <a href="index.source.html" class="el_package">com.example.android.tumblrx2</a> &gt; <span class="el_source">EndEmmaBroadcast.java</span></div><h1>EndEmmaBroadcast.java</h1><pre class="source lang-java linenums">package com.example.android.tumblrx2;
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.os.Process;
+
+// adb shell am broadcast -a com.example.pkg.END_EMMA
+//file was name EndEmmaBroadCast changed to EndEmmaBroadcast
+<span class="nc" id="L9">public class EndEmmaBroadcast extends BroadcastReceiver {</span>
+    InstrumentActivityListener activityListener;
+
+    public void setInstrumentActivityListener(InstrumentActivityListener listener){
+<span class="nc" id="L13">        this.activityListener = listener;</span>
+<span class="nc" id="L14">    }</span>
+    @Override
+    public void onReceive(Context context, Intent intent) {
+<span class="nc bnc" id="L17" title="All 2 branches missed.">        if(this.activityListener!=null){</span>
+<span class="nc" id="L18">            activityListener.onActivityEnd();</span>
+        }
+        // once coverage is dumped, the processes is ended.
+<span class="nc" id="L21">        Process.killProcess(Process.myPid());</span>
+<span class="nc" id="L22">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>

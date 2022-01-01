@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>FragmentInitialPostBindingImpl.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">TumblrX2$LoginViewModelTest.exec</a> &gt; <a href="index.source.html" class="el_package">com.example.android.tumblrx2.databinding</a> &gt; <span class="el_source">FragmentInitialPostBindingImpl.java</span></div><h1>FragmentInitialPostBindingImpl.java</h1><pre class="source lang-java linenums">package com.example.android.tumblrx2.databinding;
+import com.example.android.tumblrx2.R;
+import com.example.android.tumblrx2.BR;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import android.view.View;
+@SuppressWarnings(&quot;unchecked&quot;)
+public class FragmentInitialPostBindingImpl extends FragmentInitialPostBinding  {
+
+    @Nullable
+    private static final androidx.databinding.ViewDataBinding.IncludedLayouts sIncludes;
+    @Nullable
+    private static final android.util.SparseIntArray sViewsWithIds;
+    static {
+<span class="nc" id="L15">        sIncludes = null;</span>
+<span class="nc" id="L16">        sViewsWithIds = new android.util.SparseIntArray();</span>
+<span class="nc" id="L17">        sViewsWithIds.put(R.id.post_app_bar, 1);</span>
+<span class="nc" id="L18">        sViewsWithIds.put(R.id.close, 2);</span>
+<span class="nc" id="L19">        sViewsWithIds.put(R.id.post_button_card, 3);</span>
+<span class="nc" id="L20">        sViewsWithIds.put(R.id.post_button_text, 4);</span>
+<span class="nc" id="L21">        sViewsWithIds.put(R.id.icon_more, 5);</span>
+<span class="nc" id="L22">        sViewsWithIds.put(R.id.profile_card, 6);</span>
+<span class="nc" id="L23">        sViewsWithIds.put(R.id.profile_image, 7);</span>
+<span class="nc" id="L24">        sViewsWithIds.put(R.id.profile_name, 8);</span>
+<span class="nc" id="L25">        sViewsWithIds.put(R.id.post_list, 9);</span>
+<span class="nc" id="L26">        sViewsWithIds.put(R.id.insertion_bar, 10);</span>
+<span class="nc" id="L27">        sViewsWithIds.put(R.id.insert_text, 11);</span>
+<span class="nc" id="L28">        sViewsWithIds.put(R.id.insert_link, 12);</span>
+<span class="nc" id="L29">        sViewsWithIds.put(R.id.insert_gif, 13);</span>
+<span class="nc" id="L30">        sViewsWithIds.put(R.id.insert_media, 14);</span>
+<span class="nc" id="L31">        sViewsWithIds.put(R.id.insert_audio, 15);</span>
+<span class="nc" id="L32">        sViewsWithIds.put(R.id.tags, 16);</span>
+<span class="nc" id="L33">        sViewsWithIds.put(R.id.tags_card, 17);</span>
+<span class="nc" id="L34">        sViewsWithIds.put(R.id.add_icon, 18);</span>
+<span class="nc" id="L35">        sViewsWithIds.put(R.id.tags_area, 19);</span>
+<span class="nc" id="L36">        sViewsWithIds.put(R.id.tags_group, 20);</span>
+<span class="nc" id="L37">    }</span>
+    // views
+    @NonNull
+    private final android.widget.RelativeLayout mboundView0;
+    // variables
+    // values
+    // listeners
+    // Inverse Binding Event Handlers
+
+    public FragmentInitialPostBindingImpl(@Nullable androidx.databinding.DataBindingComponent bindingComponent, @NonNull View root) {
+<span class="nc" id="L47">        this(bindingComponent, root, mapBindings(bindingComponent, root, 21, sIncludes, sViewsWithIds));</span>
+<span class="nc" id="L48">    }</span>
+    private FragmentInitialPostBindingImpl(androidx.databinding.DataBindingComponent bindingComponent, View root, Object[] bindings) {
+<span class="nc" id="L50">        super(bindingComponent, root, 0</span>
+            , (android.widget.ImageView) bindings[18]
+            , (android.widget.ImageButton) bindings[2]
+            , (android.widget.ImageButton) bindings[5]
+            , (android.widget.ImageButton) bindings[15]
+            , (android.widget.ImageButton) bindings[13]
+            , (android.widget.ImageButton) bindings[12]
+            , (android.widget.ImageButton) bindings[14]
+            , (android.widget.ImageButton) bindings[11]
+            , (android.widget.LinearLayout) bindings[10]
+            , (com.google.android.material.appbar.AppBarLayout) bindings[1]
+            , (com.google.android.material.card.MaterialCardView) bindings[3]
+            , (android.widget.TextView) bindings[4]
+            , (android.widget.ListView) bindings[9]
+            , (com.google.android.material.card.MaterialCardView) bindings[6]
+            , (de.hdodenhof.circleimageview.CircleImageView) bindings[7]
+            , (android.widget.TextView) bindings[8]
+            , (android.widget.ImageButton) bindings[16]
+            , (android.widget.HorizontalScrollView) bindings[19]
+            , (com.google.android.material.card.MaterialCardView) bindings[17]
+            , (com.google.android.material.chip.ChipGroup) bindings[20]
+            );
+<span class="nc" id="L72">        this.mboundView0 = (android.widget.RelativeLayout) bindings[0];</span>
+<span class="nc" id="L73">        this.mboundView0.setTag(null);</span>
+<span class="nc" id="L74">        setRootTag(root);</span>
+        // listeners
+<span class="nc" id="L76">        invalidateAll();</span>
+<span class="nc" id="L77">    }</span>
+
+    @Override
+    public void invalidateAll() {
+<span class="nc" id="L81">        synchronized(this) {</span>
+<span class="nc" id="L82">                mDirtyFlags = 0x1L;</span>
+<span class="nc" id="L83">        }</span>
+<span class="nc" id="L84">        requestRebind();</span>
+<span class="nc" id="L85">    }</span>
+
+    @Override
+    public boolean hasPendingBindings() {
+<span class="nc" id="L89">        synchronized(this) {</span>
+<span class="nc bnc" id="L90" title="All 2 branches missed.">            if (mDirtyFlags != 0) {</span>
+<span class="nc" id="L91">                return true;</span>
+            }
+<span class="nc" id="L93">        }</span>
+<span class="nc" id="L94">        return false;</span>
+    }
+
+    @Override
+    public boolean setVariable(int variableId, @Nullable Object variable)  {
+<span class="nc" id="L99">        boolean variableSet = true;</span>
+<span class="nc" id="L100">            return variableSet;</span>
+    }
+
+    @Override
+    protected boolean onFieldChange(int localFieldId, Object object, int fieldId) {
+<span class="nc" id="L105">        switch (localFieldId) {</span>
+        }
+<span class="nc" id="L107">        return false;</span>
+    }
+
+    @Override
+    protected void executeBindings() {
+<span class="nc" id="L112">        long dirtyFlags = 0;</span>
+<span class="nc" id="L113">        synchronized(this) {</span>
+<span class="nc" id="L114">            dirtyFlags = mDirtyFlags;</span>
+<span class="nc" id="L115">            mDirtyFlags = 0;</span>
+<span class="nc" id="L116">        }</span>
+        // batch finished
+<span class="nc" id="L118">    }</span>
+    // Listener Stub Implementations
+    // callback impls
+    // dirty flag
+<span class="nc" id="L122">    private  long mDirtyFlags = 0xffffffffffffffffL;</span>
+    /* flag mapping
+        flag 0 (0x1L): null
+    flag mapping end*/
+    //end
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>

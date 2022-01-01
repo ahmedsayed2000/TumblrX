@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>DataBinderMapperImpl.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">TumblrX2$LoginViewModelTest.exec</a> &gt; <a href="index.source.html" class="el_package">com.example.android.tumblrx2</a> &gt; <span class="el_source">DataBinderMapperImpl.java</span></div><h1>DataBinderMapperImpl.java</h1><pre class="source lang-java linenums">package com.example.android.tumblrx2;
+
+import android.util.SparseArray;
+import android.util.SparseIntArray;
+import android.view.View;
+import androidx.databinding.DataBinderMapper;
+import androidx.databinding.DataBindingComponent;
+import androidx.databinding.ViewDataBinding;
+import com.example.android.tumblrx2.databinding.ActivityHomePageBindingImpl;
+import com.example.android.tumblrx2.databinding.ActivityMainBindingImpl;
+import com.example.android.tumblrx2.databinding.FragmentInitialPostBindingImpl;
+import java.lang.IllegalArgumentException;
+import java.lang.Integer;
+import java.lang.Object;
+import java.lang.Override;
+import java.lang.RuntimeException;
+import java.lang.String;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+
+<span class="nc" id="L22">public class DataBinderMapperImpl extends DataBinderMapper {</span>
+  private static final int LAYOUT_ACTIVITYHOMEPAGE = 1;
+
+  private static final int LAYOUT_ACTIVITYMAIN = 2;
+
+  private static final int LAYOUT_FRAGMENTINITIALPOST = 3;
+
+<span class="nc" id="L29">  private static final SparseIntArray INTERNAL_LAYOUT_ID_LOOKUP = new SparseIntArray(3);</span>
+
+  static {
+<span class="nc" id="L32">    INTERNAL_LAYOUT_ID_LOOKUP.put(com.example.android.tumblrx2.R.layout.activity_home_page, LAYOUT_ACTIVITYHOMEPAGE);</span>
+<span class="nc" id="L33">    INTERNAL_LAYOUT_ID_LOOKUP.put(com.example.android.tumblrx2.R.layout.activity_main, LAYOUT_ACTIVITYMAIN);</span>
+<span class="nc" id="L34">    INTERNAL_LAYOUT_ID_LOOKUP.put(com.example.android.tumblrx2.R.layout.fragment_initial_post, LAYOUT_FRAGMENTINITIALPOST);</span>
+<span class="nc" id="L35">  }</span>
+
+  @Override
+  public ViewDataBinding getDataBinder(DataBindingComponent component, View view, int layoutId) {
+<span class="nc" id="L39">    int localizedLayoutId = INTERNAL_LAYOUT_ID_LOOKUP.get(layoutId);</span>
+<span class="nc bnc" id="L40" title="All 2 branches missed.">    if(localizedLayoutId &gt; 0) {</span>
+<span class="nc" id="L41">      final Object tag = view.getTag();</span>
+<span class="nc bnc" id="L42" title="All 2 branches missed.">      if(tag == null) {</span>
+<span class="nc" id="L43">        throw new RuntimeException(&quot;view must have a tag&quot;);</span>
+      }
+<span class="nc bnc" id="L45" title="All 4 branches missed.">      switch(localizedLayoutId) {</span>
+        case  LAYOUT_ACTIVITYHOMEPAGE: {
+<span class="nc bnc" id="L47" title="All 2 branches missed.">          if (&quot;layout/activity_home_page_0&quot;.equals(tag)) {</span>
+<span class="nc" id="L48">            return new ActivityHomePageBindingImpl(component, view);</span>
+          }
+<span class="nc" id="L50">          throw new IllegalArgumentException(&quot;The tag for activity_home_page is invalid. Received: &quot; + tag);</span>
+        }
+        case  LAYOUT_ACTIVITYMAIN: {
+<span class="nc bnc" id="L53" title="All 2 branches missed.">          if (&quot;layout/activity_main_0&quot;.equals(tag)) {</span>
+<span class="nc" id="L54">            return new ActivityMainBindingImpl(component, view);</span>
+          }
+<span class="nc" id="L56">          throw new IllegalArgumentException(&quot;The tag for activity_main is invalid. Received: &quot; + tag);</span>
+        }
+        case  LAYOUT_FRAGMENTINITIALPOST: {
+<span class="nc bnc" id="L59" title="All 2 branches missed.">          if (&quot;layout/fragment_initial_post_0&quot;.equals(tag)) {</span>
+<span class="nc" id="L60">            return new FragmentInitialPostBindingImpl(component, view);</span>
+          }
+<span class="nc" id="L62">          throw new IllegalArgumentException(&quot;The tag for fragment_initial_post is invalid. Received: &quot; + tag);</span>
+        }
+      }
+    }
+<span class="nc" id="L66">    return null;</span>
+  }
+
+  @Override
+  public ViewDataBinding getDataBinder(DataBindingComponent component, View[] views, int layoutId) {
+<span class="nc bnc" id="L71" title="All 4 branches missed.">    if(views == null || views.length == 0) {</span>
+<span class="nc" id="L72">      return null;</span>
+    }
+<span class="nc" id="L74">    int localizedLayoutId = INTERNAL_LAYOUT_ID_LOOKUP.get(layoutId);</span>
+<span class="nc bnc" id="L75" title="All 2 branches missed.">    if(localizedLayoutId &gt; 0) {</span>
+<span class="nc" id="L76">      final Object tag = views[0].getTag();</span>
+<span class="nc bnc" id="L77" title="All 2 branches missed.">      if(tag == null) {</span>
+<span class="nc" id="L78">        throw new RuntimeException(&quot;view must have a tag&quot;);</span>
+      }
+<span class="nc" id="L80">      switch(localizedLayoutId) {</span>
+      }
+    }
+<span class="nc" id="L83">    return null;</span>
+  }
+
+  @Override
+  public int getLayoutId(String tag) {
+<span class="nc bnc" id="L88" title="All 2 branches missed.">    if (tag == null) {</span>
+<span class="nc" id="L89">      return 0;</span>
+    }
+<span class="nc" id="L91">    Integer tmpVal = InnerLayoutIdLookup.sKeys.get(tag);</span>
+<span class="nc bnc" id="L92" title="All 2 branches missed.">    return tmpVal == null ? 0 : tmpVal;</span>
+  }
+
+  @Override
+  public String convertBrIdToString(int localId) {
+<span class="nc" id="L97">    String tmpVal = InnerBrLookup.sKeys.get(localId);</span>
+<span class="nc" id="L98">    return tmpVal;</span>
+  }
+
+  @Override
+  public List&lt;DataBinderMapper&gt; collectDependencies() {
+<span class="nc" id="L103">    ArrayList&lt;DataBinderMapper&gt; result = new ArrayList&lt;DataBinderMapper&gt;(1);</span>
+<span class="nc" id="L104">    result.add(new androidx.databinding.library.baseAdapters.DataBinderMapperImpl());</span>
+<span class="nc" id="L105">    return result;</span>
+  }
+
+  private static class InnerBrLookup {
+<span class="nc" id="L109">    static final SparseArray&lt;String&gt; sKeys = new SparseArray&lt;String&gt;(1);</span>
+
+    static {
+<span class="nc" id="L112">      sKeys.put(0, &quot;_all&quot;);</span>
+<span class="nc" id="L113">    }</span>
+  }
+
+  private static class InnerLayoutIdLookup {
+<span class="nc" id="L117">    static final HashMap&lt;String, Integer&gt; sKeys = new HashMap&lt;String, Integer&gt;(3);</span>
+
+    static {
+<span class="nc" id="L120">      sKeys.put(&quot;layout/activity_home_page_0&quot;, com.example.android.tumblrx2.R.layout.activity_home_page);</span>
+<span class="nc" id="L121">      sKeys.put(&quot;layout/activity_main_0&quot;, com.example.android.tumblrx2.R.layout.activity_main);</span>
+<span class="nc" id="L122">      sKeys.put(&quot;layout/fragment_initial_post_0&quot;, com.example.android.tumblrx2.R.layout.fragment_initial_post);</span>
+<span class="nc" id="L123">    }</span>
+  }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>

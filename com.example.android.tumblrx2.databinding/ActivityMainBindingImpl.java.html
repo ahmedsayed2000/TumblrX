@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ActivityMainBindingImpl.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">TumblrX2$LoginViewModelTest.exec</a> &gt; <a href="index.source.html" class="el_package">com.example.android.tumblrx2.databinding</a> &gt; <span class="el_source">ActivityMainBindingImpl.java</span></div><h1>ActivityMainBindingImpl.java</h1><pre class="source lang-java linenums">package com.example.android.tumblrx2.databinding;
+import com.example.android.tumblrx2.R;
+import com.example.android.tumblrx2.BR;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import android.view.View;
+@SuppressWarnings(&quot;unchecked&quot;)
+public class ActivityMainBindingImpl extends ActivityMainBinding  {
+
+    @Nullable
+    private static final androidx.databinding.ViewDataBinding.IncludedLayouts sIncludes;
+    @Nullable
+    private static final android.util.SparseIntArray sViewsWithIds;
+    static {
+<span class="nc" id="L15">        sIncludes = null;</span>
+<span class="nc" id="L16">        sViewsWithIds = new android.util.SparseIntArray();</span>
+<span class="nc" id="L17">        sViewsWithIds.put(R.id.go_to_home, 1);</span>
+<span class="nc" id="L18">        sViewsWithIds.put(R.id.btn_intro, 2);</span>
+<span class="nc" id="L19">        sViewsWithIds.put(R.id.btn_activity, 3);</span>
+<span class="nc" id="L20">        sViewsWithIds.put(R.id.btn_new_message, 4);</span>
+<span class="nc" id="L21">        sViewsWithIds.put(R.id.user_blog, 5);</span>
+<span class="nc" id="L22">        sViewsWithIds.put(R.id.btn_create_blog, 6);</span>
+<span class="nc" id="L23">        sViewsWithIds.put(R.id.btn_blog, 7);</span>
+<span class="nc" id="L24">    }</span>
+    // views
+    @NonNull
+    private final android.widget.LinearLayout mboundView0;
+    // variables
+    // values
+    // listeners
+    // Inverse Binding Event Handlers
+
+    public ActivityMainBindingImpl(@Nullable androidx.databinding.DataBindingComponent bindingComponent, @NonNull View root) {
+<span class="nc" id="L34">        this(bindingComponent, root, mapBindings(bindingComponent, root, 8, sIncludes, sViewsWithIds));</span>
+<span class="nc" id="L35">    }</span>
+    private ActivityMainBindingImpl(androidx.databinding.DataBindingComponent bindingComponent, View root, Object[] bindings) {
+<span class="nc" id="L37">        super(bindingComponent, root, 0</span>
+            , (android.widget.Button) bindings[3]
+            , (android.widget.Button) bindings[7]
+            , (android.widget.Button) bindings[6]
+            , (android.widget.Button) bindings[2]
+            , (android.widget.Button) bindings[4]
+            , (android.widget.Button) bindings[1]
+            , (android.widget.Button) bindings[5]
+            );
+<span class="nc" id="L46">        this.mboundView0 = (android.widget.LinearLayout) bindings[0];</span>
+<span class="nc" id="L47">        this.mboundView0.setTag(null);</span>
+<span class="nc" id="L48">        setRootTag(root);</span>
+        // listeners
+<span class="nc" id="L50">        invalidateAll();</span>
+<span class="nc" id="L51">    }</span>
+
+    @Override
+    public void invalidateAll() {
+<span class="nc" id="L55">        synchronized(this) {</span>
+<span class="nc" id="L56">                mDirtyFlags = 0x1L;</span>
+<span class="nc" id="L57">        }</span>
+<span class="nc" id="L58">        requestRebind();</span>
+<span class="nc" id="L59">    }</span>
+
+    @Override
+    public boolean hasPendingBindings() {
+<span class="nc" id="L63">        synchronized(this) {</span>
+<span class="nc bnc" id="L64" title="All 2 branches missed.">            if (mDirtyFlags != 0) {</span>
+<span class="nc" id="L65">                return true;</span>
+            }
+<span class="nc" id="L67">        }</span>
+<span class="nc" id="L68">        return false;</span>
+    }
+
+    @Override
+    public boolean setVariable(int variableId, @Nullable Object variable)  {
+<span class="nc" id="L73">        boolean variableSet = true;</span>
+<span class="nc" id="L74">            return variableSet;</span>
+    }
+
+    @Override
+    protected boolean onFieldChange(int localFieldId, Object object, int fieldId) {
+<span class="nc" id="L79">        switch (localFieldId) {</span>
+        }
+<span class="nc" id="L81">        return false;</span>
+    }
+
+    @Override
+    protected void executeBindings() {
+<span class="nc" id="L86">        long dirtyFlags = 0;</span>
+<span class="nc" id="L87">        synchronized(this) {</span>
+<span class="nc" id="L88">            dirtyFlags = mDirtyFlags;</span>
+<span class="nc" id="L89">            mDirtyFlags = 0;</span>
+<span class="nc" id="L90">        }</span>
+        // batch finished
+<span class="nc" id="L92">    }</span>
+    // Listener Stub Implementations
+    // callback impls
+    // dirty flag
+<span class="nc" id="L96">    private  long mDirtyFlags = 0xffffffffffffffffL;</span>
+    /* flag mapping
+        flag 0 (0x1L): null
+    flag mapping end*/
+    //end
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>
