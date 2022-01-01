@@ -572,9 +572,9 @@ jQuery.cookie = function(name, value, options) {
     <body>
         <div id="container">
             <div id="header">
-                <div class="time" xmlns="">4.41 s</div>
+                <div class="time" xmlns="">893 ms</div>
                 <h1>
-                    ActivityChatTest: <strong><span class="total" xmlns="http://www.w3.org/1999/xhtml">4 total, </span><span class="passed">4 passed</span></strong>
+                    ActivityChatTest: <strong><span class="total" xmlns="http://www.w3.org/1999/xhtml">1 total, </span><span class="failed">1 failed</span></strong>
                 </h1>
                 <div id="treecontrol">
                     <ul>
@@ -591,30 +591,20 @@ jQuery.cookie = function(name, value, options) {
             </div>
             <div id="content">
                 <ul id="tree">
-                    <li xmlns="" class="level top open">
+                    <li xmlns="" class="level top failed open">
                         <span><em class="time">
-                                <div class="time">4.41 s</div>
+                                <div class="time">893 ms</div>
                             </em>com.example.android.tumblrx2.ActivityChatTest</span>
                         <ul>
-                            <li class="level test">
+                            <li class="level test failed open">
                                 <span><em class="time">
-                                        <div class="time">1.63 s</div>
-                                    </em><em class="status">passed</em>testChatList</span>
-                            </li>
-                            <li class="level test">
-                                <span><em class="time">
-                                        <div class="time">1.02 s</div>
-                                    </em><em class="status">passed</em>testEditText</span>
-                            </li>
-                            <li class="level test">
-                                <span><em class="time">
-                                        <div class="time">665 ms</div>
-                                    </em><em class="status">passed</em>testUserName</span>
-                            </li>
-                            <li class="level test">
-                                <span><em class="time">
-                                        <div class="time">1.10 s</div>
-                                    </em><em class="status">passed</em>testSendMsg</span>
+                                        <div class="time">893 ms</div>
+                                    </em><em class="status">failed</em>testChatList</span>
+                                <ul>
+                                    <li class="text">
+                                        <span class="stderr">java.lang.NullPointerException<br/>	at com.example.android.tumblrx2.chat.ActivityChat.onCreate(ActivityChat.kt:26)<br/>	at android.app.Activity.performCreate(Activity.java:7136)<br/>	at android.app.Activity.performCreate(Activity.java:7127)<br/>	at android.app.Instrumentation.callActivityOnCreate(Instrumentation.java:1272)<br/>	at androidx.test.runner.MonitoringInstrumentation.callActivityOnCreate(MonitoringInstrumentation.java:730)<br/>	at android.app.ActivityThread.performLaunchActivity(ActivityThread.java:2908)<br/>	at android.app.ActivityThread.handleLaunchActivity(ActivityThread.java:3063)<br/>	at android.app.servertransaction.LaunchActivityItem.execute(LaunchActivityItem.java:78)<br/>	at android.app.servertransaction.TransactionExecutor.executeCallbacks(TransactionExecutor.java:108)<br/>	at android.app.servertransaction.TransactionExecutor.execute(TransactionExecutor.java:68)<br/>	at android.app.ActivityThread$H.handleMessage(ActivityThread.java:1823)<br/>	at android.os.Handler.dispatchMessage(Handler.java:107)<br/>	at android.os.Looper.loop(Looper.java:198)<br/>	at android.app.ActivityThread.main(ActivityThread.java:6729)<br/>	at java.lang.reflect.Method.invoke(Native Method)<br/>	at com.android.internal.os.RuntimeInit$MethodAndArgsCaller.run(RuntimeInit.java:493)<br/>	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:876)<br/></span>
+                                    </li>
+                                </ul>
                             </li>
                         </ul>
                     </li>
