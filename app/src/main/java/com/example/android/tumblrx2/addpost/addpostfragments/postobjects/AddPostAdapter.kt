@@ -20,6 +20,10 @@ import com.giphy.sdk.ui.views.GPHMediaView
 import io.github.ponnamkarthik.richlinkpreview.RichLinkView
 import io.github.ponnamkarthik.richlinkpreview.ViewListener
 
+
+/**
+ * this class is the post listView adapter that stores the post items
+ */
 class AddPostAdapter : ArrayAdapter<AddPostItem> {
 
 
@@ -55,6 +59,13 @@ class AddPostAdapter : ArrayAdapter<AddPostItem> {
     }
 
 
+    /**
+     * this function retrieves a view to display in the UI in the position specified
+     * @param[position] the position of the view in the list view
+     * @param[convertView] a view that is already inflated before to help UI not to inflate many views
+     * @param[parent] the parent viewGroup
+     * @return a view that corresponds to an item in the post list
+     */
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
 
         val listItem = listOfItems.get(position)
@@ -183,10 +194,21 @@ class AddPostAdapter : ArrayAdapter<AddPostItem> {
         return view!!
     }
 
+    /**
+     * this function initialise the gif that will be added to the list
+     * @param[view] the gif view
+     * @param[giphMedia] the gif media or url
+     */
     private fun initGiph(view: GPHMediaView, giphMedia: Media?) {
         view.setMedia(giphMedia, RenditionType.original)
     }
 
+
+    /**
+     * this function initialise the link preview that will be added to the list
+     * @param[view] the link view
+     * @param[content] the url of the link
+     */
     private fun initPreview(view: RichLinkView, content: String) {
         view.setLink(content, object : ViewListener {
             override fun onSuccess(status: Boolean) {
@@ -209,6 +231,12 @@ class AddPostAdapter : ArrayAdapter<AddPostItem> {
         return 7
     }
 
+    /**
+     * this function initialise the text editor that will be added to the list
+     * @param[view] the EditText view
+     * @param[detector] the gesture detector for the text editor
+     * @param[item] the list item corresponds to the text editor
+     */
     private fun initText(view: EditText, detector: GestureDetectorCompat, item: AddPostItem) {
         val param = RelativeLayout.LayoutParams(
             ViewGroup.LayoutParams.MATCH_PARENT,
@@ -248,6 +276,12 @@ class AddPostAdapter : ArrayAdapter<AddPostItem> {
 
     }
 
+
+    /**
+     * this function initialise the image that will be added to the list
+     * @param[view] the image view
+     * @param[content] the image uri
+     */
     private fun initImage(view: ImageView, content: String) {
         val param = RelativeLayout.LayoutParams(
             ViewGroup.LayoutParams.MATCH_PARENT,
@@ -261,6 +295,13 @@ class AddPostAdapter : ArrayAdapter<AddPostItem> {
         view.scaleType = ImageView.ScaleType.CENTER_CROP
     }
 
+
+    /**
+     * this function initialise the video that will be added to the list
+     * @param[view] the video view
+     * @param[content] the video uri
+     * @param[mediaController] the media controller to control the video state
+     */
     private fun initVideo(view: VideoView, mediaController: MediaController, content: String) {
         val param = RelativeLayout.LayoutParams(
             ViewGroup.LayoutParams.MATCH_PARENT,
@@ -293,6 +334,11 @@ class AddPostAdapter : ArrayAdapter<AddPostItem> {
         view.start()*/
     }
 
+    /**
+     * this function initialise the link box that will be added to the list
+     * @param[view] the link box view
+     * @param[item] the list item corresponds to the text editor
+     */
     private fun initLink(view: View, item: AddPostItem) {
         val close = view.findViewById<ImageButton>(R.id.link_close)
         val linkButton = view.findViewById<ImageButton>(R.id.link_button)

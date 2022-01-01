@@ -54,6 +54,9 @@ import retrofit2.Response
 import java.io.ByteArrayOutputStream
 import java.io.File
 
+/**
+ * this is the class that does the logic of the AddPost fragment
+ */
 class AddPostViewModel : ViewModel() {
 
 
@@ -155,6 +158,11 @@ class AddPostViewModel : ViewModel() {
 
     }
 
+    /**
+     * this function initialises some variables needed for the logic
+     * @param[view] the add post list view
+     * @param[context] the current context
+     */
     fun initViews(view: ListView, context: Context) {
 
         // context and needed objects
@@ -175,6 +183,10 @@ class AddPostViewModel : ViewModel() {
 
     }
 
+    /**
+     * this function uses the postListViews to find the current active text editor
+     * @return the index of the current active text editor or -1 indicating no active editors
+     */
     private fun getActiveText(): Int {
         val size = postListView.childCount
         for (i in 0 until size) {
@@ -187,11 +199,19 @@ class AddPostViewModel : ViewModel() {
         return -1
     }
 
+    /**
+     * this function toggles the post button color depending on the list items count
+     * @param[toggle] a boolean indicates the toggle state
+     */
     private fun togglePostButton(toggle: Boolean) {
         // if true the post button is blue else gray
         togglePostButton.value = toggle
     }
 
+    /**
+     * adds an image with a specified uri to the post list
+     * @param[uri] image uri
+     */
     fun addImage(uri: Uri) {
         // getting the index to add to
         val index = getActiveText()
@@ -205,6 +225,10 @@ class AddPostViewModel : ViewModel() {
         togglePostButton(true)
     }
 
+    /**
+     * adds images with a specified uri to the post list
+     * @param[clipData] the collection of the images uris
+     */
     fun addImages(clipData: ClipData) {
         // getting the index to add to
         val index = getActiveText()
@@ -221,6 +245,9 @@ class AddPostViewModel : ViewModel() {
         togglePostButton(true)
     }
 
+    /**
+     * adds a text editor
+     */
     fun addText() {
         Log.d("initial fragment", "add text")
         val count = postListView.childCount
@@ -244,7 +271,10 @@ class AddPostViewModel : ViewModel() {
 
     }
 
-
+    /**
+     * edit the text size of the text editor with the specified index
+     * @param[index] the index of the textEditor in the list
+     */
     private fun editSelectedTextSize(index: Int) {
         // getting the text editor to increase its text size
         Log.d("initial fragment", "before area")
@@ -330,6 +360,9 @@ class AddPostViewModel : ViewModel() {
         }
     }
 
+    /**
+     * insert a link box
+     */
     fun insertLink() {
         val index = getActiveText()
         if (index == -1) {
@@ -342,6 +375,10 @@ class AddPostViewModel : ViewModel() {
     }
 
 
+    /**
+     * initialising the text bottom sheet that contains the color palette and text styles
+     * @param[view] the text bottom sheet view
+     */
     fun initTextBottomSheet(view: View) {
         // setting buttons
 
@@ -602,6 +639,9 @@ class AddPostViewModel : ViewModel() {
         }
     }
 
+    /**
+     * initialise the giphy bottom sheet
+     */
     fun initialiseGifView(view: View) {
         val grid = view.findViewById<GiphyGridView>(R.id.gifsGridView)
         grid.content = GPHContent.trendingGifs
@@ -642,6 +682,10 @@ class AddPostViewModel : ViewModel() {
         }
     }
 
+    /**
+     * adds a video to the postlist with a specified uri
+     * @param[uri] video uri
+     */
     fun addVideo(uri: Uri) {
         val real = getRealPath(uri.toString())
 
@@ -661,6 +705,11 @@ class AddPostViewModel : ViewModel() {
         //adapter.notifyDataSetChanged()
     }
 
+    /**
+     * post the postList of items to the server using a repository
+     * @param[id] id of the blog
+     * @param[postType] the post type such as Private / PostNow / Draft
+     */
     fun postToBlog(id: String, postType: String) {
         //prepareList()
         prepareTags()
@@ -673,6 +722,7 @@ class AddPostViewModel : ViewModel() {
         }
     }
 
+
     private fun prepareTags() {
         val index = 0
         for (tag in selectedBlogs.value!!) {
@@ -682,6 +732,9 @@ class AddPostViewModel : ViewModel() {
     }
 
 
+    /**
+     * this function prepares the parts of the request that will be sent to the sever
+     */
     private fun prepareList() {
 
         var index = 0
@@ -719,6 +772,11 @@ class AddPostViewModel : ViewModel() {
     }
 
 
+    /**
+     * preparing the link part that will be sent to the server
+     * @param[index] the index of the post item in the list
+     * @param[item] the item that holds the data
+     */
     private fun preparePreviewPart(index: Int, item: AddPostItem) {
         val part = MultipartBody.Part.createFormData("content[${index}][type]", "link")
         val part1 = MultipartBody.Part.createFormData("content[${index}][url]", item.content)
@@ -728,6 +786,10 @@ class AddPostViewModel : ViewModel() {
 
     }
 
+    /**
+     * preparing the text part that will be sent to the server
+     * @param[index] the index of the post item in the list
+     */
     private fun prepareTextPart(index: Int) {
 
         val item = postListItems.value?.get(index) as AddPostItem
@@ -830,6 +892,11 @@ class AddPostViewModel : ViewModel() {
 
     }
 
+    /**
+     * preparing the gif part that will be sent to the server
+     * @param[index] the index of the post item in the list
+     * @param[item] the item that holds the data
+     */
     private fun prepareGifPart(index: Int, item: AddPostItem) {
 
         val mediaView = postListView.getChildAt(index) as GPHMediaView
@@ -853,6 +920,11 @@ class AddPostViewModel : ViewModel() {
         contentList.add(part2)
     }
 
+    /**
+     * preparing the link part that will be sent to the server
+     * @param[index] the index of the post item in the list
+     * @param[path] the path of the video
+     */
     private fun prepareVideoPart(path: String, index: Int) {
         val file = File(path)
 
@@ -888,6 +960,11 @@ class AddPostViewModel : ViewModel() {
         }
     }
 
+    /**
+     * preparing the image part that will be sent to the server
+     * @param[index] the index of the post item in the list
+     * @param[uriString] the uri of the image
+     */
 
     private fun prepareImagePart(uriString: String, index: Int) {
         val uri = (Uri.parse(uriString)) as Uri
@@ -915,6 +992,10 @@ class AddPostViewModel : ViewModel() {
 
 
 
+    /**
+     * getting the real path of the media from the phone storage
+     * @param[uriString] the uri of the media
+     */
     private fun getRealPath(uriString: String): String {
         val proj = arrayOf(MediaStore.Images.Media.DATA)
         val cursor = context.contentResolver.query(Uri.parse(uriString), proj, null, null, null)
@@ -924,12 +1005,15 @@ class AddPostViewModel : ViewModel() {
             cursor.moveToFirst()
             result = cursor.getString(columnIndex)
             cursor.close()
-            return result
         }
         return result
     }
 
 
+    /**
+     * initialize the tag bottom sheet
+     * @param[view] the tag bottom sheet view
+     */
     fun initTagSheet(view: View) {
         val button = view.findViewById<Button>(R.id.done_button)
         val topChipGroup = view.findViewById<ChipGroup>(R.id.top_chipGroup)
@@ -990,6 +1074,11 @@ class AddPostViewModel : ViewModel() {
 
     }
 
+    /**
+     * initialise the top chip group with the selected tags
+     * @param[topGroup] the top chip group
+     * @param[bottomGroup] the bottom chip group
+     */
     private fun initTopChipGroup(topGroup: ChipGroup, bottomGroup: ChipGroup) {
         val list = selectedBlogs.value
         for (chip in list!!) {
@@ -997,6 +1086,11 @@ class AddPostViewModel : ViewModel() {
         }
     }
 
+    /**
+     * filling the bottom chip group with searched blogs
+     * @param[bottomChipGroup] the bottom chip group
+     * @param[topChipGroup] the top chip group
+     */
     private fun fillChipGroup(bottomChipGroup: ChipGroup, topChipGroup: ChipGroup) {
 
         if (searchedBlogs != null) {
@@ -1015,6 +1109,12 @@ class AddPostViewModel : ViewModel() {
 
     }
 
+    /**
+     * adding a chip (tag) to in the bottom chip group
+     * @param[text] the text of the chip
+     * @param[topGroup] the top chip group
+     * @param[bottomGroup] the bottom chip group
+     */
     fun addBottomChip(text: String, topGroup: ChipGroup, bottomGroup: ChipGroup) {
         val chip = Chip(context)
 
@@ -1032,6 +1132,12 @@ class AddPostViewModel : ViewModel() {
         bottomGroup.addView(chip)
     }
 
+    /**
+     * adding a chip to in the top chip group
+     * @param[text] the text of the chip
+     * @param[topGroup] the top chip group
+     * @param[bottomGroup] the bottom chip group
+     */
     fun addTopChip(text: String, topGroup: ChipGroup, bottomGroup: ChipGroup, add: Boolean) {
         val chip = Chip(context)
 

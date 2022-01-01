@@ -22,6 +22,15 @@ import retrofit2.Response
 
 class AddPostRepository() {
 
+    /**
+     * creating a post with the specified data
+     * @param[id] the blog id
+     * @param[context] the context of the app to access shared preferences and get the token
+     * @param[postType] the post type private / draft / post
+     * @param[contentList] the post content
+     * @param[tagsList] post tags
+     * @param[fileList] the list of files like images and video
+     */
     fun postToBlog(
         context: Context,
         postViewModel: AddPostViewModel,
@@ -64,6 +73,10 @@ class AddPostRepository() {
         )
     }
 
+    /**
+     * get the blogs handles with the specified
+     * @param[searchBlog] the blog handle that matches the specified string
+     */
     fun searchBlogs(searchBlog: String): Call<BlogSearchList> {
 
         val client = WebServiceClient().buildApi(AddPostApi::class.java)
@@ -75,6 +88,10 @@ class AddPostRepository() {
 
 
 
+    /**
+     * getting the user blogs info
+     * @param[context] the context of the app to access shared preferences and get the token
+     */
     fun getBlogs(context: Context): Call<MutableList<BlogEntity>> {
         val sharedPref = context.getSharedPreferences("appPref", Context.MODE_PRIVATE)
         val token = sharedPref.getString("token", null)

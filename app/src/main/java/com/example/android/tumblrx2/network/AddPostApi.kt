@@ -9,11 +9,20 @@ import okhttp3.MultipartBody
 import retrofit2.Call
 import retrofit2.http.*
 
+/**
+ * the api used in add post request
+ */
  interface AddPostApi {
 
 
-
-
+    /**
+     * creating a post with the specified data
+     * @param[id] the blog id
+     * @param[state] the post state
+     * @param[content] the post content
+     * @param[tag] post tags
+     * @param[fileList] the list of files like images and video
+     */
     @Multipart
     @POST("/api/blog/{blogid}/posts")
     fun postToBlog(
@@ -26,10 +35,18 @@ import retrofit2.http.*
     ): Call<LoginResponse>
 
 
+    /**
+     * get the blogs handles with the specified
+     * @param[blogSearch] the blog handle that matches the specified string
+     */
     @GET("/api/blog/search")
     fun getTagSearch(@Query("q") blogSearch: String): Call<BlogSearchList>
 
 
+    /**
+     * getting the user blogs info
+     * @param[header] the token of the user
+     */
      @GET("api/user/get-blogs")
      fun getBlogs(@Header("Authorization") header: String): Call<MutableList<BlogEntity>>
 

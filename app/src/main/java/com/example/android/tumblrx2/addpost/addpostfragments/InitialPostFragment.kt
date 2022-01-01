@@ -38,11 +38,15 @@ import retrofit2.Response
 /**
  * this is the starter fragment in the AddPostActivity
  * @property[binding] the fragment binding object the holds the UI
- * @property[mediaController] mediaController to control the video in the post
  * @property[oneVideo] a boolean that indicates that the post has one video
- * @property[items] array that represents the media Type options
- * @property[textMap] a map that relates each text editor with its text size
- * @property[textSizes] array represents the text sizes
+ * @property[adapter] the post list array adapter
+ * @property[viewModel] the add post fragment view model that separates the logic from the UI
+ * @property[oneVideo] a boolean to control that only one video is added
+ * @property[blogList] the list that is used to save the Blogs info of the user
+ * @property[userIds] list of user ids
+ * @property[userHandles] list of user blogs handles
+ * @property[userTitles] list of user blogs titles
+ * @property[userImageUrls] list of user blogs images
  * @property[imageLauncher] used in register the result of image returned
  * @property[videoLauncher] used in register the result of video/gif returned
  */
@@ -85,6 +89,7 @@ class InitialPostFragment : Fragment() {
                     Log.d("Initial fragment", "more than one image")
                     viewModel.addImages(clipData)
                 } else {
+                    Log.d("Initial fragment", "only one image")
                     it.data!!.data?.let { it1 -> viewModel.addImage(it1) }
                 }
                 adapter.notifyDataSetChanged()
@@ -177,8 +182,9 @@ class InitialPostFragment : Fragment() {
     }
 
 
-
-
+    /**
+     * this function retrieves the user info from the server
+     */
 
     fun initBlogList() {
         val repo = AddPostRepository()
@@ -211,7 +217,7 @@ class InitialPostFragment : Fragment() {
     }
 
     /**
-     *
+     * this function initialize the user info such as his blogs handles, ids, titles and header images
      */
     fun initUserInfo() {
         for(blog in blogList) {
@@ -223,7 +229,8 @@ class InitialPostFragment : Fragment() {
         }
     }
     /**
-     *
+     * this function observes the tags count from the view model to add them in the UI
+     * @param[count] the current tags count if zero -> no tags are added
      */
     private fun insertTags(count: Int) {
 
@@ -336,7 +343,7 @@ class InitialPostFragment : Fragment() {
 
         binding.insertText.setOnClickListener {
             viewModel.insertOrEditText()
-            adapter.notifyDataSetChanged()
+            //adapter.notifyDataSetChanged()
         }
 
         binding.insertText.setOnLongClickListener {
@@ -397,7 +404,8 @@ class InitialPostFragment : Fragment() {
 
 
     /**
-     *
+     * this function initialize the views of the post options bottom sheet
+     * @param[view] the inflated bottom sheet
      */
     fun initMoresheet(view: View) {
         val now = view.findViewById<MaterialCardView>(R.id.post_now_card)
@@ -500,6 +508,12 @@ class InitialPostFragment : Fragment() {
         videoLauncher.launch(intent)
     }
 
+    /**
+     * this function checks for the specified permission
+     * @param[permission] the permission to ask the user to grant
+     * @param[code] the permission request code
+     */
+
     fun checkForPermission(permission: String, name: String, code: Int) {
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             when {
@@ -535,6 +549,12 @@ class InitialPostFragment : Fragment() {
             }
         }
     }
+
+    /**
+     * this function shows a dialog to request a permission
+     * @param[permission] the permission to request
+     * @param[code] the requesting code
+     */
 
     fun showDialog(permission: String, code:Int ) {
         val builder = AlertDialog.Builder(context)
