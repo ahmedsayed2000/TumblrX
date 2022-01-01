@@ -10,6 +10,9 @@ class PostsViewModel : ViewModel() {
 
     lateinit var posts : PostsResponse
 
+    /**
+     * Triggers API call for getting posts of a blog
+     */
     suspend fun getBlogPosts(token:String,id:String) : Response<PostsResponse>{
         return RetrofitInstance.api.getBlogPosts(token,id)
     }

@@ -22,6 +22,9 @@ class MessagesListAdapter(context:Context,chats:List<Data>): BaseAdapter() {
     private val myChats:List<Data>
 
 
+    /**
+     * Sets context and chats list for adapter
+     */
     init {
         myContext=context
         myChats=chats

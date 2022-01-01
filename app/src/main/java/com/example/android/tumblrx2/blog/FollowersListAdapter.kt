@@ -16,6 +16,9 @@ class FollowersListAdapter(context:Context,following:List<FollowingBlog>,number:
     private val myFollowing: List<FollowingBlog>
     private val followingNumber:Int
 
+    /**
+     * Constructor for Adapter, sets context and following list
+     */
     init {myContext=context
     myFollowing=following
     followingNumber=number}

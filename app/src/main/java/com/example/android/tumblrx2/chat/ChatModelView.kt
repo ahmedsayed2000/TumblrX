@@ -7,6 +7,9 @@ import retrofit2.Response
 
 class ChatModelView() : ViewModel() {
 
+    /**
+     * Triggers API call to get a list of conversations
+     */
      suspend fun getChats(token:String) :Response<ChatsResponse>{
         return RetrofitInstance.api.getChats(token)
     }

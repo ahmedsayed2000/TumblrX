@@ -21,6 +21,9 @@ class ActivityFragment: Fragment() {
         return view
     }
 
+    /**
+     * Displays bottom sheet for activity filtering
+     */
     private fun showBottomSheet()
     {
         val bottomSheetDialog = BottomSheetDialog(requireContext())

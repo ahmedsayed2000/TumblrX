@@ -17,6 +17,9 @@ class PostsListsAdapter(context:Context,posts:List<Data>): BaseAdapter() {
     private val myPosts: List<Data>
 
 
+    /**
+     * Sets context and posts list for adapter
+     */
     init {
         myContext=context
         myPosts=posts

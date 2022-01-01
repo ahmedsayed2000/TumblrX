@@ -18,6 +18,9 @@ class LikesListAdapter(context:Context,posts:List<LikePost>): BaseAdapter() {
     private val myPosts: List<LikePost>
 
 
+    /**
+     * Sets context and posts list for adapter
+     */
     init {
         myContext=context
         myPosts=posts

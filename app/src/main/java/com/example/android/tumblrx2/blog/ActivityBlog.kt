@@ -116,6 +116,9 @@ class ActivityBlog : AppCompatActivity() {
 
     }
 
+    /**
+     * Displays bottom sheet for creating a blog
+     */
     private fun showBottomSheet()
     {
         val bottomSheetDialog = BottomSheetDialog(this)

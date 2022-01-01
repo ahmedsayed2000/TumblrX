@@ -13,6 +13,9 @@ class ActivityListAdapter(context:Context): BaseAdapter() {
 
     private val myContext: Context
 
+    /**
+     * Sets Context for Adapter
+     */
     init {myContext=context}
 
     override fun getCount(): Int {

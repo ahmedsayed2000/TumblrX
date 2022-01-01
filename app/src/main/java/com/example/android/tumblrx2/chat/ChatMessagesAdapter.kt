@@ -16,6 +16,9 @@ class ChatMessagesAdapter(context:Context,messages:List<Message>,name:String): B
     private val myMessages: List<Message>
     private val otherUser:String
 
+    /**
+     * Sets context and messages list for adapter
+     */
     init {
         myContext=context
     myMessages=messages

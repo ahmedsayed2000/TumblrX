@@ -23,6 +23,9 @@ class NewMessageListAdapter(context:Context,following:List<FollowingBlog>): Base
     private val myFollowing:List<FollowingBlog>
 
 
+    /**
+     * Sets context and following list for adapter
+     */
     init {
         myContext=context
         myFollowing=following
