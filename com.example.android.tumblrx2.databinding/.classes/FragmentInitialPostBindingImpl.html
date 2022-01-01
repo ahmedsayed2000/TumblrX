@@ -1,0 +1,210 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: FragmentInitialPostBindingImpl</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">com.example.android.tumblrx2.databinding</a> ]
+</div>
+
+<h1>Coverage Summary for Class: FragmentInitialPostBindingImpl (com.example.android.tumblrx2.databinding)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">FragmentInitialPostBindingImpl</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 8)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 47)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package com.example.android.tumblrx2.databinding;
+<i>2</i>&nbsp;import com.example.android.tumblrx2.R;
+<i>3</i>&nbsp;import com.example.android.tumblrx2.BR;
+<i>4</i>&nbsp;import androidx.annotation.NonNull;
+<i>5</i>&nbsp;import androidx.annotation.Nullable;
+<i>6</i>&nbsp;import android.view.View;
+<i>7</i>&nbsp;@SuppressWarnings(&quot;unchecked&quot;)
+<i>8</i>&nbsp;public class FragmentInitialPostBindingImpl extends FragmentInitialPostBinding  {
+<i>9</i>&nbsp;
+<i>10</i>&nbsp;    @Nullable
+<i>11</i>&nbsp;    private static final androidx.databinding.ViewDataBinding.IncludedLayouts sIncludes;
+<i>12</i>&nbsp;    @Nullable
+<i>13</i>&nbsp;    private static final android.util.SparseIntArray sViewsWithIds;
+<i>14</i>&nbsp;    static {
+<b class="nc"><i>15</i>&nbsp;        sIncludes = null;</b>
+<b class="nc"><i>16</i>&nbsp;        sViewsWithIds = new android.util.SparseIntArray();</b>
+<b class="nc"><i>17</i>&nbsp;        sViewsWithIds.put(R.id.post_app_bar, 1);</b>
+<b class="nc"><i>18</i>&nbsp;        sViewsWithIds.put(R.id.close, 2);</b>
+<b class="nc"><i>19</i>&nbsp;        sViewsWithIds.put(R.id.post_button_card, 3);</b>
+<b class="nc"><i>20</i>&nbsp;        sViewsWithIds.put(R.id.post_button_text, 4);</b>
+<b class="nc"><i>21</i>&nbsp;        sViewsWithIds.put(R.id.icon_more, 5);</b>
+<b class="nc"><i>22</i>&nbsp;        sViewsWithIds.put(R.id.profile_card, 6);</b>
+<b class="nc"><i>23</i>&nbsp;        sViewsWithIds.put(R.id.profile_image, 7);</b>
+<b class="nc"><i>24</i>&nbsp;        sViewsWithIds.put(R.id.profile_name, 8);</b>
+<b class="nc"><i>25</i>&nbsp;        sViewsWithIds.put(R.id.post_list, 9);</b>
+<b class="nc"><i>26</i>&nbsp;        sViewsWithIds.put(R.id.insertion_bar, 10);</b>
+<b class="nc"><i>27</i>&nbsp;        sViewsWithIds.put(R.id.insert_text, 11);</b>
+<b class="nc"><i>28</i>&nbsp;        sViewsWithIds.put(R.id.insert_link, 12);</b>
+<b class="nc"><i>29</i>&nbsp;        sViewsWithIds.put(R.id.insert_gif, 13);</b>
+<b class="nc"><i>30</i>&nbsp;        sViewsWithIds.put(R.id.insert_media, 14);</b>
+<b class="nc"><i>31</i>&nbsp;        sViewsWithIds.put(R.id.insert_audio, 15);</b>
+<b class="nc"><i>32</i>&nbsp;        sViewsWithIds.put(R.id.tags, 16);</b>
+<b class="nc"><i>33</i>&nbsp;        sViewsWithIds.put(R.id.tags_card, 17);</b>
+<b class="nc"><i>34</i>&nbsp;        sViewsWithIds.put(R.id.add_icon, 18);</b>
+<b class="nc"><i>35</i>&nbsp;        sViewsWithIds.put(R.id.tags_area, 19);</b>
+<b class="nc"><i>36</i>&nbsp;        sViewsWithIds.put(R.id.tags_group, 20);</b>
+<i>37</i>&nbsp;    }
+<i>38</i>&nbsp;    // views
+<i>39</i>&nbsp;    @NonNull
+<i>40</i>&nbsp;    private final android.widget.RelativeLayout mboundView0;
+<i>41</i>&nbsp;    // variables
+<i>42</i>&nbsp;    // values
+<i>43</i>&nbsp;    // listeners
+<i>44</i>&nbsp;    // Inverse Binding Event Handlers
+<i>45</i>&nbsp;
+<i>46</i>&nbsp;    public FragmentInitialPostBindingImpl(@Nullable androidx.databinding.DataBindingComponent bindingComponent, @NonNull View root) {
+<b class="nc"><i>47</i>&nbsp;        this(bindingComponent, root, mapBindings(bindingComponent, root, 21, sIncludes, sViewsWithIds));</b>
+<i>48</i>&nbsp;    }
+<i>49</i>&nbsp;    private FragmentInitialPostBindingImpl(androidx.databinding.DataBindingComponent bindingComponent, View root, Object[] bindings) {
+<b class="nc"><i>50</i>&nbsp;        super(bindingComponent, root, 0</b>
+<i>51</i>&nbsp;            , (android.widget.ImageView) bindings[18]
+<i>52</i>&nbsp;            , (android.widget.ImageButton) bindings[2]
+<i>53</i>&nbsp;            , (android.widget.ImageButton) bindings[5]
+<i>54</i>&nbsp;            , (android.widget.ImageButton) bindings[15]
+<i>55</i>&nbsp;            , (android.widget.ImageButton) bindings[13]
+<i>56</i>&nbsp;            , (android.widget.ImageButton) bindings[12]
+<i>57</i>&nbsp;            , (android.widget.ImageButton) bindings[14]
+<i>58</i>&nbsp;            , (android.widget.ImageButton) bindings[11]
+<i>59</i>&nbsp;            , (android.widget.LinearLayout) bindings[10]
+<i>60</i>&nbsp;            , (com.google.android.material.appbar.AppBarLayout) bindings[1]
+<i>61</i>&nbsp;            , (com.google.android.material.card.MaterialCardView) bindings[3]
+<i>62</i>&nbsp;            , (android.widget.TextView) bindings[4]
+<i>63</i>&nbsp;            , (android.widget.ListView) bindings[9]
+<i>64</i>&nbsp;            , (com.google.android.material.card.MaterialCardView) bindings[6]
+<i>65</i>&nbsp;            , (de.hdodenhof.circleimageview.CircleImageView) bindings[7]
+<i>66</i>&nbsp;            , (android.widget.TextView) bindings[8]
+<i>67</i>&nbsp;            , (android.widget.ImageButton) bindings[16]
+<i>68</i>&nbsp;            , (android.widget.HorizontalScrollView) bindings[19]
+<i>69</i>&nbsp;            , (com.google.android.material.card.MaterialCardView) bindings[17]
+<i>70</i>&nbsp;            , (com.google.android.material.chip.ChipGroup) bindings[20]
+<i>71</i>&nbsp;            );
+<b class="nc"><i>72</i>&nbsp;        this.mboundView0 = (android.widget.RelativeLayout) bindings[0];</b>
+<b class="nc"><i>73</i>&nbsp;        this.mboundView0.setTag(null);</b>
+<b class="nc"><i>74</i>&nbsp;        setRootTag(root);</b>
+<i>75</i>&nbsp;        // listeners
+<b class="nc"><i>76</i>&nbsp;        invalidateAll();</b>
+<i>77</i>&nbsp;    }
+<i>78</i>&nbsp;
+<i>79</i>&nbsp;    @Override
+<i>80</i>&nbsp;    public void invalidateAll() {
+<b class="nc"><i>81</i>&nbsp;        synchronized(this) {</b>
+<b class="nc"><i>82</i>&nbsp;                mDirtyFlags = 0x1L;</b>
+<b class="nc"><i>83</i>&nbsp;        }</b>
+<b class="nc"><i>84</i>&nbsp;        requestRebind();</b>
+<i>85</i>&nbsp;    }
+<i>86</i>&nbsp;
+<i>87</i>&nbsp;    @Override
+<i>88</i>&nbsp;    public boolean hasPendingBindings() {
+<b class="nc"><i>89</i>&nbsp;        synchronized(this) {</b>
+<b class="nc"><i>90</i>&nbsp;            if (mDirtyFlags != 0) {</b>
+<b class="nc"><i>91</i>&nbsp;                return true;</b>
+<i>92</i>&nbsp;            }
+<b class="nc"><i>93</i>&nbsp;        }</b>
+<b class="nc"><i>94</i>&nbsp;        return false;</b>
+<i>95</i>&nbsp;    }
+<i>96</i>&nbsp;
+<i>97</i>&nbsp;    @Override
+<i>98</i>&nbsp;    public boolean setVariable(int variableId, @Nullable Object variable)  {
+<b class="nc"><i>99</i>&nbsp;        boolean variableSet = true;</b>
+<b class="nc"><i>100</i>&nbsp;            return variableSet;</b>
+<i>101</i>&nbsp;    }
+<i>102</i>&nbsp;
+<i>103</i>&nbsp;    @Override
+<i>104</i>&nbsp;    protected boolean onFieldChange(int localFieldId, Object object, int fieldId) {
+<b class="nc"><i>105</i>&nbsp;        switch (localFieldId) {</b>
+<i>106</i>&nbsp;        }
+<b class="nc"><i>107</i>&nbsp;        return false;</b>
+<i>108</i>&nbsp;    }
+<i>109</i>&nbsp;
+<i>110</i>&nbsp;    @Override
+<i>111</i>&nbsp;    protected void executeBindings() {
+<b class="nc"><i>112</i>&nbsp;        long dirtyFlags = 0;</b>
+<b class="nc"><i>113</i>&nbsp;        synchronized(this) {</b>
+<b class="nc"><i>114</i>&nbsp;            dirtyFlags = mDirtyFlags;</b>
+<b class="nc"><i>115</i>&nbsp;            mDirtyFlags = 0;</b>
+<b class="nc"><i>116</i>&nbsp;        }</b>
+<i>117</i>&nbsp;        // batch finished
+<i>118</i>&nbsp;    }
+<i>119</i>&nbsp;    // Listener Stub Implementations
+<i>120</i>&nbsp;    // callback impls
+<i>121</i>&nbsp;    // dirty flag
+<b class="nc"><i>122</i>&nbsp;    private  long mDirtyFlags = 0xffffffffffffffffL;</b>
+<i>123</i>&nbsp;    /* flag mapping
+<i>124</i>&nbsp;        flag 0 (0x1L): null
+<i>125</i>&nbsp;    flag mapping end*/
+<i>126</i>&nbsp;    //end
+<i>127</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2021-12-30 15:02</div>
+</div>
+</body>
+</html>

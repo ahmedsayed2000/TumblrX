@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>JacocoInstrumentation.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">TumblrX2$LoginViewModelTest.exec</a> &gt; <a href="index.source.html" class="el_package">com.example.android.tumblrx2</a> &gt; <span class="el_source">JacocoInstrumentation.java</span></div><h1>JacocoInstrumentation.java</h1><pre class="source lang-java linenums">package com.example.android.tumblrx2;
+
+import android.app.Activity;
+import android.app.Instrumentation;
+import android.content.Intent;
+import android.content.IntentFilter;
+import android.os.Bundle;
+import android.os.Looper;
+import android.util.Log;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
+
+public class JacocoInstrumentation  extends Instrumentation implements InstrumentActivityListener {
+<span class="nc" id="L17">    public static String TAG = &quot;JacocoInstrumentation:&quot;;</span>
+<span class="nc" id="L18">    private static String DEFAULT_COVERAGE_FILE_PATH = null;</span>
+<span class="nc" id="L19">    private final Bundle mResults = new Bundle();</span>
+    private Intent mIntent;
+    private static final boolean LOGD = true;
+<span class="nc" id="L22">    private boolean mCoverage = true;</span>
+    private String mCoverageFilePath;
+
+<span class="nc" id="L25">    public JacocoInstrumentation() {</span>
+<span class="nc" id="L26">    }</span>
+    @Override
+    public void onCreate(Bundle arguments) {
+<span class="nc" id="L29">        Log.d(TAG, &quot;onCreate(&quot; + arguments + &quot;)&quot;);</span>
+<span class="nc" id="L30">        super.onCreate(arguments);</span>
+        // bad notation, better use NAME+TimeSeed because you might generate more than 1 corage file
+<span class="nc" id="L32">        DEFAULT_COVERAGE_FILE_PATH = getContext().getFilesDir().getPath().toString() + &quot;/coverage.ec&quot;;</span>
+<span class="nc" id="L33">        File file = new File(DEFAULT_COVERAGE_FILE_PATH);</span>
+<span class="nc bnc" id="L34" title="All 2 branches missed.">        if(!file.exists()){</span>
+            try{
+<span class="nc" id="L36">                file.createNewFile();</span>
+<span class="nc" id="L37">            }catch (IOException e){</span>
+<span class="nc" id="L38">                Log.d(TAG,&quot;File Exception ：&quot;+e);</span>
+<span class="nc" id="L39">                e.printStackTrace();}</span>
+        }
+<span class="nc bnc" id="L41" title="All 2 branches missed.">        if(arguments != null) {</span>
+<span class="nc" id="L42">            mCoverageFilePath = arguments.getString(&quot;coverageFile&quot;);</span>
+        }
+<span class="nc" id="L44">        mIntent = new Intent(getTargetContext(), InstrumentActivity.class);</span>
+<span class="nc" id="L45">        mIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);</span>
+<span class="nc" id="L46">        start();</span>
+<span class="nc" id="L47">    }</span>
+    @Override
+    public void onStart() {
+<span class="nc" id="L50">        super.onStart();</span>
+<span class="nc" id="L51">        Looper.prepare();</span>
+        // Register broadcast receiver and start InstrumentActivity
+<span class="nc" id="L53">        InstrumentActivity activity = (InstrumentActivity) startActivitySync(mIntent);</span>
+<span class="nc" id="L54">        EndEmmaBroadcast broadcast = new EndEmmaBroadcast();</span>
+<span class="nc" id="L55">        activity.setInstrumentActivityListener(this);</span>
+<span class="nc" id="L56">        broadcast.setInstrumentActivityListener(this);</span>
+<span class="nc" id="L57">        activity.registerReceiver(broadcast, new IntentFilter(&quot;com.example.pkg.END_EMMA&quot;));</span>
+<span class="nc" id="L58">    }</span>
+    private String getCoverageFilePath() {
+<span class="nc bnc" id="L60" title="All 2 branches missed.">        if (mCoverageFilePath == null) {</span>
+<span class="nc" id="L61">            return DEFAULT_COVERAGE_FILE_PATH;</span>
+        } else {
+<span class="nc" id="L63">            return mCoverageFilePath;</span>
+        }
+    }
+    private void generateCoverageReport() {
+<span class="nc" id="L67">        Log.d(TAG, &quot;generateCoverageReport():&quot; + getCoverageFilePath());</span>
+<span class="nc" id="L68">        OutputStream out = null;</span>
+        try {
+<span class="nc" id="L70">            out = new FileOutputStream(getCoverageFilePath(), false);</span>
+<span class="nc" id="L71">            Object agent = Class.forName(&quot;org.jacoco.agent.rt.RT&quot;)</span>
+<span class="nc" id="L72">                    .getMethod(&quot;getAgent&quot;)</span>
+<span class="nc" id="L73">                    .invoke(null);</span>
+<span class="nc" id="L74">            out.write((byte[]) agent.getClass().getMethod(&quot;getExecutionData&quot;, boolean.class)</span>
+<span class="nc" id="L75">                    .invoke(agent, false));</span>
+<span class="nc" id="L76">        } catch (Exception e) {</span>
+<span class="nc" id="L77">            Log.d(TAG, e.toString(), e);</span>
+        } finally {
+<span class="nc bnc" id="L79" title="All 2 branches missed.">            if (out != null) {</span>
+                try {
+<span class="nc" id="L81">                    out.close();</span>
+<span class="nc" id="L82">                } catch (IOException e) {</span>
+<span class="nc" id="L83">                    e.printStackTrace();</span>
+<span class="nc" id="L84">                }</span>
+            }
+        }
+<span class="nc" id="L87">    }</span>
+
+    @Override
+    public void onActivityEnd() {
+<span class="nc" id="L91">        if (LOGD)      Log.d(TAG, &quot;onActivityFinished()&quot;);</span>
+<span class="nc bnc" id="L92" title="All 2 branches missed.">        if (mCoverage) {</span>
+<span class="nc" id="L93">            generateCoverageReport();</span>
+        }
+<span class="nc" id="L95">        finish(Activity.RESULT_OK, mResults);</span>
+<span class="nc" id="L96">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>

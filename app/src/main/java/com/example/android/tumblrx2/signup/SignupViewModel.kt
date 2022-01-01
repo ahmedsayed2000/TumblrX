@@ -35,6 +35,11 @@ class SignupViewModel : ViewModel() {
         }
     }
 
+    /**
+     * uses the Retrofit instance function signup to hit the backend and add a new user
+     * with the given [email], [password], and [username]
+     * returns a response object parsed by the activity which contains info starter info about the new user
+     */
     suspend fun signup(
         email: String,
         password: String,
