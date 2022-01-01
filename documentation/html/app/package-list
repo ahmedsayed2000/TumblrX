@@ -185,6 +185,9 @@ $dokka.location:com.example.android.tumblrx2.chat/NewMessageListAdapter/getView/
 $dokka.location:com.example.android.tumblrx2.controllers////PointingToDeclaration/app/com.example.android.tumblrx2.controllers/index.html
 $dokka.location:com.example.android.tumblrx2.controllers/LoginController///PointingToDeclaration/app/com.example.android.tumblrx2.controllers/-login-controller/index.html
 $dokka.location:com.example.android.tumblrx2.controllers/LoginController/onLogin/#kotlin.String?#kotlin.String?/PointingToDeclaration/app/com.example.android.tumblrx2.controllers/-login-controller/on-login.html
+$dokka.location:com.example.android.tumblrx2.controllers/MvvmLoginObject///PointingToDeclaration/app/com.example.android.tumblrx2.controllers/-mvvm-login-object/index.html
+$dokka.location:com.example.android.tumblrx2.controllers/MvvmLoginObject/loginChooseErrMsg/#kotlin.Int/PointingToDeclaration/app/com.example.android.tumblrx2.controllers/-mvvm-login-object/login-choose-err-msg.html
+$dokka.location:com.example.android.tumblrx2.controllers/MvvmLoginObject/loginValidateInput/#kotlin.String#kotlin.String/PointingToDeclaration/app/com.example.android.tumblrx2.controllers/-mvvm-login-object/login-validate-input.html
 $dokka.location:com.example.android.tumblrx2.home////PointingToDeclaration/app/com.example.android.tumblrx2.home/index.html
 $dokka.location:com.example.android.tumblrx2.home/HomePageActivity///PointingToDeclaration/app/com.example.android.tumblrx2.home/-home-page-activity/index.html
 $dokka.location:com.example.android.tumblrx2.home/HomePageActivity/HomePageActivity/#/PointingToDeclaration/app/com.example.android.tumblrx2.home/-home-page-activity/-home-page-activity.html
